@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 
 // Routes
-app.use("/", indexRoutes);
+require("./routes/index")(app);
 
 //Server Setup
 const PORT = process.env.PORT || 5000;

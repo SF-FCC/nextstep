@@ -3,16 +3,15 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+const indexRoutes = require("./routes/index");
 
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 
-app.get('/',  (req, res) => {
-    res.send('getting started...');
-});
+// Routes
+app.use("/", indexRoutes);
 
 //Server Setup
 const PORT = process.env.PORT || 5000;

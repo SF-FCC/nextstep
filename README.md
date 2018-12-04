@@ -39,3 +39,6 @@ create new branch to work off of
 
 create a pull request
 
+    git add -A
+    git fetch upstream
+    git commit -m "message goes here"

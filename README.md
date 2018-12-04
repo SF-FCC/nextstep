@@ -57,4 +57,3 @@ tldr; checkout locally then rebase followed by force push
 for all pull requests, prefer squashing commits unless its a large pr
 
 Happy coding!
-    

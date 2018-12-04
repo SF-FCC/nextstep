@@ -37,8 +37,11 @@ create new branch to work off of
     refactor/
 
 
-create a pull request
-
-    git add -A
+create a pull request via branch
     git fetch upstream
-    git commit -m "message goes here"
+    git rebase upstream/development
+    git push -u upstream <branch_name>
+    request branch pr (prefer squash commits unless its a large pr)
+
+alternatively you may push your changes to development branch of your fork and pr from there
+    

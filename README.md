@@ -36,24 +36,31 @@ create new branch to work off of
     style/
     refactor/
 
-rebase and push your changes to your forked repo
-    while in new branch...
+rebase and push your changes to your forked repo 
+
+    // while in new branch...
+  
     git fetch upstream
     git rebase upstream/development
     git push -u origin <branch_name>
-    create the pr via your fork
+
+create the pr via your fork
 
 alternatively if you are collaborator you may push your new branch directly to the primary repo and pr from there
-    while in new branch...
+    
+    // while in new branch...
+    
     git fetch upstream
     git rebase upstream/development
     git push -u upstream <branch_name>
-    request branch pr
+    
+request branch pr
 
-sometimes pr will still need rebase or merge resolution - in that case follow these directions
-https://github.com/edx/edx-platform/wiki/How-to-Rebase-a-Pull-Request
+sometimes pr will still need rebase or merge resolution - in that case follow these [directions](https://github.com/edx/edx-platform/wiki/How-to-Rebase-a-Pull-Request)
+
 tldr; checkout locally then rebase followed by force push
 
 for all pull requests, prefer squashing commits unless its a large pr
 
 Happy coding!
+

@@ -63,3 +63,21 @@ for all pull requests, prefer squashing commits unless its a large pr
 
 Happy coding!
 
+# Startup
+
+### Ports
+    Client: localhost:3000
+    Server: localhost:5000
+
+While in `/server` directory - 
+### Run both `/client` and `/server`
+    npm run dev
+*`Concurrently` will reload `/client` and/or `/server` when changes are made to files in their respective directories*
+
+Additionally you can still run both independently with 
+```
+npm run server
+npm run client
+```
+
+#### Note: If running from only server (localhost:5000), you need to run `npm run build` within `/client` first so that it can serve those static files.

@@ -1,15 +1,16 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# More info on gitignore https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+node_modules/
+.pnp/
+.pnp.js/
 
 # testing
-/coverage
+coverage/
 
 # production
-/build
+build/
 
 # misc
 .DS_Store
@@ -22,6 +23,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# misc local notes
+notes.md
 
 ### Vim ###
 # Swap

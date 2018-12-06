@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+require("dotenv").config();
 const app = express();
 const { Pool } = require("pg");
 
@@ -14,8 +15,8 @@ async function test() {
   });
 
   // Hello world!
-  // const res = await pool.query("SELECT * FROM test LIMIT 10");
-  // console.log(res.rows);
+  const res = await pool.query("SELECT NOW()");
+  console.log(res.rows);
   await pool.end();
 }
 test();

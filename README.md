@@ -25,9 +25,10 @@ do the following from master
     git checkout -b development upstream/development
 
 create new branch to work off of
-    git checkout -b <branchType>/<branch name>
 
-    // branchtype examples
+    git checkout -b <branch type>/<branch name>
+
+    // branch type examples
 
     setup/<branch name>
     feature/

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter, Route, Link} from 'react-router-dom';
+import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
 
 import Tracker from './components/Tracker';
 import Account from './components/Account';
@@ -14,9 +14,11 @@ import AccountForm from './components/AccountForm';
 ReactDOM.render(
   <BrowserRouter>
     <App>
-      <Route path="/tracker" component={Tracker} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/account/form" component={AccountForm} />
+      <Switch>
+        <Route path="/tracker" component={Tracker} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/account/form" component={AccountForm} />
+      </Switch>
     </App>
   </BrowserRouter>, 
   document.getElementById('root'));

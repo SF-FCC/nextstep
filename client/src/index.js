@@ -8,6 +8,7 @@ import {BrowserRouter, Route, Link} from 'react-router-dom';
 import Tracker from './components/Tracker';
 import Account from './components/Account';
 import Dashboard from './components/Dashboard';
+import AccountForm from './components/AccountForm';
  
 
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
     <App>
       <Route path="/tracker" component={Tracker} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/account/form" component={AccountForm} />
     </App>
   </BrowserRouter>, 
   document.getElementById('root'));

@@ -21,7 +21,8 @@ class Navbar extends Component {
         <Link to="/tracker">Tracker</Link>
         <div>
           <p onClick={this.toggleAccountDropdown}>Account</p>
-          {this.state.showAccountDropdown && <Account />}
+          {this.state.showAccountDropdown && 
+            <Account hideDropdown={this.toggleAccountDropdown} />}
         </div>
       </div>
     );

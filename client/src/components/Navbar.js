@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   render() {
     return (
       <div>
         <h1>NextStep</h1>
-        <a href="">Dashboard</a>
-        <a href="">Tracker</a>
-        <a href="">Account</a>
+        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/tracker">Tracker</Link>
+        <Link to="/account">Account</Link>
       </div>
     );
   }

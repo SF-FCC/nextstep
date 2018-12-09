@@ -3,25 +3,6 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 require("dotenv").config();
 const app = express();
-const { Pool } = require("pg");
-
-async function test() {
-  const pool = new Pool({
-    user: process.env.PG_USER || "postgres",
-    host: process.env.PG_HOST || "127.0.0.1",
-    database: process.env.PG_DB || "postgres",
-    password: process.env.PG_PW || "postgres",
-    port: process.env.PG_PORT || 5432
-  });
-
-  // Hello world!
-  const res = await pool.query("SELECT NOW()");
-  console.log(res.rows);
-  await pool.end();
-}
-test();
-
-const indexRoutes = require("./routes/index");
 
 // Middleware
 app.use(bodyParser.json());
@@ -32,6 +13,7 @@ app.use(express.static("../client/build"));
 
 // Routes
 require("./routes/index")(app);
+require("./routes/jobs")(app);
 
 //Server Setup
 const PORT = process.env.PORT || 5000;

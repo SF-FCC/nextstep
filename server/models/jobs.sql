@@ -7,7 +7,9 @@ CREATE TABLE jobs(
     company_url VARCHAR(500),
     job_title VARCHAR(255),
     current_status VARCHAR(255),
-    job_location VARCHAR(255)
+    job_location VARCHAR(255),
+    created TIMESTAMP DEFAULT now(),
+    updated TIMESTAMP DEFAULT now()
 );
 
 COMMIT;

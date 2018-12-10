@@ -8,6 +8,7 @@ CREATE TABLE jobs(
     job_title VARCHAR(255),
     current_status VARCHAR(255),
     job_location VARCHAR(255),
+    job_source VARCHAR(255),
     created TIMESTAMP DEFAULT now(),
     updated TIMESTAMP DEFAULT now()
 );

@@ -14,7 +14,8 @@ export const login = userInfo => {
 
 export const logout = () => {
   return {
-    type: 'LOGOUT'  }
+    type: 'LOGOUT'
+  }
 }
 
 export const updateEmail = email => {
@@ -40,7 +41,7 @@ export const deleteAccount = userInfo => {
 
 export const getJobApps = user => {
   return {
-    type: 'GET_JOB_APPS',
+    type: 'GET_JOB_APPS'
     // payload: user.jobApps ?
   }
 }
@@ -54,7 +55,7 @@ export const addJobApp = details => {
 
 export const updateJobApp = id => {
   return {
-    type: 'UPDATE_JOB_APP',
+    type: 'UPDATE_JOB_APP'
     // payload: details
   }
 }

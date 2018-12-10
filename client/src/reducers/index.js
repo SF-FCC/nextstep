@@ -1,7 +1,10 @@
-const authReducer = () => {
-  
-}
+import { combineReducers } from "redux";
+import userInfo from "./userInfo";
 
-const apiReducer = () => {
-  
-}
+export default combineReducers({
+  userInfo
+});
+
+const authReducer = () => {};
+
+const apiReducer = () => {};

@@ -25,3 +25,9 @@ mark {
     background: transparent; }
 abbr { border: none; }
 summary::-webkit-details-marker { display: none; }
+
+
+label, input, select {
+ display: block;
+}
+

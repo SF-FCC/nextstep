@@ -1,0 +1,25 @@
+.formOuterContainer {
+  background: rgba(0, 0, 0, .5);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+}
+
+.formInnerContainer {
+  position: absolute;
+  left: 25%;
+  top: 2em;
+  margin: 0 auto; 
+  width: 50%;
+  background: white;
+  border-radius: .3em;
+  border: .08em solid grey;
+}
+
+@media (max-width: 600px) {
+  .formInnerContainer {
+    width: 90%;
+    left: 5%;
+  }
+}

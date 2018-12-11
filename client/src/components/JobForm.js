@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { sources } from '../data';
-import './JobForm.css';
+import styles from './JobForm.module.css';
 
 const SourceOptionsList = ({ companyNames, handleClick }) => {
   if (companyNames) {
@@ -51,6 +51,7 @@ class JobForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSourceOptionSelect = this.handleSourceOptionSelect.bind(this);
     this.resetSourceOptionSelect = this.resetSourceOptionSelect.bind(this);
+    this.toggleForm = this.toggleForm.bind(this);
   }
   handleSourceOptionSelect(companyName) {
     this.setState({sourceSymbol: companyName[1]});
@@ -80,6 +81,9 @@ class JobForm extends Component {
     });
     this.props.hideForm();
   }
+  toggleForm(e) {
+    e.target.id === 'hide' && this.props.hideForm();
+  }
   handleChange(e) {
     if (e.target.id === 'source') {
       this.setState({sourceOptions: sources[e.target.value.toLowerCase()]});
@@ -88,8 +92,11 @@ class JobForm extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Add New Job</h1>
+      <div id="hide" onClick={this.toggleForm} className={styles.formOuterContainer}>
+      <div className={styles.formInnerContainer}>
+        <h1>Add New Job
+          <span id="hide" onClick={this.toggleForm}>X</span>
+        </h1>
         <form onSubmit={this.handleSubmit}>
           <label>Job Posting URL
             <input 
@@ -150,6 +157,7 @@ class JobForm extends Component {
           </label>
           <button>submit</button>
         </form>
+      </div>
       </div>
     )
   }

@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import AccountForm from './AccountForm'
 import PropTypes from 'prop-types'
 import { logout } from '../actions'
 import { connect } from 'react-redux'
 
 /**
- * Some description.... Is this a header or the actual the account page???
- *
+ * This is a small dropdown when you click "Account" in the navbar.
+ * "/account/form" is the page where AccountForm will be rendered.
  */
 class Account extends Component {
   onSignOut = e => {
     e.preventDefault()
     this.props.dispatch(logout())
   }
+  
   render() {
-    const { hideDropdown, email, onSignOut } = this.props
+    const { hideDropdown, userEmail } = this.props
     return (
       <div>
-        <p>{email}</p>
+        <p>{userEmail}</p>
         <hr />
         <Link to="/account/form">
-          <span onClick={hideDropdown}>settings</span>
+          <span onClick={hideDropdown}>Settings</span>
         </Link>
         <hr />
-        <button onClick={onSignOut}>sign out</button>
+        <button onClick={this.onSignOut}>Sign Out</button>
       </div>
     )
   }
@@ -32,7 +32,6 @@ class Account extends Component {
 
 Account.propTypes = {
   hideDropdown: PropTypes.func,
-  onSignOut: PropTypes.func,
   userEmail: PropTypes.string,
   dispatch: PropTypes.func
 }

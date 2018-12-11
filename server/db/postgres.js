@@ -10,8 +10,10 @@ const pool = new Pool({
 
 // Hello world!
 async function helloWorld() {
-  const res = await pool.query("SELECT NOW()");
-  console.log(res.rows);
+  const res = await pool.query("SELECT current_database()");
+  console.log(res.rows[0]);
 }
+
+helloWorld();
 
 module.exports.pool = pool;

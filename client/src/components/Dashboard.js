@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import JobForm from './JobForm';
 import { connect } from 'react-redux';
 import { toggleJobForm } from '../actions'; 
+import { NavLink } from 'react-router-dom';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class Dashboard extends Component {
       <div>
         <div>
           <h3>Job Applications</h3>
-          <a href="">See All</a>
+          <NavLink to="/tracker">See All</NavLink>
           <button onClick={this.handleToggleJobForm}>Add Job</button>
           <ul>
             <li>Job1</li>

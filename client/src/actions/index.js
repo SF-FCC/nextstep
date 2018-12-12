@@ -65,3 +65,9 @@ export const deleteJobApp = id => {
     type: 'DELETE_JOB_APP'
   }
 }
+
+export const toggleJobForm = () => {
+  return {
+    type: 'TOGGLE_JOB_FORM'
+  }
+}

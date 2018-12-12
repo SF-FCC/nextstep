@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
+import toggleDisplays from './toggleDisplays';
 import userInfo from "./userInfo";
 
 export default combineReducers({
-  userInfo
+  userInfo,
+  toggleDisplays
 });
 
 const authReducer = () => {};

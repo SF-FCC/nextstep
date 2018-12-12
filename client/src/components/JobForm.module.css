@@ -35,6 +35,10 @@
   cursor: pointer;
 }
 
+.saveButton {
+  margin-left: 0;
+}
+
 @media (max-width: 650px) {
   .formInnerContainer {
     width: 94%;

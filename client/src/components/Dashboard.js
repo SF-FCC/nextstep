@@ -24,8 +24,7 @@ class Dashboard extends Component {
             <li>Job3</li>
             <li>Job4</li>
           </ul>
-          {this.props.showJobForm && 
-            <JobForm />}
+          {this.props.showJobForm && <JobForm />}
         </div>
       </div>
     )

@@ -17,6 +17,10 @@
   border: .08em solid grey;
 }
 
+.h1 {
+  font-weight: 100;
+}
+
 @media (max-width: 600px) {
   .formInnerContainer {
     width: 90%;

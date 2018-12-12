@@ -94,7 +94,7 @@ class JobForm extends Component {
     return (
       <div id="hide" onClick={this.toggleForm} className={styles.formOuterContainer}>
       <div className={styles.formInnerContainer}>
-        <h1>Add New Job
+        <h1 className={styles.h1}>Add New Job
           <span id="hide" onClick={this.toggleForm}>X</span>
         </h1>
         <form onSubmit={this.handleSubmit}>

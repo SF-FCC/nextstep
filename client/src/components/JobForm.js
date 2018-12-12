@@ -176,10 +176,4 @@ JobForm.propTypes = {
   dispatch: PropTypes.func,
 }
 
-const mapStateToProps = state => {
-  return {
-    showJobForm: state.toggleDisplays.showJobForm,
-  }
-}
-
 export default connect()(JobForm);

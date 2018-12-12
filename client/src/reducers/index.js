@@ -7,6 +7,6 @@ export default combineReducers({
   toggleDisplays
 });
 
-const authReducer = () => {};
+// const authReducer = () => {};
 
-const apiReducer = () => {};
+// const apiReducer = () => {};

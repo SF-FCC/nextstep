@@ -1,0 +1,43 @@
+.formOuterContainer {
+  background: rgba(0, 0, 0, .5);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+}
+
+.formInnerContainer {
+  position: absolute;
+  left: 19%;
+  top: 2em;
+  margin: 0 auto; 
+  width: 62%;
+  background: white;
+  border-radius: .3em;
+  border: .08em solid grey;
+}
+
+.formHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2em .8em;
+  border-bottom: .01em solid #ddd;
+}
+
+.h1 {
+  font-weight: 100;
+  font-size: 1.5em;
+}
+
+.companyAutoPopulate, .companyName {
+  margin: .4em;
+  cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .formInnerContainer {
+    width: 94%;
+    left: 2.5%;
+    top: 0.8em;
+  }
+}

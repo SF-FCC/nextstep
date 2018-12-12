@@ -18,7 +18,7 @@ class Dashboard extends Component {
         <div>
           <h3>Job Applications</h3>
           <a href="">See All</a>
-          <button onClick={this.toggleJobForm}>Add Job</button>
+          <span onClick={this.toggleJobForm}>Add Job</span>
           <ul>
             <li>Job1</li>
             <li>Job2</li>

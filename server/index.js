@@ -15,6 +15,7 @@ app.use(express.static('../client/build'));
 // Routes
 require('./routes/index')(app);
 require('./routes/jobs')(app);
+require('./routes/users')(app);
 
 //Server Setup
 const PORT = process.env.PORT || 5000;

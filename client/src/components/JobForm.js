@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { sources } from '../data';
 import styles from './JobForm.module.css';
+import { connect } from 'react-redux';
+import { toggleJobForm } from '../actions';
 
 const SourceOptionsList = ({ companyNames, handleClick }) => {
   if (companyNames) {
@@ -81,10 +83,10 @@ class JobForm extends Component {
       sourceOptions: null,
       displaySourceForm: true,
     });
-    this.props.hideForm();
+    this.toggleForm();
   }
   toggleForm(e) {
-    e.target.id === 'hide' && this.props.hideForm();
+    this.props.dispatch(toggleJobForm());
   }
   handleChange(e) {
     if (e.target.id === 'source') {
@@ -95,14 +97,11 @@ class JobForm extends Component {
   render() {
     return (
       <div 
-        id="hide"
-        onClick={this.toggleForm}
         className={styles.formOuterContainer}>
         <div className={styles.formInnerContainer}>
           <div className={styles.formHeader}>
             <h1 className={styles.h1}>Add New Job</h1>
             <span
-              id="hide"
               className={"closeForm"}
               onClick={this.toggleForm}>X
             </span>
@@ -164,7 +163,8 @@ class JobForm extends Component {
                     sourceSymbol={this.state.sourceSymbol}
                     source={this.state.source} />}
             </label>
-            <button>SAVE</button>
+            <button type="button" onClick={this.toggleForm}>CANCEL</button>
+            <button className={styles.saveButton}>SAVE</button>
           </form>
         </div>
       </div>
@@ -173,7 +173,13 @@ class JobForm extends Component {
 }
 
 JobForm.propTypes = {
-  hideForm: PropTypes.func,
+  dispatch: PropTypes.func,
 }
 
-export default JobForm;
+const mapStateToProps = state => {
+  return {
+    showJobForm: state.toggleDisplays.showJobForm,
+  }
+}
+
+export default connect()(JobForm);

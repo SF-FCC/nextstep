@@ -3,12 +3,16 @@ import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import './Navbar.css';
 
-const AccountDropdown = () => {
+const AccountDropdown = ({ toggleAccountDropdown }) => {
   return (
     <div className={styles.dropdownContainer}>
       <ul className={styles.dropdownUl}>
         <li className={styles.userLi}>useremail@mail.com</li>
-        <li className={styles.emailPasswordLi}>Email & Password</li>
+          <li 
+            onClick={toggleAccountDropdown}
+            className={styles.emailPasswordLi}>
+            <NavLink to="/account">Email & Password</NavLink>
+          </li>
         <li className={styles.signoutLi}>Sign Out</li>
       </ul>
     </div>
@@ -47,7 +51,9 @@ class Navbar extends Component {
             className={styles.accountLi}
             onClick={this.toggleAccountDropdown}>Account</li>
         </ul>
-        {this.state.showAccountDropdown && <AccountDropdown />}
+        {this.state.showAccountDropdown && 
+          <AccountDropdown 
+            toggleAccountDropdown={this.toggleAccountDropdown}/>}
       </nav>
     );
   }

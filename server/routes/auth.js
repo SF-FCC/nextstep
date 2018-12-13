@@ -9,7 +9,7 @@ module.exports = app => {
       return res.status(400).json("Invalid Form Submission: Missing fields");
     }
     const saltRounds = 10;
-    const hashPW = await bcrypt.hashSync(password, 10);
+    const hashPW = await bcrypt.hashSync(password, saltRounds);
     const insert = `
     INSERT INTO users (
       first_name,
@@ -20,20 +20,39 @@ module.exports = app => {
     VALUES ($1, $2, $3, $4);`;
     try {
       const user = await pool.query(insert, [first_name, last_name, email, hashPW]);
-      // Should return confirmation and user info
+      // TODO Should return confirmation, JWT, and user info
       return res.status(200).json(user);
     } catch (err) {
       console.error(err);
       return res.status(400).json(`Registration error: ${err.detail}`);
     }
   });
+
   /* Login */
-  app.post("/auth/login", (req, res) => {
+  app.post("/auth/login", async (req, res) => {
     const { email, password } = req.body;
-    console.log(req.body);
-    return res.send("Received Login: ", req.body);
+    if (!email || !password) {
+      return res.status(400).json("Invalid Form Submission: Missing email or password");
+    }
+
+    try {
+      const dbQuery = `SELECT email, password FROM users WHERE email = '${email}';`;
+      const dbUser = await pool.query(dbQuery);
+      const dbUserHash = dbUser.rows[0].password;
+      const isValidPW = await bcrypt.compareSync(password, dbUserHash);
+      if (isValidPW) {
+        // TODO Return confirmation, JWT, and user info
+        return res.json(`You are now logged in as ${dbUser.rows[0].email}`);
+      } else {
+        return res.status(400).json(`Invalid email or password 1`);
+      }
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json(`Login Error: ${err}`);
+    }
   });
 
   /* Logout */
+  // TODO Handle with passport/ jwt
   app.get("auth/logout", (req, res) => {});
 };

@@ -54,5 +54,7 @@ module.exports = app => {
 
   /* Logout */
   // TODO Handle with passport/ jwt
-  app.get("auth/logout", (req, res) => {});
+  app.get("auth/logout", (req, res) => {
+    return res.status(200).json(`TEMP: You are sort of logged out. Emphasis on the sort of.`);
+  });
 };

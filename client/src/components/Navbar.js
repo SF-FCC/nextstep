@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import styles from './Navbar.module.css';
 import './Navbar.css';
+
+const AccountDropdown = () => {
+  return (
+    <div className={styles.dropdownContainer}>
+      <ul className={styles.dropdownUl}>
+        <li className={styles.userLi}>useremail@mail.com</li>
+        <li className={styles.emailPasswordLi}>Email & Password</li>
+        <li className={styles.signoutLi}>Sign Out</li>
+      </ul>
+    </div>
+  )
+}
 
 class Navbar extends Component {
   constructor(props) {
@@ -30,12 +43,11 @@ class Navbar extends Component {
               Tracker
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/account" activeClassName="nav-active">
-              Account
-            </NavLink>
-          </li>
+          <li 
+            className={styles.accountLi}
+            onClick={this.toggleAccountDropdown}>Account</li>
         </ul>
+        {this.state.showAccountDropdown && <AccountDropdown />}
       </nav>
     );
   }

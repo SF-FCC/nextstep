@@ -1,8 +1,10 @@
-import { combineReducers } from "redux";
-import userInfo from "./userInfo";
+import { combineReducers } from 'redux';
+import userInfo from './userInfo';
+import visibleJobList from './jobList';
 
 export default combineReducers({
-  userInfo
+  userInfo,
+  visibleJobList
 });
 
 const authReducer = () => {};

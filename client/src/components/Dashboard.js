@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import JobForm from './JobForm';
 import { connect } from 'react-redux';
-import { toggleJobForm } from '../actions'; 
+import { showJobForm } from '../actions'; 
 import { NavLink } from 'react-router-dom';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props)
-    this.handleToggleJobForm = this.handleToggleJobForm.bind(this);
+    this.handleShowJobForm = this.handleShowJobForm.bind(this);
   }
-  handleToggleJobForm() {
-    this.props.dispatch(toggleJobForm());
+  handleShowJobForm() {
+    this.props.dispatch(showJobForm());
   }
   render() {
     return (
@@ -18,14 +18,14 @@ class Dashboard extends Component {
         <div>
           <h3>Job Applications</h3>
           <NavLink to="/tracker">See All</NavLink>
-          <button onClick={this.handleToggleJobForm}>Add Job</button>
+          <button onClick={this.handleShowJobForm}>Add Job</button>
           <ul>
             <li>Job1</li>
             <li>Job2</li>
             <li>Job3</li>
             <li>Job4</li>
           </ul>
-          {this.props.showJobForm && <JobForm />}
+          {this.props.isShowingJobForm && <JobForm />}
         </div>
       </div>
     )
@@ -34,7 +34,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
-    showJobForm: state.toggleDisplays.showJobForm,
+    isShowingJobForm: state.toggleDisplays.isShowingJobForm,
   }
 }
 

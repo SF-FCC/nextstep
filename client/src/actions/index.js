@@ -69,3 +69,17 @@ export const deleteJobApp = id => {
     type: 'DELETE_JOB_APP'
   };
 };
+
+export const showJobForm = () => {
+  return {
+    type: 'TOGGLE_JOB_FORM',
+    payload: true
+  }
+}
+
+export const hideJobForm = () => {
+  return {
+    type: 'TOGGLE_JOB_FORM',
+    payload: false
+  }
+}

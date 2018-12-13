@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { sources } from '../data';
 import styles from './JobForm.module.css';
 import { connect } from 'react-redux';
-import { toggleJobForm } from '../actions';
+import { hideJobForm } from '../actions';
 
 const SourceOptionsList = ({ companyNames, handleClick }) => {
   if (companyNames) {
@@ -55,7 +55,7 @@ class JobForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSourceOptionSelect = this.handleSourceOptionSelect.bind(this);
     this.resetSourceOptionSelect = this.resetSourceOptionSelect.bind(this);
-    this.toggleForm = this.toggleForm.bind(this);
+    this.handleHideJobForm = this.handleHideJobForm.bind(this);
   }
   handleSourceOptionSelect(companyName) {
     this.setState({sourceSymbol: companyName[1]});
@@ -83,10 +83,10 @@ class JobForm extends Component {
       sourceOptions: null,
       displaySourceForm: true,
     });
-    this.toggleForm();
+    this.handleHideJobForm();
   }
-  toggleForm(e) {
-    this.props.dispatch(toggleJobForm());
+  handleHideJobForm(e) {
+    this.props.dispatch(hideJobForm());
   }
   handleChange(e) {
     if (e.target.id === 'source') {
@@ -103,7 +103,7 @@ class JobForm extends Component {
             <h1 className={styles.h1}>Add New Job</h1>
             <span
               className={"closeForm"}
-              onClick={this.toggleForm}>X
+              onClick={this.handleHideJobForm}>X
             </span>
           </div>
           <form onSubmit={this.handleSubmit}>
@@ -163,7 +163,7 @@ class JobForm extends Component {
                     sourceSymbol={this.state.sourceSymbol}
                     source={this.state.source} />}
             </label>
-            <button type="button" onClick={this.toggleForm}>CANCEL</button>
+            <button type="button" onClick={this.handleHideJobForm}>CANCEL</button>
             <button className={styles.saveButton}>SAVE</button>
           </form>
         </div>

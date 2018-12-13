@@ -1,10 +1,10 @@
-const initialState = { showJobForm: false }
+const initialState = { isShowingJobForm: false }
 
 function toggleDisplays(state = initialState, action) {
   switch(action.type) {
     case 'TOGGLE_JOB_FORM':
       return Object.assign({}, state, {
-        showJobForm: !state.showJobForm,
+        isShowingJobForm: action.payload,
       })
     default:
       return state;

@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toggleJobForm } from '../actions';
+import { showJobForm } from '../actions';
 import JobForm from './JobForm';
 
 class Tracker extends Component {
   constructor(props) {
     super(props)
-    this.handleToggleJob = this.handleToggleJob.bind(this);
+    this.handleShowJobForm = this.handleShowJobForm.bind(this);
   }
-  handleToggleJob() {
-    this.props.dispatch(toggleJobForm());
+  handleShowJobForm() {
+    this.props.dispatch(showJobForm());
   }
   render() {
     return (
       <div>
         <h2>Job Applications</h2>
-        <button onClick={this.handleToggleJob}>Add Job</button>
+        <button onClick={this.handleShowJobForm}>Add Job</button>
         {/* add table here */}
-        {this.props.showJobForm && <JobForm />}
+        {this.props.isShowingJobForm && <JobForm />}
       </div>
     )
   }
@@ -25,7 +25,7 @@ class Tracker extends Component {
 
 const mapStateToProps = state => {
   return {
-    showJobForm: state.toggleDisplays.showJobForm,
+    isShowingJobForm: state.toggleDisplays.isShowingJobForm,
   }
 }
 

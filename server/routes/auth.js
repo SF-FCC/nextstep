@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const { pool } = require("../db/postgres");
+const passport = require("passport");
 
 module.exports = app => {
   /* Register */
@@ -29,32 +30,14 @@ module.exports = app => {
   });
 
   /* Login */
-  app.post("/auth/login", async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json("Invalid Form Submission: Missing email or password");
-    }
-
-    try {
-      const dbQuery = `SELECT email, password FROM users WHERE email = '${email}';`;
-      const dbUser = await pool.query(dbQuery);
-      const dbUserHash = dbUser.rows[0].password;
-      const isValidPW = await bcrypt.compareSync(password, dbUserHash);
-      if (isValidPW) {
-        // TODO Return confirmation, JWT, and user info
-        return res.json(`You are now logged in as ${dbUser.rows[0].email}`);
-      } else {
-        return res.status(400).json(`Invalid email or password 1`);
-      }
-    } catch (err) {
-      console.log(err);
-      return res.status(400).json(`Login Error: ${err}`);
-    }
+  app.post("/auth/login", passport.authenticate("local"), (req, res) => {
+    return res.status(200).json(req.user);
   });
 
   /* Logout */
-  // TODO Handle with passport/ jwt
-  app.get("auth/logout", (req, res) => {
+  // TODO Passport session does not persist, Handle with sessions or jwt?
+  app.get("/auth/logout", (req, res) => {
+    req.logOut();
     return res.status(200).json(`TEMP: You are sort of logged out. Emphasis on the sort of.`);
   });
 };

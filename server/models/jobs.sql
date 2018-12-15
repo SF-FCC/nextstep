@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-CREATE TABLE jobs(
+CREATE TABLE IF NOT EXISTS jobs(
     id SERIAL PRIMARY KEY,
     posting_url VARCHAR(500),
     company_name VARCHAR(255),

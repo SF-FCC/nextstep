@@ -1,12 +1,12 @@
-import { combineReducers } from 'redux';
-import userInfo from './userInfo';
-import visibleJobList from './jobList';
+import { combineReducers } from "redux";
+import toggleDisplays from './toggleDisplays';
+import userInfo from "./userInfo";
 
 export default combineReducers({
   userInfo,
-  visibleJobList
+  toggleDisplays
 });
 
-const authReducer = () => {};
+// const authReducer = () => {};
 
-const apiReducer = () => {};
+// const apiReducer = () => {};

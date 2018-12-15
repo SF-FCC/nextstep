@@ -1,15 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { showJobForm } from '../actions';
+import JobForm from './JobForm';
 
 class Tracker extends Component {
+  constructor(props) {
+    super(props)
+    this.handleShowJobForm = this.handleShowJobForm.bind(this);
+  }
+  handleShowJobForm() {
+    this.props.dispatch(showJobForm());
+  }
   render() {
     return (
       <div>
         <h2>Job Applications</h2>
-        <button>Add Job</button>
+        <button onClick={this.handleShowJobForm}>Add Job</button>
         {/* add table here */}
+        {this.props.isShowingJobForm && <JobForm />}
       </div>
     )
   }
 }
 
-export default Tracker;
+const mapStateToProps = state => {
+  return {
+    isShowingJobForm: state.toggleDisplays.isShowingJobForm,
+  }
+}
+
+export default connect(mapStateToProps)(Tracker);

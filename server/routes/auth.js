@@ -35,8 +35,9 @@ module.exports = app => {
   });
 
   /* Logout */
-  // TODO Handle with passport/ jwt
-  app.get("auth/logout", (req, res) => {
+  // TODO Passport session does not persist, Handle with sessions or jwt?
+  app.get("/auth/logout", (req, res) => {
+    req.logOut();
     return res.status(200).json(`TEMP: You are sort of logged out. Emphasis on the sort of.`);
   });
 };

@@ -26,41 +26,31 @@ passport.deserializeUser((id, done) => {
  * Local Strategy Config
  */
 passport.use(
-  new LocalStrategy(
-    { usernameField: "email", passwordField: "password" },
-    (username, password, done) => {
-      const findUserByEmail = `SELECT id, email, password FROM users WHERE email = '${username}';`;
-      pool.query(findUserByEmail, (err, results) => {
-        if (err) {
-          console.log("Error finding user on login");
-          return done(err);
-        }
-        if (results.rows.length > 0) {
-          const dbUser = results.rows[0];
-          bcrypt.compare(password, dbUser.password, (err, user) => {
-            if (err) {
-              return done(err, false);
-            }
-            if (!user) {
-              // Returns on Invalid Password - user === false
-              return done(null, false, { message: "Invalid Username or Password" });
-            }
-            if (user) {
-              //   Login Success - user === true
-              //   Removing Password from returned UserInfo
-              const { id, email } = dbUser;
-              const validUserInfo = { id, email };
-              return done(null, validUserInfo, { message: "Welcome. You've got mail" });
-            }
-          });
-        } else {
-          //   Returns on Invalid Username
-          return done(null, false, { message: "Invalid Username or Password" });
-        }
-      });
-    }
-  )
+  new LocalStrategy({ usernameField: "email", passwordField: "password" }, validateLocalLogin)
 );
+
+async function validateLocalLogin(userEmail, password, done) {
+  const findUserByEmail = `SELECT id, email, password FROM users WHERE email = $1::text;`;
+  try {
+    const results = await pool.query(findUserByEmail, [userEmail]);
+    if (results.rows.length < 1) {
+      throw new Error("User not found for supplied email when attempting login");
+    }
+    const dbUser = results.rows[0];
+    const isPasswordCorrect = await bcrypt.compare(password, dbUser.password);
+    if (!isPasswordCorrect) {
+      throw new Error("Invalid password for found user when attempting login");
+    }
+    console.log("Login successful");
+    // Only return id and email
+    const { id, email } = dbUser;
+    const validUserInfo = { id, email };
+    return done(null, validUserInfo);
+  } catch (err) {
+    console.log(err);
+    return done(null, false);
+  }
+}
 
 /*
  *  NOTES:

@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const { pool } = require("../db/postgres");
+const passport = require("passport");
 
 module.exports = app => {
   /* Register */
@@ -29,27 +30,24 @@ module.exports = app => {
   });
 
   /* Login */
-  app.post("/auth/login", async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json("Invalid Form Submission: Missing email or password");
-    }
+  app.post("/auth/login", passport.authenticate("local"), (req, res) => {
+    return res.status(200).json(req.user);
 
-    try {
-      const dbQuery = `SELECT email, password FROM users WHERE email = '${email}';`;
-      const dbUser = await pool.query(dbQuery);
-      const dbUserHash = dbUser.rows[0].password;
-      const isValidPW = await bcrypt.compareSync(password, dbUserHash);
-      if (isValidPW) {
-        // TODO Return confirmation, JWT, and user info
-        return res.json(`You are now logged in as ${dbUser.rows[0].email}`);
-      } else {
-        return res.status(400).json(`Invalid email or password 1`);
-      }
-    } catch (err) {
-      console.log(err);
-      return res.status(400).json(`Login Error: ${err}`);
-    }
+    // try {
+    //   const dbQuery = `SELECT email, password FROM users WHERE email = '${email}';`;
+    //   const dbUser = await pool.query(dbQuery);
+    //   const dbUserHash = dbUser.rows[0].password;
+    //   const isValidPW = await bcrypt.compareSync(password, dbUserHash);
+    //   if (isValidPW) {
+    //     // TODO Return confirmation, JWT, and user info
+    //     return res.json(`You are now logged in as ${dbUser.rows[0].email}`);
+    //   } else {
+    //     return res.status(400).json(`Invalid email or password 1`);
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   return res.status(400).json(`Login Error: ${err}`);
+    // }
   });
 
   /* Logout */

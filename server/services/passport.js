@@ -50,12 +50,12 @@ passport.use(
               //   Removing Password from returned UserInfo
               const { id, email } = dbUser;
               const validUserInfo = { id, email };
-              done(null, validUserInfo, { message: "Welcome. You've got mail" });
+              return done(null, validUserInfo, { message: "Welcome. You've got mail" });
             }
           });
         } else {
           //   Returns on Invalid Username
-          done(null, false, { message: "Invalid Username or Password" });
+          return done(null, false, { message: "Invalid Username or Password" });
         }
       });
     }

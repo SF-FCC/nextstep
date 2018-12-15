@@ -1,4 +1,8 @@
 const { Pool } = require('pg');
+const fs = require('fs');
+
+const createUsersTable = fs.readFileSync('./models/users.sql').toString();
+const createJobsTable = fs.readFileSync('./models/jobs.sql').toString();
 
 const pool = new Pool({
   user: process.env.PG_USER || 'postgres',
@@ -17,8 +21,15 @@ pool.on('error', (err, client) => {
 
 // Hello world!
 async function helloWorld() {
-  const res = await pool.query('SELECT current_database()');
-  console.log(res.rows[0]);
+  try {
+    const res = await pool.query('SELECT current_database()');
+    console.log(res.rows[0]);
+    // TODO log table creation
+    await pool.query(createUsersTable);
+    await pool.query(createJobsTable);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 helloWorld();

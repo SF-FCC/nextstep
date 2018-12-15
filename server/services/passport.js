@@ -67,3 +67,41 @@ passport.use(
  *  - message option on "done" callback can be accessed on route via "req.authInfo.message"
  *  - done callback === done(error, user) => hence null for err
  */
+
+/* 
+* SAVE
+* async version - needs to be tested due to conflicting opinions on async with callbacks
+* supposedly not entirely stable
+passport.use(
+  new LocalStrategy(
+    { usernameField: "email", passwordField: "password" },
+    async (username, password, done) => {
+      try {
+        const findUserByEmail = `SELECT id, email, password FROM users WHERE email = '${username}';`;
+        const dbUser = await pool.query(findUserByEmail);
+
+        // Invalid Username
+        if (!dbUser.rows.length) {
+          return done(null, false, { message: "Invalid Username or Password" });
+        }
+
+        // Compare passwords
+        const dbUserHash = dbUser.rows[0].password;
+        const isValidPw = await bcrypt.compareSync(password, dbUserHash);
+
+        // Invalid Password
+        if (!isValidPw) {
+          return done(null, false, { message: "Invalid Username or Password" });
+        }
+
+        const { id, email } = dbUser.rows[0];
+        const validUserInfo = { id, email };
+
+        return done(null, validUserInfo);
+      } catch (err) {
+        return done(err, false, { message: "Error with login" });
+      }
+    }
+  )
+);
+*/

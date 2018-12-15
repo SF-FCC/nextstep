@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { sources } from '../data';
 import styles from './JobForm.module.css';
+import { connect } from 'react-redux';
+import { hideJobForm } from '../actions';
 
 const SourceOptionsList = ({ companyNames, handleClick }) => {
   if (companyNames) {
@@ -53,7 +55,7 @@ class JobForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSourceOptionSelect = this.handleSourceOptionSelect.bind(this);
     this.resetSourceOptionSelect = this.resetSourceOptionSelect.bind(this);
-    this.toggleForm = this.toggleForm.bind(this);
+    this.handleHideJobForm = this.handleHideJobForm.bind(this);
   }
   handleSourceOptionSelect(companyName) {
     this.setState({sourceSymbol: companyName[1]});
@@ -81,10 +83,10 @@ class JobForm extends Component {
       sourceOptions: null,
       displaySourceForm: true,
     });
-    this.props.hideForm();
+    this.handleHideJobForm();
   }
-  toggleForm(e) {
-    e.target.id === 'hide' && this.props.hideForm();
+  handleHideJobForm(e) {
+    this.props.dispatch(hideJobForm());
   }
   handleChange(e) {
     if (e.target.id === 'source') {
@@ -95,16 +97,13 @@ class JobForm extends Component {
   render() {
     return (
       <div 
-        id="hide"
-        onClick={this.toggleForm}
         className={styles.formOuterContainer}>
         <div className={styles.formInnerContainer}>
           <div className={styles.formHeader}>
             <h1 className={styles.h1}>Add New Job</h1>
             <span
-              id="hide"
               className={"closeForm"}
-              onClick={this.toggleForm}>X
+              onClick={this.handleHideJobForm}>X
             </span>
           </div>
           <form onSubmit={this.handleSubmit}>
@@ -164,7 +163,8 @@ class JobForm extends Component {
                     sourceSymbol={this.state.sourceSymbol}
                     source={this.state.source} />}
             </label>
-            <button>SAVE</button>
+            <button type="button" onClick={this.handleHideJobForm}>CANCEL</button>
+            <button className={styles.saveButton}>SAVE</button>
           </form>
         </div>
       </div>
@@ -173,7 +173,7 @@ class JobForm extends Component {
 }
 
 JobForm.propTypes = {
-  hideForm: PropTypes.func,
+  dispatch: PropTypes.func,
 }
 
-export default JobForm;
+export default connect()(JobForm);

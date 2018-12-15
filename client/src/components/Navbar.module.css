@@ -1,0 +1,25 @@
+.dropdownContainer {
+  width: 16em;
+  border: 1px solid #ddd;
+  padding: .4em;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  right: 0;
+}
+
+.accountLi {
+  user-select: none;
+  cursor: pointer;
+}
+
+.dropdownUl > li {
+  padding: .5em 1em;
+}
+
+.userLi {
+  border-bottom: .01em solid #ddd;
+}
+
+.emailPasswordLi, .signoutLi {
+  cursor: pointer;
+}

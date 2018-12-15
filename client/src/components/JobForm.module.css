@@ -3,6 +3,7 @@
   width: 100vw;
   height: 100vh;
   position: absolute;
+  left: 0;
   top: 0;
 }
 
@@ -32,6 +33,10 @@
 .companyAutoPopulate, .companyName {
   margin: .4em;
   cursor: pointer;
+}
+
+.saveButton {
+  margin-left: 0;
 }
 
 @media (max-width: 650px) {

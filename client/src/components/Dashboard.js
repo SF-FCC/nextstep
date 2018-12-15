@@ -1,36 +1,41 @@
 import React, { Component } from 'react';
 import JobForm from './JobForm';
+import { connect } from 'react-redux';
+import { showJobForm } from '../actions'; 
+import { NavLink } from 'react-router-dom';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      showJobForm: false,
-    }
-    this.toggleJobForm = this.toggleJobForm.bind(this);
+    this.handleShowJobForm = this.handleShowJobForm.bind(this);
   }
-  toggleJobForm() {
-    this.setState({showJobForm: !this.state.showJobForm});
+  handleShowJobForm() {
+    this.props.dispatch(showJobForm());
   }
   render() {
     return (
       <div>
         <div>
           <h3>Job Applications</h3>
-          <a href="">See All</a>
-          <span onClick={this.toggleJobForm}>Add Job</span>
+          <NavLink to="/tracker">See All</NavLink>
+          <button onClick={this.handleShowJobForm}>Add Job</button>
           <ul>
             <li>Job1</li>
             <li>Job2</li>
             <li>Job3</li>
             <li>Job4</li>
           </ul>
-          {this.state.showJobForm && 
-            <JobForm hideForm={this.toggleJobForm} />}
+          {this.props.isShowingJobForm && <JobForm />}
         </div>
       </div>
     )
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => {
+  return {
+    isShowingJobForm: state.toggleDisplays.isShowingJobForm,
+  }
+}
+
+export default connect(mapStateToProps)(Dashboard);

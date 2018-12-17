@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { showJobForm } from '../actions';
-import JobForm from './JobForm';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { showJobForm } from "../actions";
+import JobForm from "./JobForm";
 
+/**
+ * TODO what is this and how is it different than dashboard?
+ */
 class Tracker extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.handleShowJobForm = this.handleShowJobForm.bind(this);
   }
   handleShowJobForm() {
@@ -19,14 +22,14 @@ class Tracker extends Component {
         {/* add table here */}
         {this.props.isShowingJobForm && <JobForm />}
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    isShowingJobForm: state.toggleDisplays.isShowingJobForm,
-  }
-}
+    isShowingJobForm: state.toggleDisplays.isShowingJobForm
+  };
+};
 
 export default connect(mapStateToProps)(Tracker);

@@ -5,6 +5,11 @@ function jobApp(state = {}, action) {
         ...state,
         jobAppPostRes: action.payload
       };
+    case "ADD_JOB_APP_ERR":
+      return {
+        ...state,
+        jobAppPostErr: action.payload
+      };
     default:
       return state;
   }

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { sources } from "../data";
 import styles from "./JobForm.module.css";
 import { connect } from "react-redux";
-import { hideJobForm } from "../actions";
+import { hideJobForm, postJobApp } from "../actions";
 
 const SourceOptionsList = ({ companyNames, handleClick }) => {
   if (companyNames) {
@@ -45,7 +45,7 @@ class JobForm extends Component {
       jobPostingUrl: "",
       company: "",
       jobTitle: "",
-      status: "interested",
+      current_status: "interested",
       location: "",
       source: "",
       sourceSymbol: "",
@@ -53,7 +53,7 @@ class JobForm extends Component {
       displaySourceForm: true
     };
     this.handleSave = this.handleSave.bind(this);
-    this.handleChange = this.handleInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSourceOptionSelect = this.handleSourceOptionSelect.bind(this);
     this.resetSourceOptionSelect = this.resetSourceOptionSelect.bind(this);
     this.handleClosePanel = this.handleClosePanel.bind(this);
@@ -72,12 +72,21 @@ class JobForm extends Component {
   }
   handleSave(e) {
     e.preventDefault();
-    console.log("handling submit...", this.state);
+    this.props.dispatch(postJobApp({
+      jobPostingUrl: this.state.jobPostingUrl,
+      company: this.state.company,
+      jobTitle: this.state.jobTitle,
+      current_status: this.state.current_status,
+      location: this.state.location,
+      source: this.state.source,
+      sourceSymbol: this.state.sourceSymbol,
+    }));
+
     this.setState({
       jobPostingUrl: "",
       company: "",
       jobTitle: "",
-      status: "interested",
+      current_status: "interested",
       location: "",
       source: "",
       sourceSymbol: "",
@@ -124,7 +133,7 @@ class JobForm extends Component {
             </label>
             <label>
               Status
-              <select id="status" value={this.state.status} onChange={this.handleInputChange}>
+              <select id="current_status" value={this.state.current_status} onChange={this.handleInputChange}>
                 <option value="interested">Interested</option>
                 <option value="applied">Applied</option>
                 <option value="phoneCall">Phone Call</option>

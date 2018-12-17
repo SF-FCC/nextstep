@@ -5,6 +5,7 @@ require("dotenv").config();
 const passport = require("passport");
 const app = express();
 const pool = require("./db/postgres").pool;
+const cors = require("cors");
 
 // Middleware
 app.use(bodyParser.json());
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 // TODO change static location and serve with nginx
 app.use(express.static("../client/build"));
+app.use(cors());
 
 // Passport
 require("./services/passport");

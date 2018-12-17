@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 /**
  *
  * @param {*} userInfo
@@ -78,11 +80,14 @@ export const setVisibleJobApps = jobs => {
  *
  * @param {*} details
  */
-export const addJobApp = details => {
-  return {
-    type: "ADD_JOB_APP",
-    payload: details
-  };
+
+export const postJobApp = details => async dispatch => { 
+  const response = await axios.post('http://localhost:5000/jobs', details);
+  if (response.status === 200) {
+    dispatch({type: "ADD_JOB_APP", payload: response})
+  } else {
+    dispatch({type: "ADD_JOB_APP_ERR", payload: 'Unable to post job application'})
+  }
 };
 
 /**

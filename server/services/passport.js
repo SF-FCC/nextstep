@@ -4,13 +4,15 @@ const { pool } = require("../db/postgres");
 const bcrypt = require("bcrypt");
 
 /*
- * Authenticated Session persistence
- TODO - Figure out how we're handling session management
+ * Save session data to db
  */
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
+/*
+ * Load session data from db
+ */
 passport.deserializeUser((id, done) => {
   const findUserById = `SELECT * FROM users WHERE id=${id}`;
   pool.query(findUserById, (err, results) => {
@@ -29,6 +31,13 @@ passport.use(
   new LocalStrategy({ usernameField: "email", passwordField: "password" }, validateLocalLogin)
 );
 
+/**
+ * Validate and log the user in
+ * @param {string} userEmail the user input email
+ * @param {string} password the user input password
+ * @param {function} done done(error, user) where user is passed to... ?
+ * Message option on "done" callback can be accessed via middleware "req.authInfo.message"
+ */
 async function validateLocalLogin(userEmail, password, done) {
   const findUserByEmail = `SELECT id, email, password FROM users WHERE email = $1::text;`;
   try {
@@ -51,47 +60,3 @@ async function validateLocalLogin(userEmail, password, done) {
     return done(null, false);
   }
 }
-
-/*
- *  NOTES:
- *  - message option on "done" callback can be accessed on route via "req.authInfo.message"
- *  - done callback === done(error, user) => hence null for err
- */
-
-/* 
-* SAVE
-* async version - needs to be tested due to conflicting opinions on async with callbacks
-* supposedly not entirely stable
-passport.use(
-  new LocalStrategy(
-    { usernameField: "email", passwordField: "password" },
-    async (username, password, done) => {
-      try {
-        const findUserByEmail = `SELECT id, email, password FROM users WHERE email = '${username}';`;
-        const dbUser = await pool.query(findUserByEmail);
-
-        // Invalid Username
-        if (!dbUser.rows.length) {
-          return done(null, false, { message: "Invalid Username or Password" });
-        }
-
-        // Compare passwords
-        const dbUserHash = dbUser.rows[0].password;
-        const isValidPw = await bcrypt.compareSync(password, dbUserHash);
-
-        // Invalid Password
-        if (!isValidPw) {
-          return done(null, false, { message: "Invalid Username or Password" });
-        }
-
-        const { id, email } = dbUser.rows[0];
-        const validUserInfo = { id, email };
-
-        return done(null, validUserInfo);
-      } catch (err) {
-        return done(err, false, { message: "Error with login" });
-      }
-    }
-  )
-);
-*/

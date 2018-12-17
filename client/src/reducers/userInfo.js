@@ -1,6 +1,12 @@
+/**
+ *
+ *
+ * @param {*} [state=[]] the previous state
+ * @param {*} action TODO typedef this
+ */
 function userInfo(state = [], action) {
   switch (action.type) {
-    case 'LOGIN':
+    case "LOGIN":
       return [
         ...state,
         {
@@ -10,20 +16,20 @@ function userInfo(state = [], action) {
           lastName: action.lastName,
           id: action.id
         }
-      ]
-    case 'LOGOUT':
+      ];
+    case "LOGOUT":
       return [
         ...state,
         {
           isLoggedIn: false,
-          userEmail: '',
-          firstName: '',
-          lastName: '',
-          id: ''
+          userEmail: "",
+          firstName: "",
+          lastName: "",
+          id: ""
         }
-      ]
+      ];
     default:
-      return state
+      return state;
   }
 }
 

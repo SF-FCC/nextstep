@@ -52,11 +52,11 @@ class JobForm extends Component {
       sourceOptions: null,
       displaySourceForm: true
     };
-    this.handleSubmit = this.handleSave.bind(this);
+    this.handleSave = this.handleSave.bind(this);
     this.handleChange = this.handleInputChange.bind(this);
     this.handleSourceOptionSelect = this.handleSourceOptionSelect.bind(this);
     this.resetSourceOptionSelect = this.resetSourceOptionSelect.bind(this);
-    this.handleHideJobForm = this.handleClosePanel.bind(this);
+    this.handleClosePanel = this.handleClosePanel.bind(this);
   }
   handleSourceOptionSelect(companyName) {
     this.setState({ sourceSymbol: companyName[1] });

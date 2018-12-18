@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { sources } from "../data";
 import styles from "./JobForm.module.css";
 import { connect } from "react-redux";
-import { hideJobForm } from "../actions";
+import { hideJobForm, postJobApp } from "../actions";
 
 const SourceOptionsList = ({ companyNames, handleClick }) => {
   if (companyNames) {
@@ -28,10 +28,10 @@ const SourceOptionsList = ({ companyNames, handleClick }) => {
   }
 };
 
-const DisplaySource = ({ sourceSymbol, source, reset }) => (
+const DisplaySource = ({ sourceSymbol, job_source, reset }) => (
   <div className={styles.companyName} onClick={reset}>
     <span>{sourceSymbol + " - "}</span>
-    <span>{source}</span>
+    <span>{job_source}</span>
   </div>
 );
 
@@ -42,44 +42,53 @@ class JobForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      jobPostingUrl: "",
-      company: "",
-      jobTitle: "",
-      status: "interested",
-      location: "",
-      source: "",
+      posting_url: "",
+      company_name: "",
+      job_title: "",
+      current_status: "interested",
+      job_location: "",
+      job_source: "",
       sourceSymbol: "",
       sourceOptions: null,
       displaySourceForm: true
     };
-    this.handleSubmit = this.handleSave.bind(this);
-    this.handleChange = this.handleInputChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSourceOptionSelect = this.handleSourceOptionSelect.bind(this);
     this.resetSourceOptionSelect = this.resetSourceOptionSelect.bind(this);
-    this.handleHideJobForm = this.handleClosePanel.bind(this);
+    this.handleClosePanel = this.handleClosePanel.bind(this);
   }
   handleSourceOptionSelect(companyName) {
     this.setState({ sourceSymbol: companyName[1] });
-    this.setState({ source: companyName[0] });
+    this.setState({ job_source: companyName[0] });
     this.setState({ displaySourceForm: !this.state.displaySourceForm });
   }
   resetSourceOptionSelect() {
     this.setState({ displaySourceForm: !this.state.displaySourceForm });
     this.setState({
       sourceSymbol: "",
-      source: ""
+      job_source: ""
     });
   }
   handleSave(e) {
     e.preventDefault();
-    console.log("handling submit...", this.state);
+    this.props.dispatch(postJobApp({
+      posting_url: this.state.posting_url,
+      company_name: this.state.company_name,
+      job_title: this.state.job_title,
+      current_status: this.state.current_status,
+      job_location: this.state.job_location,
+      job_source: this.state.job_source,
+      sourceSymbol: this.state.sourceSymbol,
+    }));
+
     this.setState({
-      jobPostingUrl: "",
-      company: "",
-      jobTitle: "",
-      status: "interested",
-      location: "",
-      source: "",
+      posting_url: "",
+      company_name: "",
+      job_title: "",
+      current_status: "interested",
+      job_location: "",
+      job_source: "",
       sourceSymbol: "",
       sourceOptions: null,
       displaySourceForm: true
@@ -90,7 +99,7 @@ class JobForm extends Component {
     this.props.dispatch(hideJobForm());
   }
   handleInputChange(e) {
-    if (e.target.id === "source") {
+    if (e.target.id === "job_source") {
       this.setState({ sourceOptions: sources[e.target.value.toLowerCase()] });
     }
     this.setState({ [e.target.id]: e.target.value });
@@ -109,22 +118,22 @@ class JobForm extends Component {
             <label>
               Job Posting URL
               <input
-                id="jobPostingUrl"
+                id="posting_url"
                 onChange={this.handleInputChange}
-                value={this.state.jobPostingUrl}
+                value={this.state.posting_url}
               />
             </label>
             <label>
               Company
-              <input id="company" onChange={this.handleInputChange} value={this.state.company} />
+              <input id="company_name" onChange={this.handleInputChange} value={this.state.company_name} />
             </label>
             <label>
               Job Title
-              <input id="jobTitle" onChange={this.handleInputChange} value={this.state.jobTitle} />
+              <input id="job_title" onChange={this.handleInputChange} value={this.state.job_title} />
             </label>
             <label>
               Status
-              <select id="status" value={this.state.status} onChange={this.handleInputChange}>
+              <select id="current_status" value={this.state.current_status} onChange={this.handleInputChange}>
                 <option value="interested">Interested</option>
                 <option value="applied">Applied</option>
                 <option value="phoneCall">Phone Call</option>
@@ -139,17 +148,17 @@ class JobForm extends Component {
             </label>
             <label>
               Location
-              <input id="location" onChange={this.handleInputChange} value={this.state.location} />
+              <input id="job_location" onChange={this.handleInputChange} value={this.state.job_location} />
             </label>
             <label>
               Source
               {this.state.displaySourceForm ? (
                 <div>
                   <input
-                    id="source"
+                    id="job_source"
                     placeholder="Where did you find this job?"
                     onChange={this.handleInputChange}
-                    value={this.state.source}
+                    value={this.state.job_source}
                   />
                   <SourceOptionsList
                     handleClick={this.handleSourceOptionSelect}
@@ -160,7 +169,7 @@ class JobForm extends Component {
                 <DisplaySource
                   reset={this.resetSourceOptionSelect}
                   sourceSymbol={this.state.sourceSymbol}
-                  source={this.state.source}
+                  job_source={this.state.job_source}
                 />
               )}
             </label>

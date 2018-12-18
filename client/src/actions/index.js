@@ -82,7 +82,7 @@ export const setVisibleJobApps = jobs => {
  */
 
 export const postJobApp = details => async dispatch => { 
-  const response = await axios.post('http://localhost:5000/jobs', details);
+  const response = await axios.post('/jobs', details);
   if (response.status === 200) {
     dispatch({type: "ADD_JOB_APP", payload: response})
   } else {

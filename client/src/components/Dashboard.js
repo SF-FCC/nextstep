@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.handleShowJobForm = this.handleAddJob.bind(this);
+    this.handleAddJob = this.handleAddJob.bind(this);
   }
   handleAddJob() {
     this.props.dispatch(showJobForm());

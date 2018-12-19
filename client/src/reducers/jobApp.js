@@ -1,18 +1,26 @@
 function jobApp(state = {}, action) {
   switch (action.type) {
     case "ADD_JOB_APP":
+      const res = {
+        ...state,
+        jobApps: [...state.jobApps, action.payload]
+      };
+      console.log(res); 
+      return res
+    case "JOB_APP_ERR":
       return {
         ...state,
-        jobAppPostRes: action.payload
+        jobAppErr: action.payload
       };
-    case "ADD_JOB_APP_ERR":
+    case "ALL_JOB_APPS":
       return {
         ...state,
-        jobAppPostErr: action.payload
-      };
+        jobApps: action.payload
+      }
     default:
       return state;
   }
 }
 
 export default jobApp;
+

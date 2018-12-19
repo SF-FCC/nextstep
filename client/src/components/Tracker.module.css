@@ -18,6 +18,7 @@
 
 .tracker__table_heading > tr {
   height: 8em;
+  user-select: none;
 }
 
 .tracker__table_body > tr {
@@ -31,6 +32,7 @@
   color: #444;
   padding-left: .4em;
   border-bottom: 1em solid #f8f8f8;
+  cursor: pointer;
 }
 
 

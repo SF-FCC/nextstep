@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
-import "./Navbar.css";
 
 const AccountDropdown = ({ toggleAccountDropdown }) => {
   return (
@@ -34,17 +33,17 @@ class Navbar extends Component {
   render() {
     return (
       <nav>
-        <ul className="nav-list">
+        <ul className={styles.navList}>
           <li>
             <NavLink to="/dashboard">NextStep</NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard" activeClassName="nav-active">
+            <NavLink to="/dashboard" activeClassName={styles.navActive}>
               Dashboard
             </NavLink>
           </li>
           <li>
-            <NavLink to="/tracker" activeClassName="nav-active">
+            <NavLink to="/tracker" activeClassName={styles.navActive}>
               Tracker
             </NavLink>
           </li>

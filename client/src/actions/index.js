@@ -81,12 +81,21 @@ export const setVisibleJobApps = jobs => {
  * @param {*} details
  */
 
+export const getAllJobApps = () => async dispatch => {
+  const response = await axios.get('/jobs');
+  if (response.status=== 200) {
+    dispatch({type: "ALL_JOB_APPS", payload: response.data});
+  } else {
+    dispatch({type: "JOB_APP_ERR", payload: 'Unable to get job applications'})
+  }
+};
+
 export const postJobApp = details => async dispatch => { 
   const response = await axios.post('/jobs', details);
   if (response.status === 200) {
-    dispatch({type: "ADD_JOB_APP", payload: response})
+    dispatch({type: "ADD_JOB_APP", payload: response.data.rows[0]});
   } else {
-    dispatch({type: "ADD_JOB_APP_ERR", payload: 'Unable to post job application'})
+    dispatch({type: "JOB_APP_ERR", payload: 'Unable to post job application'})
   }
 };
 

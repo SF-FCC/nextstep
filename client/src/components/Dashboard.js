@@ -29,7 +29,7 @@ class Dashboard extends Component {
     return (
       <div>
         <div>
-          <h3>Job Applications</h3>
+          <h2>Dashboard</h2>
           <NavLink to="/tracker">See All</NavLink>
           <button onClick={this.handleShowJobForm}>Add Job</button>
           <ul>

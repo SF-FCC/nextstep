@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,400,700');
 /* greyfont -> #444 */
 /* light grey -> #ddd */
+/* super light grey #f8f8f8 (background color) */
 /* button blue ligher -> #2196F3; */
 /* button blue darker -> #337ab7; */
 
@@ -8,12 +9,17 @@ body {
   color: #444;
   margin: 0;
   padding: 0;
+  background: #f8f8f8;
   box-sizing: border-box;
   font-family: -apple-system, "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+nav {
+  background: #fff;
 }
 
 code {
@@ -75,6 +81,12 @@ h1 {
   font-size: 1.6em;
 }
 
+h2 {
+  font-size: 2em;
+  font-weight: 100;
+  letter-spacing: .02em;
+}
+
 .closeForm {
   font-size: 1.2em;
   cursor: pointer;
@@ -90,5 +102,11 @@ button {
   border-radius: .4em;
   margin: 1em;
   cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .mobile_hide {
+    display: none;
+  }
 }
 

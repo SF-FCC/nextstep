@@ -5,13 +5,16 @@ module.exports = app => {
   app.post("/jobs", async (req, res, next) => {
     // TODO - Need to add user_id from client req (action creator)
 
-    const { posting_url,
-    company_name,
-    company_url,
-    job_title,
-    current_status,
-    job_location,
-    user_id } = req.body;
+    const {
+      posting_url,
+      company_name,
+      company_url,
+      job_title,
+      current_status,
+      job_location,
+      job_source,
+      user_id
+    } = req.body;
 
     const insert = `
       INSERT INTO jobs (
@@ -21,9 +24,10 @@ module.exports = app => {
         job_title,
         current_status,
         job_location,
+        job_source,
         user_id
         )
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       RETURNING *;`;
     try {
       const jobs = await pool.query(insert, [
@@ -33,6 +37,7 @@ module.exports = app => {
         job_title,
         current_status,
         job_location,
+        job_source,
         user_id
       ]);
       return res.json(jobs);

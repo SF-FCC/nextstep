@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { pool } = require("../db/postgres");
 const passport = require("passport");
-const { createToken } = require("../middleware/helper");
+const { createToken, requireAuthToken } = require("../middleware/helper");
 
 module.exports = app => {
   /* Register */
@@ -43,8 +43,8 @@ module.exports = app => {
   });
 
   // Saving for testing
-  //   app.get("/auth/test", passport.authenticate("jwt", { session: false }), (req, res) => {
-  //      console.log("AUTH/TEST", req);
-  //     return res.json(req.user);
-  //   });
+  // app.get("/auth/test", requireAuthToken, (req, res) => {
+  //   console.log("AUTH/TEST", req.user);
+  //   return res.json(req.user);
+  // });
 };

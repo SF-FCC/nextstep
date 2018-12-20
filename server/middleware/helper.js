@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 const jwtHelper = {
   createToken: userId => {
@@ -10,6 +11,8 @@ const jwtHelper = {
         expiresIn: 300 // measured in seconds from time of issue (iat) - currently 5 minutes
       }
     );
-  }
+  },
+  requireAuthToken: passport.authenticate("jwt", { session: false })
 };
+
 module.exports = jwtHelper;

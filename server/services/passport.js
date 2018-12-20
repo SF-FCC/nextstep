@@ -71,7 +71,7 @@ const jwtStratOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_KEY,
   ignoreExpiration: false,
-  jsonWebTokenOptions: { maxAge: 86400 }
+  jsonWebTokenOptions: { maxAge: 1800 } // in seconds - currently 30 mins
 };
 
 const validateJwtToken = async (payload, done) => {

@@ -8,7 +8,7 @@ const jwtHelper = {
       process.env.JWT_KEY,
       {
         algorithm: "HS256",
-        expiresIn: 300 // measured in seconds from time of issue (iat) - currently 5 minutes
+        expiresIn: 1800 // measured in seconds from time of issue (iat) - currently 30 minutes
       }
     );
   },

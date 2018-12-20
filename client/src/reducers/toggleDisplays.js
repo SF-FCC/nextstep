@@ -1,4 +1,7 @@
-const initialState = { isShowingJobForm: false };
+const initialState = { 
+  isShowingJobForm: false,
+  isShowingJobDetail: false 
+};
 
 /**
  *
@@ -10,6 +13,8 @@ function toggleDisplays(state = initialState, action) {
   switch (action.type) {
     case "TOGGLE_JOB_FORM":
       return { ...state, isShowingJobForm: action.payload };
+    case "TOGGLE_JOB_DETAIL":
+      return { ...state, isShowingJobDetail: action.payload };
     default:
       return state;
   }

@@ -5,6 +5,11 @@ function jobApp(state = {}, action) {
         ...state,
         jobApps: [...state.jobApps, action.payload]
       };
+    case "SET_CURRENT_JOB_DETAIL":
+      return {
+        ...state,
+        currentJobApp: action.payload
+      };
     case "JOB_APP_ERR":
       return {
         ...state,

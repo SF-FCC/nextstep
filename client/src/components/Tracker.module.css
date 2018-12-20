@@ -2,37 +2,3 @@
   display: flex;
   justify-content: space-between;
 }
-
-.tracker__table {
-  width: 100%;
-  border-collapse:collapse;
-}
-
-.tracker__table_heading {
-  font-size: .66em;
-  letter-spacing: .05em;
-  height: 50px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.tracker__table_heading > tr {
-  height: 8em;
-  user-select: none;
-}
-
-.tracker__table_body > tr {
-  background: #fff;
-  height: 5em;
-  font-size: .8em;
-  cursor: pointer;
-}
-
-.tracker__table_body > tr > td {
-  color: #444;
-  padding-left: .4em;
-  border-bottom: 1em solid #f8f8f8;
-  cursor: pointer;
-}
-
-

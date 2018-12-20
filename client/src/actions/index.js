@@ -139,3 +139,30 @@ export const hideJobForm = () => {
     payload: false
   };
 };
+
+/**
+ *
+ */
+export const showJobDetail = () => {
+  return {
+    type: "TOGGLE_JOB_DETAIL",
+    payload: true
+  };
+};
+
+/**
+ *
+ */
+export const hideJobDetail = () => {
+  return {
+    type: "TOGGLE_JOB_DETAIL",
+    payload: false
+  };
+};
+
+export const setCurrentJobApp = (job) => {
+  return {
+    type: "SET_CURRENT_JOB_DETAIL",
+    payload: job
+  };
+};

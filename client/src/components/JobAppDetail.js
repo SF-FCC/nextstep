@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import styles from "./JobAppDetail.module.css";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
+import { hideJobDetail } from "../actions";
 
 class JobAppDetail extends Component {
   constructor(props) {
@@ -37,7 +38,9 @@ class JobAppDetail extends Component {
         <div className={styles.jobAppDetail__formInnerContainer}>
           <div className={styles.jobAppDetail__header}>
             <h3>{currentJobApp.company_name}</h3>
-            <span className="closeForm">X</span>
+            <span 
+              onClick={this.props.hideJobDetail}
+              className="closeForm">X</span>
           </div>
             <form 
               onSubmit={this.handleFormSubmit}
@@ -97,4 +100,8 @@ JobAppDetail.propTypes = {
   currentJobApp: PropTypes.object, 
 }
 
-export default connect()(JobAppDetail);
+const mapDispatchToProps = dispatch => ({
+  hideJobDetail: () => dispatch(hideJobDetail())
+})
+
+export default connect(null, mapDispatchToProps)(JobAppDetail);

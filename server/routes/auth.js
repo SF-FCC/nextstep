@@ -38,9 +38,9 @@ module.exports = app => {
 
   /* Logout */
   // * NOTE: User logout will be handled on Client-side (delete token from storage)
-  app.get("/auth/logout", (req, res) => {
-    return res.status(200).json(`TEMP: You are sort of logged out. Emphasis on the sort of.`);
-  });
+  // app.get("/auth/logout", (req, res) => {
+  //   return res.status(200).json(`TEMP: You are sort of logged out. Emphasis on the sort of.`);
+  // });
 
   // Saving for testing
   // app.get("/auth/test", requireAuthToken, (req, res) => {

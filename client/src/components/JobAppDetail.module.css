@@ -12,6 +12,7 @@
   position: absolute;
   left: 0;
   top: 0;
+  cursor: pointer;
 }
 
 .jobAppDetail__formInnerContainer {
@@ -21,6 +22,7 @@
   width: 60%;
   background: white;
   height: 100vh;
+  cursor: default;
 }
 
 .jobAppDetail__form {

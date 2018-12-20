@@ -20,6 +20,7 @@ class JobAppDetail extends Component {
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleHideJobAppDetail = this.handleHideJobAppDetail.bind(this);
   }
   handleInputChange(e) {
     this.setState({
@@ -31,10 +32,16 @@ class JobAppDetail extends Component {
     e.preventDefault();
     console.log('submitting form...'); 
   }
+  handleHideJobAppDetail(e) {
+    if (e.target.id === "formOuterContainer") this.props.hideJobDetail();
+  }
   render() {
     const { currentJobApp } = this.props;
     return (
-      <div className={styles.jobAppDetail__formOuterContainer}>
+      <div 
+        id="formOuterContainer"
+        onClick={this.handleHideJobAppDetail} 
+        className={styles.jobAppDetail__formOuterContainer}>
         <div className={styles.jobAppDetail__formInnerContainer}>
           <div className={styles.jobAppDetail__header}>
             <h3>{currentJobApp.company_name}</h3>

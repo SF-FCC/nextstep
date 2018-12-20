@@ -33,9 +33,8 @@ class Dashboard extends Component {
           <NavLink to="/tracker">See All</NavLink>
           <button onClick={this.handleShowJobForm}>Add Job</button>
           <ul>
-            {}
+            {this.props.allJobApps && <JobList jobs={this.props.allJobApps} />}
           </ul>
-          {this.props.allJobApps && <JobList jobs={this.props.allJobApps} />}
           {this.props.isShowingJobForm && <JobForm />}
         </div>
       </div>

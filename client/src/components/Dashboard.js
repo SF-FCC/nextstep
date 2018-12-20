@@ -3,6 +3,7 @@ import JobForm from "./JobForm";
 import { connect } from "react-redux";
 import { showJobForm, getAllJobApps } from "../actions";
 import { NavLink } from "react-router-dom";
+import styles from './Dashboard.module.css';
 
 /**
  * A dashboard that displays an overview of recent events.
@@ -10,7 +11,26 @@ import { NavLink } from "react-router-dom";
  */
 const JobList = ({ jobs }) => {
   return (
-    jobs.map((job) => <li key={job.id}>{job.company_name}</li>)
+    jobs.map(job => {
+      return (
+        <li 
+          key={job.id}
+          className={styles.card}
+        >
+          <div className={styles.card_top}>
+            <span>
+              <div className={styles.card_top__company}>{job.company_name}</div>
+              <div className={styles.card_top__jobtitle}>{job.job_title}</div>
+            </span>
+            <div>{job.current_status}</div>
+          </div>
+          <div className={styles.card_bottom}>
+            Updated {Math.round((Date.now() - Date.parse(`${job.updated}`))/1000)}s ago
+          </div>
+        </li>
+        )
+      }
+    )
   )
 }
 
@@ -32,7 +52,7 @@ class Dashboard extends Component {
           <h2>Dashboard</h2>
           <NavLink to="/tracker">See All</NavLink>
           <button onClick={this.handleShowJobForm}>Add Job</button>
-          <ul>
+          <ul className={styles.cards_list}>
             {this.props.allJobApps && <JobList jobs={this.props.allJobApps} />}
           </ul>
           {this.props.isShowingJobForm && <JobForm />}

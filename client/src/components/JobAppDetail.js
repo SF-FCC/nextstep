@@ -30,6 +30,7 @@ class JobAppDetail extends Component {
   }
   handleFormSubmit(e) {
     e.preventDefault();
+    this.setState({ showSubmitButton: false });
     console.log('submitting form...'); 
   }
   handleHideJobAppDetail(e) {
@@ -67,11 +68,21 @@ class JobAppDetail extends Component {
                   value={this.state.job_title} />
               </label>
               <label>Status
-                <input
-                  className={styles.jobAppDetail__input}
-                  onChange={this.handleInputChange}
-                  id={"current_status"}
-                  value={this.state.current_status} />
+                <select 
+                  id="current_status"
+                  value={this.state.current_status}
+                  onChange={this.handleInputChange}>
+                    <option value="interested">Interested</option>
+                    <option value="applied">Applied</option>
+                    <option value="phoneCall">Phone Call</option>
+                    <option value="assignment">Assignment</option>
+                    <option value="interview">Interview</option>
+                    <option value="offer">Offer</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="withdrawn">Withdrawn</option>
+                    <option value="expired">Expired</option>
+                    <option value="notAFit">Not A Fit</option>
+                </select>
               </label>
               <label>Location
                 <input

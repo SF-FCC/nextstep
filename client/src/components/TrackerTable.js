@@ -20,6 +20,7 @@ class TrackerTable extends Component {
     }
     this.sortTableBy = this.sortTableBy.bind(this);
     this.handleSortRequest = this.handleSortRequest.bind(this);
+    this.capitalize = this.capitalize.bind(this);
   }
   sortTableBy(sortType) {
     let jobsCopy = this.state.jobApps.slice();
@@ -39,6 +40,9 @@ class TrackerTable extends Component {
         jobApps: res
       });
     }
+  }
+  capitalize(str) {
+    return str[0].toUpperCase() + str.slice(1);
   }
   handleSortRequest(e) {
     if (e.target.id) this.sortTableBy(e.target.id);
@@ -69,7 +73,7 @@ class TrackerTable extends Component {
                 onClick={this.handleShowJobAppDetail.bind(this, jobApp)}>
                 <td>{jobApp.company_name}</td>
                 <td>{jobApp.job_title}</td>
-                <td>{jobApp.current_status}</td>
+                <td>{this.capitalize(jobApp.current_status)}</td>
                 <td className={"mobile_hide"}>{jobApp.job_location}</td>
                 <td className={"mobile_hide"}>{jobApp.created}</td>
               </tr>))}

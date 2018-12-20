@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import styles from "./JobAppDetail.module.css";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
-import { hideJobDetail } from "../actions";
+import { hideJobDetail, updateJobApp } from "../actions";
 
 class JobAppDetail extends Component {
   constructor(props) {
@@ -31,7 +31,16 @@ class JobAppDetail extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
     this.setState({ showSubmitButton: false });
-    console.log('submitting form...'); 
+    const details = {
+      id : this.props.currentJobApp.id,
+      company_name : this.state.company_name,
+      job_title : this.state.job_title,
+      current_status : this.state.current_status,
+      job_location : this.state.job_location,
+      job_source : this.state.job_source,
+      posting_url : this.state.posting_url,
+    }
+    this.props.updateJobApp(details);
   }
   handleHideJobAppDetail(e) {
     if (e.target.id === "formOuterContainer") this.props.hideJobDetail();
@@ -119,7 +128,8 @@ JobAppDetail.propTypes = {
 }
 
 const mapDispatchToProps = dispatch => ({
-  hideJobDetail: () => dispatch(hideJobDetail())
+  hideJobDetail: () => dispatch(hideJobDetail()),
+  updateJobApp: (details) => dispatch(updateJobApp(details))
 })
 
 export default connect(null, mapDispatchToProps)(JobAppDetail);

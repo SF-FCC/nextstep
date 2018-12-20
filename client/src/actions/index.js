@@ -101,13 +101,18 @@ export const postJobApp = details => async dispatch => {
 
 /**
  *
- * @param {*} id
+ * @param {*} details
  */
-export const updateJobApp = id => {
-  return {
-    type: "UPDATE_JOB_APP"
-    // payload: details
-  };
+export const updateJobApp = details => async dispatch => {
+  console.log(details.id) 
+  const response = await axios.post("/jobs/update", details);
+  if (response.status !== 200) {
+    dispatch({type: "JOB_APP_ERR", payload: 'Unable to post job application'})
+  }
+  // return {
+  //   type: "UPDATE_JOB_APP"
+  //   payload: details
+  // };
 };
 
 /**

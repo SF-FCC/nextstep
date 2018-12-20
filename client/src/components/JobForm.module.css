@@ -39,6 +39,19 @@
   margin-left: 0;
 }
 
+.jobForm__input {
+  width: 100%;
+  line-height: 2.5;
+  margin: auto;
+  border: none;
+  font-size: 1em;
+  font-weight: 100;
+  color: #444;
+  letter-spacing: .04em;
+  border-bottom: .01em solid #ddd
+}
+
+
 @media (max-width: 650px) {
   .formInnerContainer {
     width: 94%;

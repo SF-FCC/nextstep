@@ -1,0 +1,48 @@
+.jobAppDetail__header {
+  display: flex;
+  justify-content: space-between;
+  background: #f8f8f8;
+  padding: 1em;
+}
+
+.jobAppDetail__formOuterContainer {
+  background: rgba(0, 0, 0, .5);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.jobAppDetail__formInnerContainer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60%;
+  background: white;
+  height: 100vh;
+}
+
+.jobAppDetail__form {
+  width: 16em;
+  margin: 1em;
+  padding: 1em;
+  box-sizing: border-box;
+  border: .05em solid #ddd;
+  border-radius: .2em;
+}
+
+.jobAppDetail__input {
+  margin-top: .6em;
+  border: none;
+  padding: .2em;
+  width: 100%;
+  cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .jobAppDetail__formInnerContainer {
+    width: 90%;
+  }
+}
+

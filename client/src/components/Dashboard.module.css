@@ -1,0 +1,39 @@
+.cards_list {
+  display: grid;
+  grid-column-gap: 2em;
+  grid-row-gap: 1em;
+  grid-template-columns: repeat(3, 12em);
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #777;
+  height: 12em;
+  width: 12em;
+}
+
+.card_top {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9em;
+  height: 80%;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.card_top__jobtitle {
+  color: #444;
+  margin: 8px 0;
+}
+
+.card_bottom {
+  align-items: center;
+  background-color: #f1f0f0;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  display: flex;
+  font-size: 0.8em;
+  height: 20%;
+  padding-left: 1em;
+}

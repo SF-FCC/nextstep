@@ -63,19 +63,21 @@ async function validateLocalLogin(userEmail, password, done) {
   }
 }
 
-/* JWT Config */
-const jwtOptions = {
+/*
+ * JWT Config
+ */
+const jwtStratOptions = {
+  algorithms: ["HS256"],
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_KEY,
-  ignoreExpiration: false
+  ignoreExpiration: false,
+  jsonWebTokenOptions: { maxAge: 86400 }
 };
 
 const validateJwtToken = async (payload, done) => {
-  console.log("PAYLOAD", payload);
-  const findUserById = `SELECT id, email FROM users WHERE id = $1::INT;`; //Should this match both id and email?
+  const findUserById = `SELECT id, email FROM users WHERE id = $1::INT;`;
   try {
     const results = await pool.query(findUserById, [payload.sub]);
-    // console.log("results", results.rows[0]);
     if (results.rowCount < 1) {
       return done(null, false);
     }
@@ -87,4 +89,4 @@ const validateJwtToken = async (payload, done) => {
   }
 };
 
-passport.use(new JwtStrategy(jwtOptions, validateJwtToken));
+passport.use(new JwtStrategy(jwtStratOptions, validateJwtToken));

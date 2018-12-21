@@ -114,10 +114,6 @@ export const updateJobApp = details => async dispatch => {
   } else {
     dispatch({type: "JOB_APP_ERR", payload: 'Unable to post job application'})
   }
-  // return {
-  //   type: "UPDATE_JOB_APP"
-  //   payload: details
-  // };
 };
 
 /**

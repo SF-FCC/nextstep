@@ -120,7 +120,8 @@ class JobAppDetail extends Component {
                   id={"posting_url"}
                   value={this.state.posting_url} />
               </label>
-              <p onClick={this.handleDeleteSubmit}>delete this job</p>
+              <p className={styles.jobAppDetail__delete}
+                 onClick={this.handleDeleteSubmit}>delete this job</p>
               {this.state.showDeleteConfirmation && 
                 <JobAppDeleteModal jobAppId={this.props.currentJobApp.id}/>}
               {this.state.showSubmitButton && 

@@ -12,7 +12,7 @@ class JobAppDetail extends Component {
     super(props);
     this.state = {
       showSubmitButton: false,
-      showDeleteConfirmation: false,
+      deleteConfrimationIsShowing: false,
       company_name : props.currentJobApp.company_name,
       job_title : props.currentJobApp.job_title,
       current_status : props.currentJobApp.current_status,
@@ -23,7 +23,8 @@ class JobAppDetail extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleHideJobAppDetail = this.handleHideJobAppDetail.bind(this);
-    this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
+    this.showDeleteConfirmation = this.showDeleteConfirmation.bind(this);
+    this.hideDeleteConfirmation = this.hideDeleteConfirmation.bind(this);
   }
   handleInputChange(e) {
     this.setState({
@@ -45,8 +46,11 @@ class JobAppDetail extends Component {
     }
     this.props.updateJobApp(details);
   }
-  handleDeleteSubmit() {
-    this.setState({showDeleteConfirmation: true});
+  showDeleteConfirmation() {
+    this.setState({deleteConfrimationIsShowing: true});
+  }
+  hideDeleteConfirmation() {
+    this.setState({deleteConfrimationIsShowing: false});
   }
   handleHideJobAppDetail(e) {
     if (e.target.id === "formOuterContainer") this.props.hideJobDetail();
@@ -121,9 +125,11 @@ class JobAppDetail extends Component {
                   value={this.state.posting_url} />
               </label>
               <p className={styles.jobAppDetail__delete}
-                 onClick={this.handleDeleteSubmit}>delete this job</p>
-              {this.state.showDeleteConfirmation && 
-                <JobAppDeleteModal jobAppId={this.props.currentJobApp.id}/>}
+                 onClick={this.showDeleteConfirmation}>delete this job</p>
+              {this.state.deleteConfrimationIsShowing && 
+                <JobAppDeleteModal 
+                  jobAppId={this.props.currentJobApp.id}
+                  hideDeleteConfirmation={this.hideDeleteConfirmation} />}
               {this.state.showSubmitButton && 
                 <button>submit</button>}
             </form>

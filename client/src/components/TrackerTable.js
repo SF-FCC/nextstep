@@ -3,7 +3,7 @@ import styles from "./TrackerTable.module.css";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import JobAppDetail from "./JobAppDetail";
-import { setCurrentJobApp, showJobDetail } from "../actions";
+import { setCurrentJobApp, showJobDetail, sortAllJobApps } from "../actions";
 
 /**
 * TODO - when a job status is changed to applied there should be a form for collecting the date
@@ -16,30 +16,25 @@ class TrackerTable extends Component {
     super(props);
     this.state = {
       currentSortBy: null, 
-      jobApps: props.jobApps,
     }
     this.sortTableBy = this.sortTableBy.bind(this);
     this.handleSortRequest = this.handleSortRequest.bind(this);
     this.capitalize = this.capitalize.bind(this);
   }
   sortTableBy(sortType) {
-    let jobsCopy = this.state.jobApps.slice();
-
+    let jobsCopy = this.props.jobApps.slice();
+    
+    
     if (this.state.currentSortBy === sortType) {
-      this.setState({
-        currentSortBy: null,
-        jobApps: jobsCopy.reverse(),
-      });
+      this.setState({currentSortBy: null});
+      this.props.sortAllJobApps(jobsCopy.reverse());
     } else {
       let res = jobsCopy.sort((acc, job) => {
-        return acc[sortType].toLowerCase() > job[sortType].toLowerCase();
+        return String(acc[sortType]).toLowerCase() > String(job[sortType]).toLowerCase();
       });
-
-      this.setState({
-        currentSortBy: sortType,
-        jobApps: res
-      });
-    }
+      this.setState({currentSortBy: sortType});
+      this.props.sortAllJobApps(res);
+    };
   }
   capitalize(str) {
     return str[0].toUpperCase() + str.slice(1);
@@ -56,18 +51,20 @@ class TrackerTable extends Component {
       <div>
         {this.props.isShowingJobDetail 
           && <JobAppDetail currentJobApp={this.props.currentJobApp} />}
+
         <table className={styles.tracker__table}>
+
           <tbody className={styles.tracker__table_heading}>
             <tr onClick={this.handleSortRequest}>
-              <td id='company_name'>COMPANY</td>
-              <td id='job_title'>JOB TITLE</td>
-              <td id='current_status'>STATUS</td>
-              <td id='job_location' className={"mobile_hide"}>LOCATION</td>
-              <td id='created' className={"mobile_hide"}>DATE APPLIED</td>
+              <th id='company_name'>COMPANY</th>
+              <th id='job_title'>JOB TITLE</th>
+              <th id='current_status'>STATUS</th>
+              <th id='job_location' className={"mobile_hide"}>LOCATION</th>
+              <th id='created' className={"mobile_hide"}>DATE APPLIED</th>
             </tr>
           </tbody>
           <tbody className={styles.tracker__table_body}>
-            {this.state.jobApps.map(jobApp => (
+            {this.props.jobApps && this.props.jobApps.map(jobApp => (
               <tr 
                 key={jobApp.id}
                 onClick={this.handleShowJobAppDetail.bind(this, jobApp)}>
@@ -78,6 +75,7 @@ class TrackerTable extends Component {
                 <td className={"mobile_hide"}>{jobApp.created}</td>
               </tr>))}
           </tbody>
+
         </table>
       </div>
     )
@@ -92,12 +90,14 @@ const mapStateToProps = state => {
   return {
     isShowingJobDetail: state.toggleDisplays.isShowingJobDetail,
     currentJobApp: state.jobApp.currentJobApp,
+    allJobApps: state.jobApp.jobApps,
   }
 };
 
 const mapDispatchToProps = dispatch => ({
   setCurrentJobApp: (job) => dispatch(setCurrentJobApp(job)),
   showJobDetail: () => dispatch(showJobDetail()),
+  sortAllJobApps: (allJobApps) => dispatch(sortAllJobApps(allJobApps))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackerTable);

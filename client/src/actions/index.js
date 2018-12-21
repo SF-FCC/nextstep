@@ -99,15 +99,21 @@ export const postJobApp = details => async dispatch => {
   }
 };
 
+export const sortAllJobApps = allJobApps => async dispatch => {
+  dispatch({type: "SORT_ALL_JOB_APPS", payload: allJobApps});
+}
+
 /**
  *
- * @param {*} id
+ * @param {*} details
  */
-export const updateJobApp = id => {
-  return {
-    type: "UPDATE_JOB_APP"
-    // payload: details
-  };
+export const updateJobApp = details => async dispatch => {
+  const response = await axios.post("/jobs/update", details);
+  if (response.status === 200) {
+    dispatch({type: "JOB_APP_UPDATE", payload: details});
+  } else {
+    dispatch({type: "JOB_APP_ERR", payload: 'Unable to post job application'})
+  }
 };
 
 /**
@@ -137,5 +143,32 @@ export const hideJobForm = () => {
   return {
     type: "TOGGLE_JOB_FORM",
     payload: false
+  };
+};
+
+/**
+ *
+ */
+export const showJobDetail = () => {
+  return {
+    type: "TOGGLE_JOB_DETAIL",
+    payload: true
+  };
+};
+
+/**
+ *
+ */
+export const hideJobDetail = () => {
+  return {
+    type: "TOGGLE_JOB_DETAIL",
+    payload: false
+  };
+};
+
+export const setCurrentJobApp = (job) => {
+  return {
+    type: "SET_CURRENT_JOB_DETAIL",
+    payload: job
   };
 };

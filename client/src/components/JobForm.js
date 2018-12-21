@@ -118,6 +118,7 @@ class JobForm extends Component {
             <label>
               Job Posting URL
               <input
+                className={styles.jobForm__input}
                 id="posting_url"
                 onChange={this.handleInputChange}
                 value={this.state.posting_url}
@@ -125,36 +126,52 @@ class JobForm extends Component {
             </label>
             <label>
               Company
-              <input id="company_name" onChange={this.handleInputChange} value={this.state.company_name} />
+              <input 
+                className={styles.jobForm__input}
+                id="company_name"
+                onChange={this.handleInputChange}
+                value={this.state.company_name} />
             </label>
             <label>
               Job Title
-              <input id="job_title" onChange={this.handleInputChange} value={this.state.job_title} />
+              <input 
+                className={styles.jobForm__input}
+                id="job_title"
+                onChange={this.handleInputChange}
+                value={this.state.job_title} />
             </label>
             <label>
               Status
-              <select id="current_status" value={this.state.current_status} onChange={this.handleInputChange}>
-                <option value="interested">Interested</option>
-                <option value="applied">Applied</option>
-                <option value="phoneCall">Phone Call</option>
-                <option value="assignment">Assignment</option>
-                <option value="interview">Interview</option>
-                <option value="offer">Offer</option>
-                <option value="accepted">Accepted</option>
-                <option value="withdrawn">Withdrawn</option>
-                <option value="expired">Expired</option>
-                <option value="notAFit">Not A Fit</option>
+              <select 
+                id="current_status"
+                value={this.state.current_status}
+                onChange={this.handleInputChange}>
+                  <option value="interested">Interested</option>
+                  <option value="applied">Applied</option>
+                  <option value="phoneCall">Phone Call</option>
+                  <option value="assignment">Assignment</option>
+                  <option value="interview">Interview</option>
+                  <option value="offer">Offer</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="withdrawn">Withdrawn</option>
+                  <option value="expired">Expired</option>
+                  <option value="notAFit">Not A Fit</option>
               </select>
             </label>
             <label>
               Location
-              <input id="job_location" onChange={this.handleInputChange} value={this.state.job_location} />
+              <input
+                className={styles.jobForm__input}
+                id="job_location"
+                onChange={this.handleInputChange}
+                value={this.state.job_location} />
             </label>
             <label>
               Source
               {this.state.displaySourceForm ? (
                 <div>
                   <input
+                    className={styles.jobForm__input}
                     id="job_source"
                     placeholder="Where did you find this job?"
                     onChange={this.handleInputChange}

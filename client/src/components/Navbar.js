@@ -1,21 +1,40 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
-const AccountDropdown = ({ toggleAccountDropdown }) => {
-  return (
-    <div className={styles.dropdownContainer}>
-      <ul className={styles.dropdownUl}>
-        <li className={styles.userLi}>useremail@mail.com</li>
-        <li onClick={toggleAccountDropdown} className={styles.emailPasswordLi}>
-          <NavLink to="/account">Email & Password</NavLink>
-        </li>
-        <li className={styles.signoutLi}>Sign Out</li>
-      </ul>
-    </div>
-  );
-};
+class AccountDropdown extends Component {
+  componentDidMount() {
+    document.addEventListener("click", this.onOutsideClick, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this.onOutsideClick, false);
+  }
+
+  setWrapperRef = node => {
+    this.wrapperRef = node;
+  };
+
+  onOutsideClick = e => {
+    if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
+      this.props.toggleAccountDropdown();
+    }
+  };
+
+  render() {
+    return (
+      <div className={styles.dropdownContainer} ref={this.setWrapperRef}>
+        <ul className={styles.dropdownUl}>
+          <li className={styles.userLi}>useremail@mail.com</li>
+          <li onClick={this.props.toggleAccountDropdown} className={styles.emailPasswordLi}>
+            <NavLink to="/account">Email & Password</NavLink>
+          </li>
+          <li className={styles.signoutLi}>Sign Out</li>
+        </ul>
+      </div>
+    );
+  }
+}
 
 /**
  * The header navigation bar that displays location and login/account.
@@ -29,23 +48,9 @@ class Navbar extends Component {
     this.toggleAccountDropdown = this.toggleAccountDropdown.bind(this);
   }
 
-  componentDidMount() {
-    document.addEventListener("click", this.outsideClick, false);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("click", this.outsideClick, false);
-  }
-
   toggleAccountDropdown() {
     this.setState({ showAccountDropdown: !this.state.showAccountDropdown });
   }
-
-  outsideClick = e => {
-    if (!ReactDOM.findDOMNode(this).contains(e.target)) {
-      this.setState({ showAccountDropdown: false });
-    }
-  };
 
   render() {
     return (

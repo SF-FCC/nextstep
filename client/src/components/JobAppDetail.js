@@ -5,12 +5,14 @@ import styles from "./JobAppDetail.module.css";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { hideJobDetail, updateJobApp } from "../actions";
+import JobAppDeleteModal from "./JobAppDeleteModal";
 
 class JobAppDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showSubmitButton: false,
+      showDeleteConfirmation: false,
       company_name : props.currentJobApp.company_name,
       job_title : props.currentJobApp.job_title,
       current_status : props.currentJobApp.current_status,
@@ -21,6 +23,7 @@ class JobAppDetail extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleHideJobAppDetail = this.handleHideJobAppDetail.bind(this);
+    this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
   }
   handleInputChange(e) {
     this.setState({
@@ -41,6 +44,9 @@ class JobAppDetail extends Component {
       posting_url : this.state.posting_url,
     }
     this.props.updateJobApp(details);
+  }
+  handleDeleteSubmit() {
+    this.setState({showDeleteConfirmation: true});
   }
   handleHideJobAppDetail(e) {
     if (e.target.id === "formOuterContainer") this.props.hideJobDetail();
@@ -114,6 +120,9 @@ class JobAppDetail extends Component {
                   id={"posting_url"}
                   value={this.state.posting_url} />
               </label>
+              <p onClick={this.handleDeleteSubmit}>delete this job</p>
+              {this.state.showDeleteConfirmation && 
+                <JobAppDeleteModal jobAppId={this.props.currentJobApp.id}/>}
               {this.state.showSubmitButton && 
                 <button>submit</button>}
             </form>

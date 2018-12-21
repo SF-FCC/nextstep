@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
@@ -27,9 +28,25 @@ class Navbar extends Component {
     };
     this.toggleAccountDropdown = this.toggleAccountDropdown.bind(this);
   }
+
+  componentDidMount() {
+    document.addEventListener("click", this.outsideClick, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this.outsideClick, false);
+  }
+
   toggleAccountDropdown() {
     this.setState({ showAccountDropdown: !this.state.showAccountDropdown });
   }
+
+  outsideClick = e => {
+    if (!ReactDOM.findDOMNode(this).contains(e.target)) {
+      this.setState({ showAccountDropdown: false });
+    }
+  };
+
   render() {
     return (
       <nav>

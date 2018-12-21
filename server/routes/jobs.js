@@ -46,6 +46,46 @@ module.exports = app => {
     }
   });
 
+  app.post("/jobs/update", async (req, res, next) => {
+    console.log('req.body.....', req.body)
+    const {
+      id,
+      posting_url,
+      company_name,
+      company_url,
+      job_title,
+      current_status,
+      job_location,
+      job_source,
+    } = req.body;
+
+    const insert = `
+      UPDATE jobs SET 
+        posting_url = $2, 
+        company_name = $3,
+        company_url = $4,
+        job_title = $5,
+        current_status = $6,
+        job_location = $7,
+        job_source = $8
+      WHERE id = $1`;
+    try {
+      const jobs = await pool.query(insert, [
+        id,
+        posting_url,
+        company_name,
+        company_url,
+        job_title,
+        current_status,
+        job_location,
+        job_source
+      ]);
+      return res.json(jobs);
+    } catch (err) {
+      next(err);
+    }
+  });
+
   app.get("/jobs", async (req, res, next) => {
     // TODO - need to add user_id to query based on auth middleware/ request
     const query = `SELECT * from jobs`;

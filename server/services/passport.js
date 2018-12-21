@@ -2,6 +2,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const { pool } = require("../db/postgres");
 const bcrypt = require("bcrypt");
+const JwtStrategy = require("passport-jwt").Strategy;
+const { ExtractJwt } = require("passport-jwt");
 
 /*
  * Save session data to db
@@ -60,3 +62,31 @@ async function validateLocalLogin(userEmail, password, done) {
     return done(null, false);
   }
 }
+
+/*
+ * JWT Config
+ */
+const jwtStratOptions = {
+  algorithms: ["HS256"],
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_KEY,
+  ignoreExpiration: false,
+  jsonWebTokenOptions: { maxAge: 1800 } // in seconds - currently 30 mins
+};
+
+const validateJwtToken = async (payload, done) => {
+  const findUserById = `SELECT id, email FROM users WHERE id = $1::INT;`;
+  try {
+    const results = await pool.query(findUserById, [payload.sub]);
+    if (results.rowCount < 1) {
+      return done(null, false);
+    }
+    const user = results.rows[0];
+    return done(null, user);
+  } catch (err) {
+    console.log("validateJwtToken: ", err);
+    return done(err, false);
+  }
+};
+
+passport.use(new JwtStrategy(jwtStratOptions, validateJwtToken));

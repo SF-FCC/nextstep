@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const { pool } = require("../db/postgres");
 const passport = require("passport");
+const { createToken, requireAuthToken } = require("../middleware/helper");
 
 module.exports = app => {
   /* Register */
@@ -31,13 +32,19 @@ module.exports = app => {
 
   /* Login */
   app.post("/auth/login", passport.authenticate("local"), (req, res) => {
-    return res.status(200).json(req.user);
+    console.log("req.user", req.user);
+    return res.status(200).send({ user: req.user, token: createToken(req.user.id) });
   });
 
   /* Logout */
-  // TODO Passport session does not persist, Handle with sessions or jwt?
-  app.get("/auth/logout", (req, res) => {
-    req.logOut();
-    return res.status(200).json(`TEMP: You are sort of logged out. Emphasis on the sort of.`);
-  });
+  // * NOTE: User logout will be handled on Client-side (delete token from storage)
+  // app.get("/auth/logout", (req, res) => {
+  //   return res.status(200).json(`TEMP: You are sort of logged out. Emphasis on the sort of.`);
+  // });
+
+  // Saving for testing
+  // app.get("/auth/test", requireAuthToken, (req, res) => {
+  //   console.log("AUTH/TEST", req.user);
+  //   return res.json(req.user);
+  // });
 };

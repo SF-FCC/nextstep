@@ -19,11 +19,12 @@ module.exports = app => {
       email,
       password
       )
-    VALUES ($1, $2, $3, $4);`;
+    VALUES ($1, $2, $3, $4)
+    RETURNING id, email;`;
     try {
-      const user = await pool.query(insert, [first_name, last_name, email, hashPW]);
-      // TODO Should return confirmation, JWT, and user info
-      return res.status(200).json(user);
+      const registerQuery = await pool.query(insert, [first_name, last_name, email, hashPW]);
+      const user = registerQuery.rows[0];
+      return res.status(200).json({ user, token: createToken(user.id) });
     } catch (err) {
       console.error(err);
       return res.status(400).json(`Registration error: ${err.detail}`);

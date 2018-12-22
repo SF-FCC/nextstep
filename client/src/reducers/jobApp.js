@@ -13,6 +13,13 @@ function jobApp(state = {}, action) {
           return jobApp.id !== curId;
         }), action.payload]
       };
+    case "DELETE_JOB_APP":
+      const deleteId = action.payload;
+      return {
+        jobApps: [...state.jobApps.filter(jobApp => {
+          return jobApp.id !== deleteId;
+        })]
+      };
     case "SET_CURRENT_JOB_DETAIL":
       return {
         ...state,

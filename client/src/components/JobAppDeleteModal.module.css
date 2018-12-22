@@ -1,0 +1,41 @@
+.JobAppDeleteModal__outerContainer {
+  background: rgba(0, 0, 0, .5);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.JobAppDeleteModal__innerContainer {
+  background: #fff;
+  position: fixed;
+  width: 40%;
+  height: 30%;
+  left: 30%;
+  top: 30%;
+  display: flex;
+}
+
+.JobAppDeleteModal {
+  text-align: center;
+  width: 100%;
+  margin: auto;
+}
+
+.JobAppDeleteModal > span {
+  position: absolute;
+  top: .02em;
+  right: .02em;
+  padding: .6em.8em;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .JobAppDeleteModal__innerContainer {
+    width: 70%;
+    left: 15%;
+  }
+}
+

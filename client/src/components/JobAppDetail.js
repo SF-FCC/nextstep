@@ -12,7 +12,7 @@ class JobAppDetail extends Component {
     super(props);
     this.state = {
       showSubmitButton: false,
-      deleteConfrimationIsShowing: false,
+      deleteConfirmationIsShowing: false,
       company_name : props.currentJobApp.company_name,
       job_title : props.currentJobApp.job_title,
       current_status : props.currentJobApp.current_status,
@@ -47,10 +47,10 @@ class JobAppDetail extends Component {
     this.props.updateJobApp(details);
   }
   showDeleteConfirmation() {
-    this.setState({deleteConfrimationIsShowing: true});
+    this.setState({deleteConfirmationIsShowing: true});
   }
   hideDeleteConfirmation() {
-    this.setState({deleteConfrimationIsShowing: false});
+    this.setState({deleteConfirmationIsShowing: false});
   }
   handleHideJobAppDetail(e) {
     if (e.target.id === "formOuterContainer") this.props.hideJobDetail();
@@ -126,7 +126,7 @@ class JobAppDetail extends Component {
               </label>
               <p className={styles.jobAppDetail__delete}
                  onClick={this.showDeleteConfirmation}>delete this job</p>
-              {this.state.deleteConfrimationIsShowing && 
+              {this.state.deleteConfirmationIsShowing && 
                 <JobAppDeleteModal 
                   jobAppId={this.props.currentJobApp.id}
                   hideDeleteConfirmation={this.hideDeleteConfirmation} />}

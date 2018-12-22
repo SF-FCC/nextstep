@@ -47,7 +47,6 @@ module.exports = app => {
   });
 
   app.post("/jobs/update", async (req, res, next) => {
-    console.log('req.body.....', req.body)
     const {
       id,
       posting_url,
@@ -70,7 +69,7 @@ module.exports = app => {
         job_source = $8
       WHERE id = $1`;
     try {
-      const jobs = await pool.query(insert, [
+      const dbResponse = await pool.query(insert, [
         id,
         posting_url,
         company_name,
@@ -80,7 +79,19 @@ module.exports = app => {
         job_location,
         job_source
       ]);
-      return res.json(jobs);
+      return res.json(dbResponse);
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  app.post("/jobs/delete", async (req, res, next) => {
+    const { id } = req.body;
+    const remove = `DELETE FROM jobs WHERE id = $1`;
+
+    try {
+      const dbResponse = await pool.query(remove, [id]);
+      return res.json(dbResponse);
     } catch (err) {
       next(err);
     }

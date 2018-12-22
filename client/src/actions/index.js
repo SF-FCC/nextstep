@@ -120,10 +120,13 @@ export const updateJobApp = details => async dispatch => {
  *
  * @param {*} id
  */
-export const deleteJobApp = id => {
-  return {
-    type: "DELETE_JOB_APP"
-  };
+export const deleteJobApp = curId => async dispatch => {
+  const response = await axios.post("/jobs/delete", {id: curId});
+  if (response.status === 200) { 
+    dispatch({type: "DELETE_JOB_APP", payload: curId});
+  } else {
+    dispatch({ type: "JOB_APP_ERR", payload: 'Unable to delete job application'})
+  }
 };
 
 /**

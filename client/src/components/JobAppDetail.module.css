@@ -25,6 +25,13 @@
   cursor: default;
 }
 
+.jobAppDetail__delete {
+  cursor: pointer;
+  color: #337ab7;
+  margin-left: 1em;
+  font-size: .8em;
+}
+
 .jobAppDetail__form {
   width: 16em;
   margin: 1em;

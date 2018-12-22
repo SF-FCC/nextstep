@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,400,700');
 /* greyfont -> #444 */
 /* light grey -> #ddd */
+/* modal background -> rgba(0, 0, 0, .5)
 /* super light grey #f8f8f8 (background color) */
 /* button blue ligher -> #2196F3; */
 /* button blue darker -> #337ab7; */
+/* button danger -> #d9534f; */
+
+
 
 * {
   box-sizing: border-box;
@@ -72,7 +76,7 @@ h1 {
   font-size: 1.6em;
 }
 
-h2, h3 {
+h2, h3, h4 {
   font-weight: 100;
   letter-spacing: .02em;
 }
@@ -83,6 +87,11 @@ h2 {
 
 h3 {
   font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.1em;
+  line-height: 2.5em;
 }
 
 .closeForm {
@@ -100,6 +109,10 @@ button {
   border-radius: .4em;
   margin: 1em;
   cursor: pointer;
+}
+
+.delete_button {
+  background-color: #d9534f; 
 }
 
 @media (max-width: 650px) {

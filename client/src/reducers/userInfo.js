@@ -1,33 +1,37 @@
 /**
  *
- *
- * @param {*} [state=[]] the previous state
- * @param {*} action TODO typedef this
+ * @typedef {object} AuthAction
+ * @property {string} email user email
+ * @property {string} firstName user first name
+ * @property {string} lastName user last name
+ * @property {string} id user id
  */
-function userInfo(state = [], action) {
+
+/**
+ *
+ * @param {object} [state={}] Previous state
+ * @param {AuthAction} action The user auth information
+ */
+function userInfo(state = {}, action) {
   switch (action.type) {
     case "LOGIN":
-      return [
+      return {
         ...state,
-        {
-          isLoggedIn: true,
-          userEmail: action.email,
-          firstName: action.firstName,
-          lastName: action.lastName,
-          id: action.id
-        }
-      ];
+        isLoggedIn: true,
+        userEmail: action.email,
+        firstName: action.firstName,
+        lastName: action.lastName,
+        id: action.id
+      };
     case "LOGOUT":
-      return [
+      return {
         ...state,
-        {
-          isLoggedIn: false,
-          userEmail: "",
-          firstName: "",
-          lastName: "",
-          id: ""
-        }
-      ];
+        isLoggedIn: false,
+        userEmail: "",
+        firstName: "",
+        lastName: "",
+        id: ""
+      };
     default:
       return state;
   }

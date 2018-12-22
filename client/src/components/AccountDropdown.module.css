@@ -1,0 +1,20 @@
+.container {
+  width: 16em;
+  border: 1px solid #ddd;
+  padding: 0.4em;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  right: 0;
+}
+
+.list > li {
+  padding: 0.5em 1em;
+}
+
+.email {
+  border-bottom: 0.01em solid #ddd;
+}
+
+.button {
+  cursor: pointer;
+}

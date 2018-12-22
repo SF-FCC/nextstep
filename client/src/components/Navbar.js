@@ -1,40 +1,10 @@
 import React, { Component } from "react";
+import AccountDropdown from "./AccountDropdown";
+import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 import styles from "./Navbar.module.css";
-
-class AccountDropdown extends Component {
-  componentDidMount() {
-    document.addEventListener("click", this.onOutsideClick, false);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("click", this.onOutsideClick, false);
-  }
-
-  setWrapperRef = node => {
-    this.wrapperRef = node;
-  };
-
-  onOutsideClick = e => {
-    if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
-      this.props.toggleAccountDropdown();
-    }
-  };
-
-  render() {
-    return (
-      <div className={styles.dropdownContainer} ref={this.setWrapperRef}>
-        <ul className={styles.dropdownUl}>
-          <li className={styles.userLi}>useremail@mail.com</li>
-          <li onClick={this.props.toggleAccountDropdown} className={styles.emailPasswordLi}>
-            <NavLink to="/account">Email & Password</NavLink>
-          </li>
-          <li className={styles.signoutLi}>Sign Out</li>
-        </ul>
-      </div>
-    );
-  }
-}
+import "./Navbar.css";
 
 /**
  * The header navigation bar that displays location and login/account.
@@ -43,42 +13,53 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAccountDropdown: false
     };
-    this.toggleAccountDropdown = this.toggleAccountDropdown.bind(this);
   }
 
-  toggleAccountDropdown() {
-    this.setState({ showAccountDropdown: !this.state.showAccountDropdown });
-  }
-
+  toggleAccountDropdown = () => {
+    this.setState({ isShowingAccountDropdown: !this.state.isShowingAccountDropdown });
+  };
   render() {
     return (
       <nav>
-        <ul className={styles.navList}>
-          <li>
+        <ul className={styles.nav_list}>
+          <li className={styles.nav_list__item}>
             <NavLink to="/dashboard">NextStep</NavLink>
           </li>
-          <li>
-            <NavLink to="/dashboard" activeClassName={styles.navActive}>
+          <li className={styles.nav_list__item}>
+            <NavLink to="/dashboard" activeClassName="nav-active">
               Dashboard
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/tracker" activeClassName={styles.navActive}>
+          <li className={styles.nav_list__item}>
+            <NavLink to="/tracker" activeClassName="nav-active">
               Tracker
             </NavLink>
           </li>
-          <li className={styles.accountLi} onClick={this.toggleAccountDropdown}>
-            Account
-          </li>
+          {this.props.isLoggedIn ? (
+            <li className={styles.nav_list__item} onClick={this.login}>
+              Login
+            </li>
+          ) : (
+            <li className={styles.nav_list__item} onClick={this.toggleAccountDropdown}>
+              Account
+            </li>
+          )}
         </ul>
-        {this.state.showAccountDropdown && (
-          <AccountDropdown toggleAccountDropdown={this.toggleAccountDropdown} />
-        )}
+        <AccountDropdown isVisible={this.state.isShowingAccountDropdown} />
       </nav>
     );
   }
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.isLoggedIn
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

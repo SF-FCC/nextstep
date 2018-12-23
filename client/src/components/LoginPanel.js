@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropType from "prop-types";
 import { connect } from "react-redux";
 import { requestLogin } from "../actions";
 import { NavLink } from "react-router-dom";
@@ -20,9 +21,11 @@ class LoginPanel extends Component {
     this.props
       .requestLogin(this.state.email, this.state.password)
       .then(() => {
-        this.props.onHide();
+        // This doesn't wait for state to finish updating currently
+        this.props.history.push("/");
       })
       .catch(e => {
+        // TODO possible to pass failures here in order to keep errors local... much like this pattern
         // do nothing
       });
   };
@@ -62,6 +65,11 @@ class LoginPanel extends Component {
     );
   }
 }
+
+LoginPanel.propTypes = {
+  /** The history object from router. Allows programmatic redirect */
+  history: PropType.object
+};
 
 const mapDispatchToProps = dispatch => {
   return {

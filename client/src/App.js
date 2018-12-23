@@ -30,7 +30,7 @@ class App extends Component {
           {!this.props.isLoggedIn ? (
             <Switch>
               <Route exact path="/" component={SplashPage} />
-              <Route exact path="/login" component={LoginPanel} />
+              <Route exact path="/login" render={props => <LoginPanel history={props.history} />} />
               <Route exact path="/register" component={RegisterPanel} />
             </Switch>
           ) : (

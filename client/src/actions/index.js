@@ -12,6 +12,8 @@ export const register = ({ email, password, first_name, last_name }) => {
     axios
       .post(url, body)
       .then(r => {
+        // TODO: request login from these register creds?
+        // Or just save token?
         dispatch(resolveLogin(r.data.user));
       })
       .catch(e => {
@@ -62,8 +64,8 @@ export const requestLogin = (email, password) => {
       axios
         .post(url, body)
         .then(r => {
-          console.log("user is");
-          console.log(r.data.user);
+          console.log(r.data);
+          document.cookie = "token=" + r.data.token;
           // Update store
           dispatch(resolveLogin(r.data.user));
           // Let component resolve any local state
@@ -97,11 +99,11 @@ export const errorLogin = message => {
  * @param {*} email
  * @param {*} password
  */
-export const resolveLogin = userData => {
-  console.log(userData);
+export const resolveLogin = user => {
+  console.log(user);
   return {
     type: "LOGIN",
-    ...userData
+    ...user
   };
 };
 
@@ -110,7 +112,7 @@ export const resolveLogin = userData => {
  *
  */
 export const logout = () => {
-  // TODO: check if we need to clear any state on the server... JWT might not need any cleanup
+  document.cookie = "token=";
   return {
     type: "LOGOUT"
   };

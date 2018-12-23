@@ -26,9 +26,21 @@ export const requestLogin = (email, password) => {
         dispatch(resolveLogin(r.data.user));
       })
       .catch(e => {
-        alert("login fail");
-        console.log(e);
+        // TODO map out error response
+        dispatch(errorLogin("Login failed"));
       });
+  };
+};
+
+/**
+ *
+ * @param {*} email
+ * @param {*} password
+ */
+export const errorLogin = message => {
+  return {
+    type: "ERROR_LOGIN",
+    message
   };
 };
 

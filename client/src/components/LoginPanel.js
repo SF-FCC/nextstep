@@ -42,7 +42,7 @@ class LoginPanel extends Component {
             Password
             <input type="password" onChange={this.handleInputChange("password")} required />
           </label>
-          {this.state.loginError && <p>{this.state.loginError}</p>}
+          {this.props.loginError && <p>{this.props.loginError}</p>}
           <input type="submit" value="Login" />
         </form>
       </div>
@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    loginError: state.loginError
+    loginError: state.userInfo.loginError
   };
 };
 

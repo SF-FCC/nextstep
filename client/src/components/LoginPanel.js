@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { requestLogin } from "../actions";
+import { NavLink } from "react-router-dom";
 
 /**
  * The panel that allows users to login via email and password
@@ -16,9 +17,14 @@ class LoginPanel extends Component {
 
   submitLogin = e => {
     e.preventDefault();
-    this.props.requestLogin(this.state.email, this.state.password).then(() => {
-      this.props.onHide();
-    });
+    this.props
+      .requestLogin(this.state.email, this.state.password)
+      .then(() => {
+        this.props.onHide();
+      })
+      .catch(e => {
+        // do nothing
+      });
   };
 
   handleInputChange = state => e => {
@@ -26,7 +32,6 @@ class LoginPanel extends Component {
   };
 
   render() {
-    if (!this.props.isVisible) return null;
     return (
       <div
         style={{
@@ -52,6 +57,7 @@ class LoginPanel extends Component {
           {this.props.loginError && <p>{this.props.loginError}</p>}
           <input type="submit" value="Login" />
         </form>
+        <NavLink to="/register">Register</NavLink>
       </div>
     );
   }

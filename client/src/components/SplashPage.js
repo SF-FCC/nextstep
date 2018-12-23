@@ -5,10 +5,6 @@ import React, { Component } from "react";
  */
 export default class SplashPage extends Component {
   render() {
-    return (
-      <div>
-        Some splash page. Currently /login exists but should we combine splash page and login page?
-      </div>
-    );
+    return <div>Some flashy splash page.</div>;
   }
 }

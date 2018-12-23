@@ -13,13 +13,13 @@ const AccountDropdown = ({ isVisible, email, logout, onHide }) => {
   if (!isVisible) return null;
   return (
     <div className={styles.container}>
-      <ul className={styles.list}>
-        <li className={styles.email}>{email}</li>
-        <li className={styles.settings}>
+      <ul>
+        <li className={styles.list_item + " " + styles.email}>{email}</li>
+        <li className={styles.list_item}>
           <NavLink to="/account">Settings</NavLink>
         </li>
         <li
-          className={styles.button}
+          className={styles.list_item + " " + styles.button}
           onClick={() => {
             logout();
             onHide();

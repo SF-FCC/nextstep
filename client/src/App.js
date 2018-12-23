@@ -7,13 +7,15 @@ import AccountForm from "./components/AccountForm";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import SplashPage from "./components/SplashPage";
+import LoginPanel from "./components/LoginPanel";
+import RegisterPanel from "./components/RegisterPanel";
 
 // TODO do we even need a splash page separated from a login page?
-function LoginPanel(props) {
-  return (
-    <div>This is a placeholder - login panel exists but needs a refactor and style rework.</div>
-  );
-}
+// function LoginPanel(props) {
+// return (
+// // <div>This is a placeholder - login panel exists but needs a refactor and style rework.</div>
+// );
+// }
 
 /**
  * The main app entry point. If you plan to add a component that will utilize
@@ -29,6 +31,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={SplashPage} />
               <Route exact path="/login" component={LoginPanel} />
+              <Route exact path="/register" component={RegisterPanel} />
             </Switch>
           ) : (
             <Switch>

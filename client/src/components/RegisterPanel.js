@@ -32,7 +32,6 @@ class RegisterPanel extends Component {
   };
 
   render() {
-    if (!this.props.isVisible) return null;
     return (
       <div
         style={{
@@ -41,8 +40,7 @@ class RegisterPanel extends Component {
           marginLeft: "-100px",
           position: "absolute",
           textAlign: "center",
-          border: "1px solid black",
-          top: "500%"
+          border: "1px solid black"
         }}
       >
         <h1>Register</h1>
@@ -71,9 +69,7 @@ class RegisterPanel extends Component {
   }
 }
 
-RegisterPanel.propTypes = {
-  isVisible: PropTypes.bool
-};
+RegisterPanel.propTypes = {};
 
 const mapDispatchToProps = dispatch => {
   return {

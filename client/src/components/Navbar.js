@@ -78,9 +78,9 @@ class Navbar extends Component {
             </>
           ) : (
             <li>
-              <button className={styles.nav_list__item} onClick={this.showLoginModal}>
+              <NavLink to="/login" className={styles.nav_list__item}>
                 Login
-              </button>
+              </NavLink>
             </li>
           )}
         </ul>
@@ -88,8 +88,6 @@ class Navbar extends Component {
           isVisible={this.state.isShowingAccountDropdown}
           onHide={this.hideAccountDropdown}
         />
-        <LoginPanel isVisible={this.state.isShowingLoginModal} onHide={this.hideLoginModal} />
-        <RegisterPanel isVisible={this.state.isShowingLoginModal} onHide={this.hideLoginModal} />
       </nav>
     );
   }

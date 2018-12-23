@@ -5,6 +5,12 @@ const bcrypt = require("bcrypt");
 const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
 
+if (!process.env.JWT_KEY) {
+  throw new Error(
+    `System did not find a JWT_KEY environment variable. Ensure you have JWT_KEY set in the environment so that process.env.JWT_KEY is not null.`
+  );
+}
+
 /*
  * Save session data to db
  */

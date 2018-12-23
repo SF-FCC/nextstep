@@ -16,7 +16,9 @@ class LoginPanel extends Component {
 
   submitLogin = e => {
     e.preventDefault();
-    this.props.onLoginClick(this.state.email, this.state.password);
+    this.props.requestLogin(this.state.email, this.state.password).then(() => {
+      this.props.onHide();
+    });
   };
 
   handleInputChange = state => e => {
@@ -56,8 +58,8 @@ class LoginPanel extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoginClick: (email, password) => {
-      dispatch(requestLogin(email, password));
+    requestLogin: (email, password) => {
+      return dispatch(requestLogin(email, password));
     }
   };
 };

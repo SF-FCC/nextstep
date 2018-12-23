@@ -58,17 +58,25 @@ export const requestLogin = (email, password) => {
   const body = { email, password };
   const url = "/auth/login";
   return dispatch => {
-    axios
-      .post(url, body)
-      .then(r => {
-        console.log("user is");
-        console.log(r.data.user);
-        dispatch(resolveLogin(r.data.user));
-      })
-      .catch(e => {
-        // TODO map correct response
-        dispatch(errorLogin("Login failed"));
-      });
+    return new Promise((resolve, reject) => {
+      axios
+        .post(url, body)
+        .then(r => {
+          console.log("user is");
+          console.log(r.data.user);
+          // Update store
+          dispatch(resolveLogin(r.data.user));
+          // Let component resolve any local state
+          resolve(r.data.user);
+        })
+        .catch(e => {
+          // TODO map correct response
+          // Update store
+          dispatch(errorLogin("Login failed"));
+          // Let component resolve any local state
+          reject();
+        });
+    });
   };
 };
 

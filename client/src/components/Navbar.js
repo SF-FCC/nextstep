@@ -29,6 +29,12 @@ class Navbar extends Component {
     this.setState({ isShowingLoginModal: !this.state.isShowingLoginModal });
   };
 
+  hideLoginModal = () => {
+    this.props.clearLoginError();
+    this.props.clearRegisterError();
+    this.setState({ isShowingLoginModal: false });
+  };
+
   render() {
     return (
       <nav style={{ position: "relative" }}>
@@ -74,8 +80,8 @@ class Navbar extends Component {
           )}
         </ul>
         <AccountDropdown isVisible={this.state.isShowingAccountDropdown} />
-        <LoginPanel isVisible={this.state.isShowingLoginModal} />
-        <RegisterPanel isVisible={this.state.isShowingLoginModal} />
+        <LoginPanel isVisible={this.state.isShowingLoginModal} onHide={this.hideLoginModal} />
+        <RegisterPanel isVisible={this.state.isShowingLoginModal} onHide={this.hideLoginModal} />
       </nav>
     );
   }

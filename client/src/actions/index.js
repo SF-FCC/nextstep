@@ -17,20 +17,19 @@ export const register = userInfo => {
  * @param {*} password
  */
 export const requestLogin = (email, password) => {
-  const body = {
-    user: this.state.email,
-    password: this.state.password
-  };
+  const body = { email, password };
   const url = "/auth/login";
-  return axios
-    .post(url, body)
-    .then(r => {
-      resolveLogin(r.data.user);
-    })
-    .catch(e => {
-      alert("login fail");
-      console.log(e);
-    });
+  return dispatch => {
+    axios
+      .post(url, body)
+      .then(r => {
+        dispatch(resolveLogin(r.data.user));
+      })
+      .catch(e => {
+        alert("login fail");
+        console.log(e);
+      });
+  };
 };
 
 /**

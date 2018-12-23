@@ -13,7 +13,7 @@ class LoginPanel extends Component {
 
   submitLogin = e => {
     e.preventDefault();
-    this.onLoginClick(this.state.email, this.state.password);
+    this.props.onLoginClick(this.state.email, this.state.password);
   };
 
   handleInputChange = state => e => {
@@ -65,6 +65,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(
-  mapDispatchToProps,
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(LoginPanel);

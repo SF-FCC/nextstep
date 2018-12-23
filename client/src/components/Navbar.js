@@ -36,31 +36,33 @@ class Navbar extends Component {
               NextStep
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              exact
-              to="/"
-              className={styles.nav_list__item}
-              activeClassName={styles.nav_list__item_Active}
-            >
-              Dashboard
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/tracker"
-              className={styles.nav_list__item}
-              activeClassName={styles.nav_list__item_Active}
-            >
-              Tracker
-            </NavLink>
-          </li>
           {this.props.isLoggedIn ? (
-            <li>
-              <button className={styles.nav_list__item} onClick={this.toggleAccountDropdown}>
-                Account
-              </button>
-            </li>
+            <>
+              <li>
+                <NavLink
+                  exact
+                  to="/"
+                  className={styles.nav_list__item}
+                  activeClassName={styles.nav_list__item_Active}
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/tracker"
+                  className={styles.nav_list__item}
+                  activeClassName={styles.nav_list__item_Active}
+                >
+                  Tracker
+                </NavLink>
+              </li>
+              <li>
+                <button className={styles.nav_list__item} onClick={this.toggleAccountDropdown}>
+                  Account
+                </button>
+              </li>
+            </>
           ) : (
             <li>
               <button className={styles.nav_list__item} onClick={this.showLoginModal}>

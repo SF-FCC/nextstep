@@ -32,10 +32,27 @@ function userInfo(state = {}, action) {
         lastName: "",
         id: ""
       };
+
     case "ERROR_LOGIN":
       return {
         ...state,
         loginError: action.message
+      };
+    case "CLEAR_LOGIN_ERROR":
+      return {
+        ...state,
+        loginError: ""
+      };
+
+    case "ERROR_REGISTER":
+      return {
+        ...state,
+        registerError: action.message
+      };
+    case "CLEAR_REGISTER_ERROR":
+      return {
+        ...state,
+        registerError: ""
       };
     default:
       return state;

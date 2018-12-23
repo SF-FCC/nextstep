@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import AccountDropdown from "./AccountDropdown";
 import LoginPanel from "./LoginPanel";
+import RegisterPanel from "./RegisterPanel";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import styles from "./Navbar.module.css";
+import { clearLoginError, clearRegisterError } from "../actions";
 
 /**
  * The header navigation bar that displays location and login/account.
@@ -20,6 +22,10 @@ class Navbar extends Component {
   };
 
   showLoginModal = () => {
+    if (!this.state.isShowingLoginModal) {
+      this.props.clearLoginError();
+      this.props.clearRegisterError();
+    }
     this.setState({ isShowingLoginModal: !this.state.isShowingLoginModal });
   };
 
@@ -73,6 +79,7 @@ class Navbar extends Component {
         </ul>
         <AccountDropdown isVisible={this.state.isShowingAccountDropdown} />
         <LoginPanel isVisible={this.state.isShowingLoginModal} />
+        <RegisterPanel isVisible={this.state.isShowingLoginModal} />
       </nav>
     );
   }
@@ -84,6 +91,13 @@ Navbar.propTypes = {
   location: PropTypes.object.isRequired
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    clearLoginError: () => dispatch(clearLoginError()),
+    clearRegisterError: () => dispatch(clearRegisterError())
+  };
+};
+
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
@@ -91,4 +105,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navbar);

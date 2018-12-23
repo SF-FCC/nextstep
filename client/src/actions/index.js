@@ -2,12 +2,50 @@ import axios from "axios";
 
 /**
  *
- * @param {*} userInfo
+ * @param {*} email
+ * @param {*} password
  */
-export const register = userInfo => {
+export const register = ({ email, password, first_name, last_name }) => {
+  const body = { email, password, first_name, last_name };
+  const url = "/auth/register";
+  return dispatch => {
+    axios
+      .post(url, body)
+      .then(r => {
+        dispatch(resolveLogin(r.data.user));
+      })
+      .catch(e => {
+        // TODO map correct response
+        dispatch(errorRegister("Register failed"));
+      });
+  };
+};
+
+/**
+ *
+ */
+export const errorRegister = message => {
   return {
-    type: "REGISTER",
-    payload: userInfo
+    type: "ERROR_REGISTER",
+    message
+  };
+};
+
+/**
+ *
+ */
+export const clearLoginError = () => {
+  return {
+    type: "CLEAR_LOGIN_ERROR"
+  };
+};
+
+/**
+ *
+ */
+export const clearRegisterError = () => {
+  return {
+    type: "CLEAR_REGISTER_ERROR"
   };
 };
 
@@ -26,7 +64,7 @@ export const requestLogin = (email, password) => {
         dispatch(resolveLogin(r.data.user));
       })
       .catch(e => {
-        // TODO map out error response
+        // TODO map correct response
         dispatch(errorLogin("Login failed"));
       });
   };

@@ -5,10 +5,11 @@ import JobForm from "./JobForm";
 import styles from "./Tracker.module.css";
 import TrackerTable from "./TrackerTable";
 
+// TODO: add search bar
+// TODO: fix button animation so text animates the same speed
+
 /**
  * Tracker displays the jobs in a sortable table.
- * Has a searchbar
- *
  */
 
 class Tracker extends Component {
@@ -28,7 +29,7 @@ class Tracker extends Component {
         <div className={styles.header}>
           <h2>Job Applications</h2>
           <button className={styles.button_Blue} onClick={this.handleShowJobForm}>
-            Add Job
+            <span className={styles.plus}>+</span> ADD JOB
           </button>
         </div>
         {this.props.jobApps && <TrackerTable jobApps={this.props.jobApps} />}

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import AccountDropdown from "./AccountDropdown";
+import LoginPanel from "./LoginPanel";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import styles from "./Navbar.module.css";
-console.log("styles found");
-console.log(styles);
 
 /**
  * The header navigation bar that displays location and login/account.
@@ -20,13 +19,17 @@ class Navbar extends Component {
     this.setState({ isShowingAccountDropdown: !this.state.isShowingAccountDropdown });
   };
 
+  showLoginModal = () => {
+    this.setState({ isShowingLoginModal: !this.state.isShowingLoginModal });
+  };
+
   login = () => {
     alert("This is where you would login....");
   };
 
   render() {
     return (
-      <nav>
+      <nav style={{ position: "relative" }}>
         <ul className={styles.nav_list}>
           <li className={styles.display_left}>
             <NavLink exact to="/" className={styles.nav_list__item}>
@@ -60,13 +63,14 @@ class Navbar extends Component {
             </li>
           ) : (
             <li>
-              <button className={styles.nav_list__item} onClick={this.login}>
+              <button className={styles.nav_list__item} onClick={this.showLoginModal}>
                 Login
               </button>
             </li>
           )}
         </ul>
         <AccountDropdown isVisible={this.state.isShowingAccountDropdown} />
+        <LoginPanel isVisible={this.state.isShowingLoginModal} />
       </nav>
     );
   }

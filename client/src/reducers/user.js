@@ -12,24 +12,26 @@
  * @param {object} [state={}] Previous state
  * @param {AuthAction} action The user auth information
  */
-function userInfo(state = {}, action) {
+function user(state = {}, action) {
   switch (action.type) {
     case "LOGIN":
       return {
         ...state,
         isLoggedIn: true,
-        userEmail: action.email,
-        firstName: action.firstName,
-        lastName: action.lastName,
-        id: action.id
+        email: action.email,
+        first_name: action.first_name,
+        last_name: action.last_name,
+        id: action.id,
+        loginError: "",
+        registerError: ""
       };
     case "LOGOUT":
       return {
         ...state,
         isLoggedIn: false,
-        userEmail: "",
-        firstName: "",
-        lastName: "",
+        email: "",
+        first_name: "",
+        last_name: "",
         id: ""
       };
 
@@ -59,4 +61,4 @@ function userInfo(state = {}, action) {
   }
 }
 
-export default userInfo;
+export default user;

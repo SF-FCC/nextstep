@@ -85,7 +85,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    registerError: state.userInfo.registerError
+    registerError: state.user.registerError
   };
 };
 

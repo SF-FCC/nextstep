@@ -89,10 +89,11 @@ export const errorLogin = message => {
  * @param {*} email
  * @param {*} password
  */
-export const resolveLogin = user => {
+export const resolveLogin = userData => {
+  console.log(userData);
   return {
     type: "LOGIN",
-    payload: { user }
+    ...userData
   };
 };
 
@@ -130,12 +131,12 @@ export const updatePassword = password => {
 
 /**
  *
- * @param {*} userInfo
+ * @param {*} user
  */
-export const deleteAccount = userInfo => {
+export const deleteAccount = user => {
   return {
     type: "DELETE_ACCOUNT",
-    payload: userInfo
+    payload: user
   };
 };
 

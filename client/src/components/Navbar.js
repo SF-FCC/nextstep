@@ -29,10 +29,6 @@ class Navbar extends Component {
     this.setState({ isShowingLoginModal: !this.state.isShowingLoginModal });
   };
 
-  login = () => {
-    alert("This is where you would login....");
-  };
-
   render() {
     return (
       <nav style={{ position: "relative" }}>
@@ -100,7 +96,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.isLoggedIn,
+    isLoggedIn: state.user && state.user.isLoggedIn,
     location: state.location
   };
 };

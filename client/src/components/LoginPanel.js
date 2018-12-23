@@ -64,7 +64,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    loginError: state.userInfo.loginError
+    loginError: state.user.loginError
   };
 };
 

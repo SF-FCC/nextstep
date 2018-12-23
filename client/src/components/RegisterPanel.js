@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { register } from "../actions";
 import { connect } from "react-redux";
 
@@ -68,8 +67,6 @@ class RegisterPanel extends Component {
     );
   }
 }
-
-RegisterPanel.propTypes = {};
 
 const mapDispatchToProps = dispatch => {
   return {

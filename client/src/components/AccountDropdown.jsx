@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import styles from "./AccountDropdown.module.css";
@@ -33,8 +33,13 @@ const AccountDropdown = ({ isVisible, email, logout, onHide }) => {
 };
 
 AccountDropdown.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
-  email: PropTypes.string.isRequired
+  isVisible: PropTypes.bool,
+  email: PropTypes.string
+};
+
+AccountDropdown.defaultProps = {
+  isVisible: false,
+  email: ""
 };
 
 const mapStateToProps = state => {

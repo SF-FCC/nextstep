@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import AccountDropdown from "./AccountDropdown";
-import LoginPanel from "./LoginPanel";
-import RegisterPanel from "./RegisterPanel";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
@@ -96,7 +94,7 @@ class Navbar extends Component {
 Navbar.propTypes = {
   isLoggedIn: PropTypes.bool,
   // Necessary to trigger renders on url change
-  location: PropTypes.object.isRequired
+  location: PropTypes.object
 };
 
 const mapDispatchToProps = dispatch => {

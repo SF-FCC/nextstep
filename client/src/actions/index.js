@@ -110,6 +110,7 @@ export const resolveLogin = userData => {
  *
  */
 export const logout = () => {
+  // TODO: check if we need to clear any state on the server... JWT might not need any cleanup
   return {
     type: "LOGOUT"
   };

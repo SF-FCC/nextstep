@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 /**
  *
@@ -13,12 +13,35 @@ export const register = userInfo => {
 
 /**
  *
- * @param {*} userInfo
+ * @param {*} email
+ * @param {*} password
  */
-export const login = userInfo => {
+export const requestLogin = (email, password) => {
+  const body = {
+    user: this.state.email,
+    password: this.state.password
+  };
+  const url = "/auth/login";
+  return axios
+    .post(url, body)
+    .then(r => {
+      resolveLogin(r.data.user);
+    })
+    .catch(e => {
+      alert("login fail");
+      console.log(e);
+    });
+};
+
+/**
+ *
+ * @param {*} email
+ * @param {*} password
+ */
+export const resolveLogin = user => {
   return {
     type: "LOGIN",
-    payload: userInfo
+    payload: { user }
   };
 };
 
@@ -82,26 +105,26 @@ export const setVisibleJobApps = jobs => {
  */
 
 export const getAllJobApps = () => async dispatch => {
-  const response = await axios.get('/jobs');
-  if (response.status=== 200) {
-    dispatch({type: "ALL_JOB_APPS", payload: response.data});
+  const response = await axios.get("/jobs");
+  if (response.status === 200) {
+    dispatch({ type: "ALL_JOB_APPS", payload: response.data });
   } else {
-    dispatch({type: "JOB_APP_ERR", payload: 'Unable to get job applications'})
+    dispatch({ type: "JOB_APP_ERR", payload: "Unable to get job applications" });
   }
 };
 
-export const postJobApp = details => async dispatch => { 
-  const response = await axios.post('/jobs', details);
+export const postJobApp = details => async dispatch => {
+  const response = await axios.post("/jobs", details);
   if (response.status === 200) {
-    dispatch({type: "ADD_JOB_APP", payload: response.data.rows[0]});
+    dispatch({ type: "ADD_JOB_APP", payload: response.data.rows[0] });
   } else {
-    dispatch({type: "JOB_APP_ERR", payload: 'Unable to post job application'})
+    dispatch({ type: "JOB_APP_ERR", payload: "Unable to post job application" });
   }
 };
 
 export const sortAllJobApps = allJobApps => async dispatch => {
-  dispatch({type: "SORT_ALL_JOB_APPS", payload: allJobApps});
-}
+  dispatch({ type: "SORT_ALL_JOB_APPS", payload: allJobApps });
+};
 
 /**
  *
@@ -110,9 +133,9 @@ export const sortAllJobApps = allJobApps => async dispatch => {
 export const updateJobApp = details => async dispatch => {
   const response = await axios.post("/jobs/update", details);
   if (response.status === 200) {
-    dispatch({type: "JOB_APP_UPDATE", payload: details});
+    dispatch({ type: "JOB_APP_UPDATE", payload: details });
   } else {
-    dispatch({type: "JOB_APP_ERR", payload: 'Unable to post job application'})
+    dispatch({ type: "JOB_APP_ERR", payload: "Unable to post job application" });
   }
 };
 
@@ -121,11 +144,11 @@ export const updateJobApp = details => async dispatch => {
  * @param {*} id
  */
 export const deleteJobApp = curId => async dispatch => {
-  const response = await axios.post("/jobs/delete", {id: curId});
-  if (response.status === 200) { 
-    dispatch({type: "DELETE_JOB_APP", payload: curId});
+  const response = await axios.post("/jobs/delete", { id: curId });
+  if (response.status === 200) {
+    dispatch({ type: "DELETE_JOB_APP", payload: curId });
   } else {
-    dispatch({ type: "JOB_APP_ERR", payload: 'Unable to delete job application'})
+    dispatch({ type: "JOB_APP_ERR", payload: "Unable to delete job application" });
   }
 };
 
@@ -169,7 +192,7 @@ export const hideJobDetail = () => {
   };
 };
 
-export const setCurrentJobApp = (job) => {
+export const setCurrentJobApp = job => {
   return {
     type: "SET_CURRENT_JOB_DETAIL",
     payload: job

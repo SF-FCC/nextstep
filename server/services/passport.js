@@ -47,7 +47,7 @@ passport.use(
  * Message option on "done" callback can be accessed via middleware "req.authInfo.message"
  */
 async function validateLocalLogin(userEmail, password, done) {
-  const findUserByEmail = `SELECT id, email, password FROM users WHERE email = $1::text;`;
+  const findUserByEmail = `SELECT id, email, password, first_name, last_name FROM users WHERE email = $1::text;`;
   try {
     const results = await pool.query(findUserByEmail, [userEmail]);
     if (results.rows.length < 1) {
@@ -59,9 +59,9 @@ async function validateLocalLogin(userEmail, password, done) {
       throw new Error("Invalid password for found user when attempting login");
     }
     console.log("Login successful");
-    // Only return id and email
-    const { id, email } = dbUser;
-    const validUserInfo = { id, email };
+    // Only return id and email, first, and last
+    const { id, email, first_name, last_name } = dbUser;
+    const validUserInfo = { id, email, first_name, last_name };
     return done(null, validUserInfo);
   } catch (err) {
     console.log(err);

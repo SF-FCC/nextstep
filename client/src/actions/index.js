@@ -61,6 +61,8 @@ export const requestLogin = (email, password) => {
     axios
       .post(url, body)
       .then(r => {
+        console.log("user is");
+        console.log(r.data.user);
         dispatch(resolveLogin(r.data.user));
       })
       .catch(e => {

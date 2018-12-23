@@ -35,7 +35,8 @@ class LoginPanel extends Component {
           marginLeft: "-100px",
           position: "absolute",
           textAlign: "center",
-          border: "1px solid black"
+          border: "1px solid black",
+          backgroundColor: "white"
         }}
       >
         <h1>Login</h1>

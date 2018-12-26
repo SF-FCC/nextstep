@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <div>
         <Navbar location={this.props.location} />
-        <div style={{ padding: "20px 5px 20px 20px" }}>
+        <div style={{ padding: "20px" }}>
           {!this.props.isLoggedIn ? (
             <Switch>
               <Route exact path="/" component={SplashPage} />

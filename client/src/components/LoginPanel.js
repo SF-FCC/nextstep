@@ -3,6 +3,7 @@ import PropType from "prop-types";
 import { connect } from "react-redux";
 import { requestLogin } from "../actions";
 import { NavLink } from "react-router-dom";
+import styles from "./LoginPanel.module.css";
 
 /**
  * The panel that allows users to login via email and password
@@ -36,31 +37,37 @@ class LoginPanel extends Component {
 
   render() {
     return (
-      <div
-        style={{
-          left: "50%",
-          width: "200px",
-          marginLeft: "-100px",
-          position: "absolute",
-          textAlign: "center",
-          border: "1px solid black",
-          backgroundColor: "white"
-        }}
-      >
-        <h1>Login</h1>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Login</h1>
         <form onSubmit={this.submitLogin}>
-          <label>
+          <label className={styles.label}>
             Email
-            <input type="text" onChange={this.handleInputChange("email")} required />
+            <input
+              className={styles.field}
+              type="text"
+              onChange={this.handleInputChange("email")}
+              required
+            />
           </label>
-          <label>
+          <label className={styles.label}>
             Password
-            <input type="password" onChange={this.handleInputChange("password")} required />
+            <input
+              className={styles.field}
+              type="password"
+              onChange={this.handleInputChange("password")}
+              required
+            />
           </label>
           {this.props.loginError && <p>{this.props.loginError}</p>}
-          <input type="submit" value="Login" />
+          <input className={styles.login_button} type="submit" value="Login" />
         </form>
-        <NavLink to="/register">Register</NavLink>
+        <div className={styles.footer}>
+          New to NextStep?
+          <NavLink to="/register" className={styles.sign_up_highlight}>
+            {" "}
+            Sign up for free!
+          </NavLink>
+        </div>
       </div>
     );
   }

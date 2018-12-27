@@ -1,40 +1,10 @@
 import React, { Component } from "react";
+import AccountDropdown from "./AccountDropdown";
+import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 import styles from "./Navbar.module.css";
-
-class AccountDropdown extends Component {
-  componentDidMount() {
-    document.addEventListener("click", this.onOutsideClick, false);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("click", this.onOutsideClick, false);
-  }
-
-  setWrapperRef = node => {
-    this.wrapperRef = node;
-  };
-
-  onOutsideClick = e => {
-    if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
-      this.props.toggleAccountDropdown();
-    }
-  };
-
-  render() {
-    return (
-      <div className={styles.dropdownContainer} ref={this.setWrapperRef}>
-        <ul className={styles.dropdownUl}>
-          <li className={styles.userLi}>useremail@mail.com</li>
-          <li onClick={this.props.toggleAccountDropdown} className={styles.emailPasswordLi}>
-            <NavLink to="/account">Email & Password</NavLink>
-          </li>
-          <li className={styles.signoutLi}>Sign Out</li>
-        </ul>
-      </div>
-    );
-  }
-}
+import { clearLoginError, clearRegisterError } from "../actions";
 
 /**
  * The header navigation bar that displays location and login/account.
@@ -42,43 +12,106 @@ class AccountDropdown extends Component {
 class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showAccountDropdown: false
-    };
-    this.toggleAccountDropdown = this.toggleAccountDropdown.bind(this);
+    this.state = {};
   }
 
-  toggleAccountDropdown() {
-    this.setState({ showAccountDropdown: !this.state.showAccountDropdown });
-  }
+  toggleAccountDropdown = () => {
+    this.setState({ isShowingAccountDropdown: !this.state.isShowingAccountDropdown });
+  };
+
+  hideAccountDropdown = () => {
+    this.setState({ isShowingAccountDropdown: false });
+  };
+
+  showLoginModal = () => {
+    if (!this.state.isShowingLoginModal) {
+      this.props.clearLoginError();
+      this.props.clearRegisterError();
+    }
+    this.setState({ isShowingLoginModal: !this.state.isShowingLoginModal });
+  };
+
+  hideLoginModal = () => {
+    console.log("hide fired");
+    this.props.clearLoginError();
+    this.props.clearRegisterError();
+    this.setState({ isShowingLoginModal: false });
+  };
 
   render() {
     return (
-      <nav>
-        <ul className={styles.navList}>
-          <li>
-            <NavLink to="/dashboard">NextStep</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard" activeClassName={styles.navActive}>
-              Dashboard
+      <nav style={{ position: "relative" }}>
+        <ul className={styles.nav_list}>
+          <li className={styles.display_left}>
+            <NavLink exact to="/" className={styles.nav_list__item}>
+              NextStep
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/tracker" activeClassName={styles.navActive}>
-              Tracker
-            </NavLink>
-          </li>
-          <li className={styles.accountLi} onClick={this.toggleAccountDropdown}>
-            Account
-          </li>
+          {this.props.isLoggedIn ? (
+            <>
+              <li>
+                <NavLink
+                  exact
+                  to="/"
+                  className={styles.nav_list__item}
+                  activeClassName={styles.nav_list__item_Active}
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/tracker"
+                  className={styles.nav_list__item}
+                  activeClassName={styles.nav_list__item_Active}
+                >
+                  Tracker
+                </NavLink>
+              </li>
+              <li>
+                <button className={styles.nav_list__item} onClick={this.toggleAccountDropdown}>
+                  Account
+                </button>
+              </li>
+            </>
+          ) : (
+            <li>
+              <NavLink to="/login" className={styles.nav_list__item}>
+                Login
+              </NavLink>
+            </li>
+          )}
         </ul>
-        {this.state.showAccountDropdown && (
-          <AccountDropdown toggleAccountDropdown={this.toggleAccountDropdown} />
-        )}
+        <AccountDropdown
+          isVisible={this.state.isShowingAccountDropdown}
+          onHide={this.hideAccountDropdown}
+        />
       </nav>
     );
   }
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  // Necessary to trigger renders on url change
+  location: PropTypes.object
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    clearLoginError: () => dispatch(clearLoginError()),
+    clearRegisterError: () => dispatch(clearRegisterError())
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.user && state.user.isLoggedIn,
+    location: state.location
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navbar);

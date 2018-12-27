@@ -1,4 +1,8 @@
-.cards_list {
+.card_list_container {
+  margin-top: 20px;
+}
+
+.card_list {
   display: grid;
   grid-column-gap: 2em;
   grid-row-gap: 1em;
@@ -36,4 +40,27 @@
   font-size: 0.8em;
   height: 20%;
   padding-left: 1em;
+}
+
+.inline_header {
+  display: inline;
+}
+
+.see_all {
+  padding-left: 16px;
+  color: #2196f3;
+  text-decoration: none;
+}
+
+.add_job_card {
+  color: #0275d8;
+  border-color: #0275d8;
+  background-color: rgba(63, 56, 168, 0.04);
+  cursor: pointer;
+  text-align: center;
+  padding: 44% 0;
+}
+
+.add_job_card:hover {
+  background-color: rgba(63, 56, 168, 0.08);
 }

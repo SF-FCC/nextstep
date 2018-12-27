@@ -1,24 +1,109 @@
-import axios from 'axios';
+import axios from "axios";
 
 /**
  *
- * @param {*} userInfo
+ * @param {*} email
+ * @param {*} password
  */
-export const register = userInfo => {
-  return {
-    type: "REGISTER",
-    payload: userInfo
+export const register = ({ email, password, first_name, last_name }) => {
+  const body = { email, password, first_name, last_name };
+  const url = "/auth/register";
+  return dispatch => {
+    axios
+      .post(url, body)
+      .then(r => {
+        // TODO: request login from these register creds?
+        // Or just save token?
+        dispatch(resolveLogin(r.data.user));
+      })
+      .catch(e => {
+        // TODO map correct response
+        dispatch(errorRegister("Register failed"));
+      });
   };
 };
 
 /**
  *
- * @param {*} userInfo
  */
-export const login = userInfo => {
+export const errorRegister = message => {
+  return {
+    type: "ERROR_REGISTER",
+    message
+  };
+};
+
+/**
+ *
+ */
+export const clearLoginError = () => {
+  return {
+    type: "CLEAR_LOGIN_ERROR"
+  };
+};
+
+/**
+ *
+ */
+export const clearRegisterError = () => {
+  return {
+    type: "CLEAR_REGISTER_ERROR"
+  };
+};
+
+/**
+ *
+ * @param {*} email
+ * @param {*} password
+ */
+export const requestLogin = (email, password) => {
+  const body = { email, password };
+  const url = "/auth/login";
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      axios
+        .post(url, body)
+        .then(r => {
+          console.log(r.data);
+          document.cookie = "token=" + r.data.token;
+          // Update store
+          dispatch(resolveLogin(r.data.user));
+          // Let component resolve any local state
+          resolve(r.data.user);
+        })
+        .catch(e => {
+          // TODO map correct response
+          // Update store
+          dispatch(errorLogin("Login failed"));
+          // Let component resolve any local state
+          reject();
+        });
+    });
+  };
+};
+
+/**
+ *
+ * @param {*} email
+ * @param {*} password
+ */
+export const errorLogin = message => {
+  return {
+    type: "ERROR_LOGIN",
+    message
+  };
+};
+
+/**
+ *
+ * @param {*} email
+ * @param {*} password
+ */
+export const resolveLogin = user => {
+  console.log(user);
   return {
     type: "LOGIN",
-    payload: userInfo
+    ...user
   };
 };
 
@@ -27,6 +112,7 @@ export const login = userInfo => {
  *
  */
 export const logout = () => {
+  document.cookie = "token=";
   return {
     type: "LOGOUT"
   };
@@ -56,12 +142,12 @@ export const updatePassword = password => {
 
 /**
  *
- * @param {*} userInfo
+ * @param {*} user
  */
-export const deleteAccount = userInfo => {
+export const deleteAccount = user => {
   return {
     type: "DELETE_ACCOUNT",
-    payload: userInfo
+    payload: user
   };
 };
 
@@ -82,26 +168,26 @@ export const setVisibleJobApps = jobs => {
  */
 
 export const getAllJobApps = () => async dispatch => {
-  const response = await axios.get('/jobs');
-  if (response.status=== 200) {
-    dispatch({type: "ALL_JOB_APPS", payload: response.data});
+  const response = await axios.get("/jobs");
+  if (response.status === 200) {
+    dispatch({ type: "ALL_JOB_APPS", payload: response.data });
   } else {
-    dispatch({type: "JOB_APP_ERR", payload: 'Unable to get job applications'})
+    dispatch({ type: "JOB_APP_ERR", payload: "Unable to get job applications" });
   }
 };
 
-export const postJobApp = details => async dispatch => { 
-  const response = await axios.post('/jobs', details);
+export const postJobApp = details => async dispatch => {
+  const response = await axios.post("/jobs", details);
   if (response.status === 200) {
-    dispatch({type: "ADD_JOB_APP", payload: response.data.rows[0]});
+    dispatch({ type: "ADD_JOB_APP", payload: response.data.rows[0] });
   } else {
-    dispatch({type: "JOB_APP_ERR", payload: 'Unable to post job application'})
+    dispatch({ type: "JOB_APP_ERR", payload: "Unable to post job application" });
   }
 };
 
 export const sortAllJobApps = allJobApps => async dispatch => {
-  dispatch({type: "SORT_ALL_JOB_APPS", payload: allJobApps});
-}
+  dispatch({ type: "SORT_ALL_JOB_APPS", payload: allJobApps });
+};
 
 /**
  *
@@ -110,9 +196,9 @@ export const sortAllJobApps = allJobApps => async dispatch => {
 export const updateJobApp = details => async dispatch => {
   const response = await axios.post("/jobs/update", details);
   if (response.status === 200) {
-    dispatch({type: "JOB_APP_UPDATE", payload: details});
+    dispatch({ type: "JOB_APP_UPDATE", payload: details });
   } else {
-    dispatch({type: "JOB_APP_ERR", payload: 'Unable to post job application'})
+    dispatch({ type: "JOB_APP_ERR", payload: "Unable to post job application" });
   }
 };
 
@@ -121,11 +207,11 @@ export const updateJobApp = details => async dispatch => {
  * @param {*} id
  */
 export const deleteJobApp = curId => async dispatch => {
-  const response = await axios.post("/jobs/delete", {id: curId});
-  if (response.status === 200) { 
-    dispatch({type: "DELETE_JOB_APP", payload: curId});
+  const response = await axios.post("/jobs/delete", { id: curId });
+  if (response.status === 200) {
+    dispatch({ type: "DELETE_JOB_APP", payload: curId });
   } else {
-    dispatch({ type: "JOB_APP_ERR", payload: 'Unable to delete job application'})
+    dispatch({ type: "JOB_APP_ERR", payload: "Unable to delete job application" });
   }
 };
 
@@ -169,7 +255,7 @@ export const hideJobDetail = () => {
   };
 };
 
-export const setCurrentJobApp = (job) => {
+export const setCurrentJobApp = job => {
   return {
     type: "SET_CURRENT_JOB_DETAIL",
     payload: job

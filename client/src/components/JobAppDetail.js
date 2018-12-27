@@ -47,6 +47,7 @@ class JobAppDetail extends Component {
       posting_url : this.state.posting_url,
     }
     this.props.updateJobApp(details);
+    this.props.hideJobDetail();
   }
   isActive(status) {
     let res = ["withdrawn", "expired", "notAFit"].indexOf(status) === -1;

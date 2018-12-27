@@ -24,7 +24,6 @@ class TrackerTable extends Component {
   sortTableBy(sortType) {
     let jobsCopy = this.props.jobApps.slice();
     
-    
     if (this.state.currentSortBy === sortType) {
       this.setState({currentSortBy: null});
       this.props.sortAllJobApps(jobsCopy.reverse());
@@ -37,7 +36,7 @@ class TrackerTable extends Component {
     };
   }
   capitalize(str) {
-    return str[0].toUpperCase() + str.slice(1);
+    return str && str[0].toUpperCase() + str.slice(1);
   }
   handleSortRequest(e) {
     if (e.target.id) this.sortTableBy(e.target.id);
@@ -47,14 +46,22 @@ class TrackerTable extends Component {
     this.props.showJobDetail(); 
   }
   render() {
+    let filteredJobApps;
+    let jobApps = this.props.jobApps.slice();
+
+    if (this.props.showArchived) {
+      filteredJobApps = jobApps.filter(jobApp => !jobApp.active);
+    } else {
+      filteredJobApps = jobApps.filter(jobApp => jobApp.active);
+    }
+
     return (
       <div>
         {this.props.isShowingJobDetail 
           && <JobAppDetail currentJobApp={this.props.currentJobApp} />}
 
         <table className={styles.tracker__table}>
-
-          <tbody className={styles.tracker__table_heading}>
+          {!this.props.showArchived && <tbody className={styles.tracker__table_heading}>
             <tr onClick={this.handleSortRequest}>
               <th id='company_name'>COMPANY</th>
               <th id='job_title'>JOB TITLE</th>
@@ -62,9 +69,9 @@ class TrackerTable extends Component {
               <th id='job_location' className={"mobile_hide"}>LOCATION</th>
               <th id='created' className={"mobile_hide"}>DATE APPLIED</th>
             </tr>
-          </tbody>
+          </tbody>}
           <tbody className={styles.tracker__table_body}>
-            {this.props.jobApps && this.props.jobApps.map(jobApp => (
+            {filteredJobApps.map(jobApp => (
               <tr 
                 key={jobApp.id}
                 onClick={this.handleShowJobAppDetail.bind(this, jobApp)}>
@@ -73,9 +80,9 @@ class TrackerTable extends Component {
                 <td>{this.capitalize(jobApp.current_status)}</td>
                 <td className={"mobile_hide"}>{jobApp.job_location}</td>
                 <td className={"mobile_hide"}>{jobApp.created}</td>
-              </tr>))}
+              </tr>)
+            )}
           </tbody>
-
         </table>
       </div>
     )
@@ -84,6 +91,7 @@ class TrackerTable extends Component {
 
 TrackerTable.propTypes = {
   jobApps: PropTypes.array,
+  showArchived: PropTypes.bool,
 };
 
 const mapStateToProps = state => {

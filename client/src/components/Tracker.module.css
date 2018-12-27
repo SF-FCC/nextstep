@@ -30,3 +30,9 @@
   font-weight: bold;
   vertical-align: -11%;
 }
+
+.archived {
+  color: #337ab7;
+  cursor: pointer;
+  margin: 2rem 0;
+}

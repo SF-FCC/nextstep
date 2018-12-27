@@ -50,9 +50,7 @@ class JobAppDetail extends Component {
     this.props.hideJobDetail();
   }
   isActive(status) {
-    let res = ["withdrawn", "expired", "notAFit"].indexOf(status) === -1;
-    console.log(res); 
-    return res;
+    return ["withdrawn", "expired", "notAFit"].indexOf(status) === -1;
   }
   showDeleteConfirmation() {
     this.setState({deleteConfirmationIsShowing: true});

@@ -61,7 +61,7 @@ class TrackerTable extends Component {
           && <JobAppDetail currentJobApp={this.props.currentJobApp} />}
 
         <table className={styles.tracker__table}>
-          <tbody className={styles.tracker__table_heading}>
+          {!this.props.showArchived && <tbody className={styles.tracker__table_heading}>
             <tr onClick={this.handleSortRequest}>
               <th id='company_name'>COMPANY</th>
               <th id='job_title'>JOB TITLE</th>
@@ -69,7 +69,7 @@ class TrackerTable extends Component {
               <th id='job_location' className={"mobile_hide"}>LOCATION</th>
               <th id='created' className={"mobile_hide"}>DATE APPLIED</th>
             </tr>
-          </tbody>
+          </tbody>}
           <tbody className={styles.tracker__table_body}>
             {filteredJobApps.map(jobApp => (
               <tr 

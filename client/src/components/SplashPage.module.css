@@ -1,0 +1,13 @@
+.container {
+}
+
+.value_prop {
+  text-align: center;
+}
+
+.cool_image {
+  box-shadow: 0 3px 16px lightgray;
+  width: 100%;
+  height: 700px;
+  margin-top: 1rem;
+}

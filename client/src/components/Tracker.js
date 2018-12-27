@@ -5,10 +5,11 @@ import JobForm from "./JobForm";
 import styles from "./Tracker.module.css";
 import TrackerTable from "./TrackerTable";
 
+// TODO: add search bar
+// TODO: fix button animation so text animates the same speed
+
 /**
  * Tracker displays the jobs in a sortable table.
- * Has a searchbar
- *
  */
 
 class Tracker extends Component {
@@ -27,7 +28,9 @@ class Tracker extends Component {
       <div>
         <div className={styles.header}>
           <h2>Job Applications</h2>
-          <button onClick={this.handleShowJobForm}>Add Job</button>
+          <button className={styles.button_Blue} onClick={this.handleShowJobForm}>
+            <span className={styles.plus}>+</span> ADD JOB
+          </button>
         </div>
         {this.props.jobApps && <TrackerTable jobApps={this.props.jobApps} />}
         {this.props.isShowingJobForm && <JobForm />}
@@ -43,7 +46,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   showJobForm: () => dispatch(showJobForm()),
-  getAllJobApps: () => dispatch(getAllJobApps()),
-})
+  getAllJobApps: () => dispatch(getAllJobApps())
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tracker);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tracker);

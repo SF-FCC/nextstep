@@ -1,6 +1,6 @@
-const initialState = { 
+const initialState = {
   isShowingJobForm: false,
-  isShowingJobDetail: false 
+  isShowingJobDetail: false
 };
 
 /**

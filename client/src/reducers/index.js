@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import toggleDisplays from "./toggleDisplays";
-import userInfo from "./userInfo";
+import user from "./user";
 import jobApp from "./jobApp";
 
 export default combineReducers({
-  userInfo,
+  user,
   toggleDisplays,
   jobApp
 });

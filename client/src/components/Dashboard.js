@@ -1,39 +1,33 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import JobForm from "./JobForm";
 import { connect } from "react-redux";
 import { showJobForm, getAllJobApps } from "../actions";
 import { NavLink } from "react-router-dom";
-import styles from './Dashboard.module.css';
+import styles from "./Dashboard.module.css";
+
+// TODO: change updated to minutes once 60s threshold reached (basic formatting)
+
+const JobItem = ({ job }) => {
+  return (
+    <li key={job.id} className={styles.card}>
+      <div className={styles.card_top}>
+        <span>
+          <div className={styles.card_top__company}>{job.company_name}</div>
+          <div className={styles.card_top__jobtitle}>{job.job_title}</div>
+        </span>
+        <div>{job.current_status}</div>
+      </div>
+      <div className={styles.card_bottom}>
+        Updated {Math.round((Date.now() - Date.parse(`${job.updated}`)) / 1000)}s ago
+      </div>
+    </li>
+  );
+};
 
 /**
  * A dashboard that displays an overview of recent events.
- * TODO: we need specs on this
  */
-const JobList = ({ jobs }) => {
-  return (
-    jobs.map(job => {
-      return (
-        <li 
-          key={job.id}
-          className={styles.card}
-        >
-          <div className={styles.card_top}>
-            <span>
-              <div className={styles.card_top__company}>{job.company_name}</div>
-              <div className={styles.card_top__jobtitle}>{job.job_title}</div>
-            </span>
-            <div>{job.current_status}</div>
-          </div>
-          <div className={styles.card_bottom}>
-            Updated {Math.round((Date.now() - Date.parse(`${job.updated}`))/1000)}s ago
-          </div>
-        </li>
-        )
-      }
-    )
-  )
-}
-
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -50,17 +44,37 @@ class Dashboard extends Component {
       <div>
         <div>
           <h2>Dashboard</h2>
-          <NavLink to="/tracker">See All</NavLink>
-          <button onClick={this.handleShowJobForm}>Add Job</button>
-          <ul className={styles.cards_list}>
-            {this.props.allJobApps && <JobList jobs={this.props.allJobApps} />}
-          </ul>
+          <div className={styles.card_list_container}>
+            <div className={styles.header}>
+              <h3 className={styles.inline_header}>Jobs</h3>
+              <NavLink to="/tracker" className={styles.see_all}>
+                See All →
+              </NavLink>
+            </div>
+            <ul className={styles.card_list}>
+              <li
+                onClick={this.handleShowJobForm}
+                className={styles.card + " " + styles.add_job_card}
+              >
+                <span className={styles.bold}>+</span> Add Job
+              </li>
+              {this.props.allJobApps.map(job => (
+                <JobItem key={job.id} job={job} />
+              ))}
+            </ul>
+          </div>
           {this.props.isShowingJobForm && <JobForm />}
         </div>
       </div>
     );
   }
 }
+Dashboard.propTypes = {
+  allJobApps: PropTypes.array
+};
+Dashboard.defaultProps = {
+  allJobApps: []
+};
 
 const mapStateToProps = state => {
   return {
@@ -70,10 +84,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    showJobForm: () => dispatch(showJobForm()),
-    getAllJobApps: () => dispatch(getAllJobApps())
-})
+  showJobForm: () => dispatch(showJobForm()),
+  getAllJobApps: () => dispatch(getAllJobApps())
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
-
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);

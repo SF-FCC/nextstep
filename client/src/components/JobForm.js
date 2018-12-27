@@ -57,6 +57,7 @@ class JobForm extends Component {
     this.handleSourceOptionSelect = this.handleSourceOptionSelect.bind(this);
     this.resetSourceOptionSelect = this.resetSourceOptionSelect.bind(this);
     this.handleClosePanel = this.handleClosePanel.bind(this);
+    this.isActive = this.isActive.bind(this);
   }
   handleSourceOptionSelect(companyName) {
     this.setState({ sourceSymbol: companyName[1] });
@@ -78,6 +79,7 @@ class JobForm extends Component {
       job_title: this.state.job_title,
       current_status: this.state.current_status,
       job_location: this.state.job_location,
+      active: this.isActive(this.state.current_status),
       job_source: this.state.job_source,
       sourceSymbol: this.state.sourceSymbol,
     }));
@@ -94,6 +96,9 @@ class JobForm extends Component {
       displaySourceForm: true
     });
     this.handleClosePanel();
+  }
+  isActive(status) {
+    return ["withdrawn", "expired", "notAFit"].indexOf(status) === -1;
   }
   handleClosePanel(e) {
     this.props.dispatch(hideJobForm());

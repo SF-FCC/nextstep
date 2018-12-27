@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { getItem, setItem, removeItem } from "../utilities/helper";
 /**
  *
  * @param {*} email
@@ -65,7 +65,7 @@ export const requestLogin = (email, password) => {
         .post(url, body)
         .then(r => {
           console.log(r.data);
-          document.cookie = "token=" + r.data.token;
+          setItem("token", r.data.token, 1800); // max age set at 30 minutes
           // Update store
           dispatch(resolveLogin(r.data.user));
           // Let component resolve any local state
@@ -112,7 +112,7 @@ export const resolveLogin = user => {
  *
  */
 export const logout = () => {
-  document.cookie = "token=";
+  removeItem("token", "/");
   return {
     type: "LOGOUT"
   };

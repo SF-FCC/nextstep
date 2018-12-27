@@ -36,7 +36,7 @@ class TrackerTable extends Component {
     };
   }
   capitalize(str) {
-    return str[0].toUpperCase() + str.slice(1);
+    return str && str[0].toUpperCase() + str.slice(1);
   }
   handleSortRequest(e) {
     if (e.target.id) this.sortTableBy(e.target.id);

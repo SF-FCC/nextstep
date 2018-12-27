@@ -13,6 +13,7 @@ module.exports = app => {
       current_status,
       job_location,
       job_source,
+      active,
       user_id
     } = req.body;
 
@@ -25,9 +26,10 @@ module.exports = app => {
         current_status,
         job_location,
         job_source,
+        active,
         user_id
         )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       RETURNING *;`;
     try {
       const jobs = await pool.query(insert, [
@@ -38,6 +40,7 @@ module.exports = app => {
         current_status,
         job_location,
         job_source,
+        active,
         user_id
       ]);
       return res.json(jobs);
@@ -56,6 +59,7 @@ module.exports = app => {
       current_status,
       job_location,
       job_source,
+      active
     } = req.body;
 
     const insert = `
@@ -66,7 +70,8 @@ module.exports = app => {
         job_title = $5,
         current_status = $6,
         job_location = $7,
-        job_source = $8
+        job_source = $8,
+        active = $9
       WHERE id = $1`;
     try {
       const dbResponse = await pool.query(insert, [
@@ -77,7 +82,8 @@ module.exports = app => {
         job_title,
         current_status,
         job_location,
-        job_source
+        job_source,
+        active
       ]);
       return res.json(dbResponse);
     } catch (err) {

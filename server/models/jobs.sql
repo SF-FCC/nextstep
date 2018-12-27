@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS jobs(
     current_status VARCHAR(255),
     job_location VARCHAR(255),
     job_source VARCHAR(255),
-    created TIMESTAMP DEFAULT now(),
     active BOOL DEFAULT true,
+    created TIMESTAMP DEFAULT now(),
     updated TIMESTAMP DEFAULT now(),
     user_id INTEGER REFERENCES users (id)
 );

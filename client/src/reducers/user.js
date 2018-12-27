@@ -12,7 +12,7 @@
  * @param {object} [state={}] Previous state
  * @param {AuthAction} action The user auth information
  */
-function user(state = {isLoggedIn: true}, action) {
+function user(state = {}, action) {
   switch (action.type) {
     case "LOGIN":
       return {

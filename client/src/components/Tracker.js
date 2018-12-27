@@ -15,7 +15,11 @@ import TrackerTable from "./TrackerTable";
 class Tracker extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showArchived: false,
+    }
     this.handleShowJobForm = this.handleShowJobForm.bind(this);
+    this.toggleShowArchived = this.toggleShowArchived.bind(this);
   }
   componentDidMount() {
     this.props.getAllJobApps();
@@ -23,18 +27,28 @@ class Tracker extends Component {
   handleShowJobForm() {
     this.props.showJobForm();
   }
+  toggleShowArchived() {
+    this.setState({showArchived: !this.state.showArchived});
+  }
   render() {
     return (
       <div>
         <div className={styles.header}>
           <h2>Job Applications</h2>
-          <button className={styles.button_Blue} onClick={this.handleShowJobForm}>
+          <button 
+            className={styles.button_Blue} 
+            onClick={this.handleShowJobForm}>
             <span className={styles.plus}>+</span> ADD JOB
           </button>
         </div>
         {this.props.jobApps && 
           <TrackerTable jobApps={this.props.jobApps} showArchived={false} />}
-        {this.props.jobApps && 
+
+        <p 
+          onClick={this.toggleShowArchived}
+          className={styles.archived}>archived</p>
+
+        {this.props.jobApps && this.state.showArchived &&
           <TrackerTable jobApps={this.props.jobApps} showArchived={true} />}
         {this.props.isShowingJobForm && <JobForm />}
       </div>

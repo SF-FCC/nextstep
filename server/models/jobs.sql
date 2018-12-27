@@ -1,3 +1,6 @@
+/* If you want archived functionality to work, add the following sql command to your local db */ 
+/* ALTER TABLE jobs ADD COLUMN active BOOL; */ 
+
 BEGIN TRANSACTION;
 
 CREATE TABLE IF NOT EXISTS jobs(
@@ -10,6 +13,7 @@ CREATE TABLE IF NOT EXISTS jobs(
     job_location VARCHAR(255),
     job_source VARCHAR(255),
     created TIMESTAMP DEFAULT now(),
+    active BOOL DEFAULT true,
     updated TIMESTAMP DEFAULT now(),
     user_id INTEGER REFERENCES users (id)
 );

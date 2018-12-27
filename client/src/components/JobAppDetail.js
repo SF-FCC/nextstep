@@ -25,6 +25,7 @@ class JobAppDetail extends Component {
     this.handleHideJobAppDetail = this.handleHideJobAppDetail.bind(this);
     this.showDeleteConfirmation = this.showDeleteConfirmation.bind(this);
     this.hideDeleteConfirmation = this.hideDeleteConfirmation.bind(this);
+    this.isActive = this.isActive.bind(this);
   }
   handleInputChange(e) {
     this.setState({
@@ -42,9 +43,15 @@ class JobAppDetail extends Component {
       current_status : this.state.current_status,
       job_location : this.state.job_location,
       job_source : this.state.job_source,
+      active: this.isActive(this.state.current_status),
       posting_url : this.state.posting_url,
     }
     this.props.updateJobApp(details);
+  }
+  isActive(status) {
+    let res = ["withdrawn", "expired", "notAFit"].indexOf(status) === -1;
+    console.log(res); 
+    return res;
   }
   showDeleteConfirmation() {
     this.setState({deleteConfirmationIsShowing: true});

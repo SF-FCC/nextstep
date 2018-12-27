@@ -32,7 +32,10 @@ class Tracker extends Component {
             <span className={styles.plus}>+</span> ADD JOB
           </button>
         </div>
-        {this.props.jobApps && <TrackerTable jobApps={this.props.jobApps} />}
+        {this.props.jobApps && 
+          <TrackerTable jobApps={this.props.jobApps} showArchived={false} />}
+        {this.props.jobApps && 
+          <TrackerTable jobApps={this.props.jobApps} showArchived={true} />}
         {this.props.isShowingJobForm && <JobForm />}
       </div>
     );

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { showJobForm, getAllJobApps } from "../actions";
 import JobForm from "./JobForm";
 import styles from "./Tracker.module.css";
+import g_styles from "../globals.module.css";
 import TrackerTable from "./TrackerTable";
 
 // TODO: add search bar
@@ -35,8 +36,7 @@ class Tracker extends Component {
       <div>
         <div className={styles.header}>
           <h2>Job Applications</h2>
-          <button 
-            className={styles.button_Blue} 
+          <button className={g_styles.primary_button} onClick={this.handleShowJobForm}>
             onClick={this.handleShowJobForm}>
             <span className={styles.plus}>+</span> ADD JOB
           </button>

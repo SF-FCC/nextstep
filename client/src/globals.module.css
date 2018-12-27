@@ -1,0 +1,26 @@
+@value colors: "./colors.css";
+@value primary-blue, secondary-blue, border-gray, light-blue-gray, dark-blue-gray from colors, primary-box-shadow from colors;
+
+.primary_button {
+  background-color: primary-blue;
+  color: white;
+  padding: 1rem;
+  box-shadow: primary-box-shadow;
+  border-radius: 0.4rem;
+  margin: 1rem;
+  cursor: pointer;
+  border: none;
+  padding: 2px 20px;
+  transition: all 0.3s linear;
+  margin: 0;
+  height: 3rem;
+}
+
+.primary_button:hover {
+  margin-top: 1px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+}
+
+.cancel_button {
+  /* some styles */
+}

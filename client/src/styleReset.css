@@ -7,6 +7,8 @@
 /* button blue darker -> #337ab7; */
 /* button danger -> #d9534f; */
 
+/* Global colors are not currently imported */
+
 * {
   box-sizing: border-box;
 }

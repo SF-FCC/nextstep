@@ -1,5 +1,5 @@
 .card_list_container {
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 .card_list {
@@ -28,7 +28,7 @@
 
 .card_top__jobtitle {
   color: #444;
-  margin: 8px 0;
+  margin: 0.5rem 0;
 }
 
 .card_bottom {
@@ -47,7 +47,7 @@
 }
 
 .see_all {
-  padding-left: 16px;
+  padding-left: 1rem;
   color: #2196f3;
   text-decoration: none;
 }

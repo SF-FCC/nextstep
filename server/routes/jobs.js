@@ -1,8 +1,9 @@
 // Temp index routing
 const pool = require("../db/postgres").pool;
+const { requireAuthToken } = require("../middleware/helper");
 
 module.exports = app => {
-  app.post("/jobs", async (req, res, next) => {
+  app.post("/jobs", requireAuthToken, async (req, res, next) => {
     // TODO - Need to add user_id from client req (action creator)
 
     const {
@@ -49,7 +50,7 @@ module.exports = app => {
     }
   });
 
-  app.post("/jobs/update", async (req, res, next) => {
+  app.post("/jobs/update", requireAuthToken, async (req, res, next) => {
     const {
       id,
       posting_url,
@@ -91,7 +92,7 @@ module.exports = app => {
     }
   });
 
-  app.post("/jobs/delete", async (req, res, next) => {
+  app.post("/jobs/delete", requireAuthToken, async (req, res, next) => {
     const { id } = req.body;
     const remove = `DELETE FROM jobs WHERE id = $1`;
 
@@ -103,7 +104,7 @@ module.exports = app => {
     }
   });
 
-  app.get("/jobs", async (req, res, next) => {
+  app.get("/jobs", requireAuthToken, async (req, res, next) => {
     // TODO - need to add user_id to query based on auth middleware/ request
     const query = `SELECT * from jobs`;
     try {

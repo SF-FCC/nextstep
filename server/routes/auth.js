@@ -37,6 +37,11 @@ module.exports = app => {
     return res.status(200).send({ user: req.user, token: createToken(req.user.id) });
   });
 
+  /* Check user already logged in */
+  app.get("/auth/verify", requireAuthToken, (req, res) => {
+    return res.status(200).send({ user: req.user });
+  });
+
   /* Logout */
   // * NOTE: User logout will be handled on Client-side (delete token from storage)
   // app.get("/auth/logout", (req, res) => {

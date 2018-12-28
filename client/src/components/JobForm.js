@@ -73,16 +73,19 @@ class JobForm extends Component {
   }
   handleSave(e) {
     e.preventDefault();
-    this.props.dispatch(postJobApp({
-      posting_url: this.state.posting_url,
-      company_name: this.state.company_name,
-      job_title: this.state.job_title,
-      current_status: this.state.current_status,
-      job_location: this.state.job_location,
-      active: this.isActive(this.state.current_status),
-      job_source: this.state.job_source,
-      sourceSymbol: this.state.sourceSymbol,
-    }));
+    this.props.dispatch(
+      postJobApp({
+        posting_url: this.state.posting_url,
+        company_name: this.state.company_name,
+        job_title: this.state.job_title,
+        current_status: this.state.current_status,
+        job_location: this.state.job_location,
+        active: this.isActive(this.state.current_status),
+        job_source: this.state.job_source,
+        sourceSymbol: this.state.sourceSymbol,
+        user_id: this.props.user.id
+      })
+    );
 
     this.setState({
       posting_url: "",
@@ -206,8 +209,12 @@ class JobForm extends Component {
   }
 }
 
+function mapStateToProps({ user }) {
+  return { user };
+}
+
 JobForm.propTypes = {
   dispatch: PropTypes.func
 };
 
-export default connect()(JobForm);
+export default connect(mapStateToProps)(JobForm);

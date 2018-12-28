@@ -1,5 +1,5 @@
 .JobAppDeleteModal__outerContainer {
-  background: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -25,17 +25,16 @@
 
 .JobAppDeleteModal > span {
   position: absolute;
-  top: .02em;
-  right: .02em;
-  padding: .6em.8em;
+  top: 0.02em;
+  right: 0.02em;
+  padding: 0.6em.8em;
   font-size: 1.2em;
   cursor: pointer;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 40.625rem) {
   .JobAppDeleteModal__innerContainer {
     width: 70%;
     left: 15%;
   }
 }
-

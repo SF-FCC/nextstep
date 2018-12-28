@@ -14,14 +14,14 @@
   margin: 1rem;
   cursor: pointer;
   border: none;
-  padding: 2px 20px;
+  padding: 0.125rem 1.25rem;
   transition: all 0.3s linear;
   margin-top: 0;
   height: 3rem;
 }
 
 .button_Blue:hover {
-  margin-top: 1px;
+  margin-top: 0.0625rem;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
 }
 

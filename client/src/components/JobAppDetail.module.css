@@ -6,7 +6,7 @@
 }
 
 .jobAppDetail__formOuterContainer {
-  background: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -29,7 +29,7 @@
   cursor: pointer;
   color: #337ab7;
   margin-left: 1em;
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 .jobAppDetail__form {
@@ -37,21 +37,20 @@
   margin: 1em;
   padding: 1em;
   box-sizing: border-box;
-  border: .05em solid #ddd;
-  border-radius: .2em;
+  border: 0.05em solid #ddd;
+  border-radius: 0.2em;
 }
 
 .jobAppDetail__input {
-  margin-top: .6em;
+  margin-top: 0.6em;
   border: none;
-  padding: .2em;
+  padding: 0.2em;
   width: 100%;
   cursor: pointer;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 40.625rem) {
   .jobAppDetail__formInnerContainer {
     width: 90%;
   }
 }
-

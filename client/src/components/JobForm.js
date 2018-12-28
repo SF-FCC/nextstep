@@ -87,18 +87,20 @@ class JobForm extends Component {
       })
     );
 
-    this.setState({
-      posting_url: "",
-      company_name: "",
-      job_title: "",
-      current_status: "interested",
-      job_location: "",
-      job_source: "",
-      sourceSymbol: "",
-      sourceOptions: null,
-      displaySourceForm: true
-    });
-    this.handleClosePanel();
+    this.setState(
+      {
+        posting_url: "",
+        company_name: "",
+        job_title: "",
+        current_status: "interested",
+        job_location: "",
+        job_source: "",
+        sourceSymbol: "",
+        sourceOptions: null,
+        displaySourceForm: true
+      },
+      () => this.handleClosePanel()
+    );
   }
   isActive(status) {
     return ["withdrawn", "expired", "notAFit"].indexOf(status) === -1;

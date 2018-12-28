@@ -1,5 +1,6 @@
 import axios from "axios";
-import { getItem, setItem, removeItem } from "../utilities/helper";
+import { getItem, setItem, removeItem } from "../utilities/cookie-helper";
+import { reqConfig } from "../utilities/axios-helper";
 /**
  *
  * @param {*} email
@@ -169,10 +170,7 @@ export const setVisibleJobApps = jobs => {
  */
 
 export const getAllJobApps = () => async dispatch => {
-  const token = await getItem("token");
-  console.log("token", token);
-  const reqOpt = { headers: { Authorization: `Bearer ${token}` } };
-  const response = await axios.get("/jobs", reqOpt);
+  const response = await axios.get("/jobs", reqConfig);
   if (response.status === 200) {
     dispatch({ type: "ALL_JOB_APPS", payload: response.data });
   } else {
@@ -181,10 +179,7 @@ export const getAllJobApps = () => async dispatch => {
 };
 
 export const postJobApp = details => async dispatch => {
-  const token = await getItem("token");
-  console.log("token", token);
-  const reqOpt = { headers: { Authorization: `Bearer ${token}` } };
-  const response = await axios.post("/jobs", details, reqOpt);
+  const response = await axios.post("/jobs", details, reqConfig);
   if (response.status === 200) {
     dispatch({ type: "ADD_JOB_APP", payload: response.data.rows[0] });
   } else {
@@ -201,10 +196,7 @@ export const sortAllJobApps = allJobApps => async dispatch => {
  * @param {*} details
  */
 export const updateJobApp = details => async dispatch => {
-  const token = await getItem("token");
-  console.log("token", token);
-  const reqOpt = { headers: { Authorization: `Bearer ${token}` } };
-  const response = await axios.post("/jobs/update", details, reqOpt);
+  const response = await axios.post("/jobs/update", details, reqConfig);
   if (response.status === 200) {
     dispatch({ type: "JOB_APP_UPDATE", payload: details });
   } else {
@@ -217,10 +209,7 @@ export const updateJobApp = details => async dispatch => {
  * @param {*} id
  */
 export const deleteJobApp = curId => async dispatch => {
-  const token = await getItem("token");
-  console.log("token", token);
-  const reqOpt = { headers: { Authorization: `Bearer ${token}` } };
-  const response = await axios.post("/jobs/delete", { id: curId }, reqOpt);
+  const response = await axios.post("/jobs/delete", { id: curId }, reqConfig);
   if (response.status === 200) {
     dispatch({ type: "DELETE_JOB_APP", payload: curId });
   } else {

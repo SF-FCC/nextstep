@@ -1,5 +1,5 @@
 .formOuterContainer {
-  background: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -11,18 +11,18 @@
   position: absolute;
   left: 19%;
   top: 2em;
-  margin: 0 auto; 
+  margin: 0 auto;
   width: 62%;
   background: white;
-  border-radius: .3em;
-  border: .08em solid grey;
+  border-radius: 0.3em;
+  border: 0.08em solid grey;
 }
 
 .formHeader {
   display: flex;
   justify-content: space-between;
-  padding: 1.2em .8em;
-  border-bottom: .01em solid #ddd;
+  padding: 1.2em 0.8em;
+  border-bottom: 0.01em solid #ddd;
 }
 
 .h1 {
@@ -30,8 +30,9 @@
   font-size: 1.5em;
 }
 
-.companyAutoPopulate, .companyName {
-  margin: .4em;
+.companyAutoPopulate,
+.companyName {
+  margin: 0.4em;
   cursor: pointer;
 }
 
@@ -47,12 +48,11 @@
   font-size: 1em;
   font-weight: 100;
   color: #444;
-  letter-spacing: .04em;
-  border-bottom: .01em solid #ddd
+  letter-spacing: 0.04em;
+  border-bottom: 0.01em solid #ddd;
 }
 
-
-@media (max-width: 650px) {
+@media (max-width: 40.625rem) {
   .formInnerContainer {
     width: 94%;
     left: 2.5%;

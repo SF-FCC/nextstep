@@ -7,6 +7,11 @@
 /* button blue darker -> #337ab7; */
 /* button danger -> #d9534f; */
 
+/* Global colors are not currently imported */
+
+/* Currently a single media query exists to handle mobile styles  */
+/* @media (max-width: 40.625rem) {} */
+
 * {
   box-sizing: border-box;
 }
@@ -107,7 +112,7 @@ textarea:focus,
 input:focus,
 select:focus {
   outline: none;
-  border-bottom: 2px solid #2196f3;
+  border-bottom: 0.125rem solid #2196f3;
 }
 
 label {
@@ -149,7 +154,7 @@ h4 {
   line-height: 2.5em;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 40.625rem) {
   .mobile_hide {
     display: none;
   }

@@ -1,0 +1,13 @@
+/**
+ * Copy paste to import what you need
+
+@value colors: "./colors.css";
+@value primary-blue, secondary-blue, border-gray, light-blue-gray, dark-blue-gray from colors, primary-box-shadow;
+*/
+
+@value primary-blue: #2196f3;
+@value secondary-blue: #0275d8;
+@value border-gray: #f1f0f0;
+@value light-blue-gray:rgba(63, 56, 168, 0.04);
+@value dark-blue-gray:rgba(63, 56, 168, 0.08);
+@value primary-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);

@@ -170,7 +170,8 @@ export const setVisibleJobApps = jobs => {
  */
 
 export const getAllJobApps = () => async dispatch => {
-  const response = await axios.get("/jobs", reqConfig);
+  const authHeaders = await reqConfig("token");
+  const response = await axios.get("/jobs", authHeaders);
   if (response.status === 200) {
     dispatch({ type: "ALL_JOB_APPS", payload: response.data });
   } else {
@@ -179,7 +180,8 @@ export const getAllJobApps = () => async dispatch => {
 };
 
 export const postJobApp = details => async dispatch => {
-  const response = await axios.post("/jobs", details, reqConfig);
+  const authHeaders = await reqConfig("token");
+  const response = await axios.post("/jobs", details, authHeaders);
   if (response.status === 200) {
     dispatch({ type: "ADD_JOB_APP", payload: response.data.rows[0] });
   } else {
@@ -196,7 +198,8 @@ export const sortAllJobApps = allJobApps => async dispatch => {
  * @param {*} details
  */
 export const updateJobApp = details => async dispatch => {
-  const response = await axios.post("/jobs/update", details, reqConfig);
+  const authHeaders = await reqConfig("token");
+  const response = await axios.post("/jobs/update", details, authHeaders);
   if (response.status === 200) {
     dispatch({ type: "JOB_APP_UPDATE", payload: details });
   } else {
@@ -209,7 +212,8 @@ export const updateJobApp = details => async dispatch => {
  * @param {*} id
  */
 export const deleteJobApp = curId => async dispatch => {
-  const response = await axios.post("/jobs/delete", { id: curId }, reqConfig);
+  const authHeaders = await reqConfig("token");
+  const response = await axios.post("/jobs/delete", { id: curId }, authHeaders);
   if (response.status === 200) {
     dispatch({ type: "DELETE_JOB_APP", payload: curId });
   } else {

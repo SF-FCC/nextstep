@@ -4,4 +4,8 @@ const getToken = name => {
   return getItem(name);
 };
 
-export const reqConfig = { headers: { Authorization: `Bearer ${getToken("token")}` } };
+export function reqConfig(name) {
+  const token = getToken(name);
+  const headersObj = { headers: { Authorization: `Bearer ${token}` } };
+  return headersObj;
+}

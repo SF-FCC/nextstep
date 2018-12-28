@@ -29,14 +29,14 @@ class TrackerTable extends Component {
       this.props.sortAllJobApps(jobsCopy.reverse());
     } else {
       let res = jobsCopy.sort((acc, job) => {
-        return String(acc[sortType]).toLowerCase() > String(job[sortType]).toLowerCase();
+        return String(acc[sortType]).toLowerCase() > String(job[sortType]).toLowerCase() ? 1 : -1;
       });
       this.setState({currentSortBy: sortType});
       this.props.sortAllJobApps(res);
     };
   }
   capitalize(str) {
-    return str && str[0].toUpperCase() + str.slice(1);
+    if (str) return str[0].toUpperCase() + str.slice(1);
   }
   handleSortRequest(e) {
     if (e.target.id) this.sortTableBy(e.target.id);

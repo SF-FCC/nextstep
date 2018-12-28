@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import reducers from "./reducers";
 import reduxThunk from "redux-thunk";
-import { getItem } from "./utilities/helper";
+import { getItem } from "./utilities/cookie-helper";
 import axios from "axios";
 import { resolveLogin } from "./actions";
 import history from "./utilities/history";

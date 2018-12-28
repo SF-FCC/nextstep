@@ -81,7 +81,7 @@ const jwtStratOptions = {
 };
 
 const validateJwtToken = async (payload, done) => {
-  const findUserById = `SELECT id, email FROM users WHERE id = $1::INT;`;
+  const findUserById = `SELECT id, email, first_name, last_name FROM users WHERE id = $1::INT;`;
   try {
     const results = await pool.query(findUserById, [payload.sub]);
     if (results.rowCount < 1) {

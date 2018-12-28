@@ -34,11 +34,6 @@
   padding: 0.5rem;
 }
 
-.select option::before {
-  content: "test";
-  color: black;
-}
-
 .companyAutoPopulate,
 .companyName {
   margin: 0.4em;
@@ -60,6 +55,7 @@
   color: #444;
   letter-spacing: 0.04em;
   border-bottom: 0.01em solid #ddd;
+  margin-bottom: 1.5rem;
 }
 
 .flex_right {

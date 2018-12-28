@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import styles from "./JobAppDeleteModal.module.css";
+import g_styles from "../globals.module.css";
 import { connect } from "react-redux";
 import { deleteJobApp, hideJobDetail } from "../actions";
 
@@ -18,28 +19,32 @@ class JobAppDeleteModal extends Component {
       <div className={styles.JobAppDeleteModal__outerContainer}>
         <div className={styles.JobAppDeleteModal__innerContainer}>
           <div className={styles.JobAppDeleteModal}>
-            <span onClick={this.props.hideDeleteConfirmation}>X</span>
+            <span className={g_styles.close_form} onClick={this.props.hideDeleteConfirmation}>
+              X
+            </span>
             <h1>Are you sure?</h1>
             <h4>This cannot be undone</h4>
-            <button 
-              type="button"
-              onClick={this.props.hideDeleteConfirmation}>Cancel</button>
-            <button 
-              type="button"
-              onClick={this.handleDeleteJobApp}
-              className={"delete_button"}>Delete</button>
+            <button className={g_styles.cancel_button} onClick={this.props.hideDeleteConfirmation}>
+              Cancel
+            </button>
+            <button className={g_styles.primary_button} onClick={this.handleDeleteJobApp}>
+              Delete
+            </button>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteJobApp: (id) => dispatch(deleteJobApp(id)),
+    deleteJobApp: id => dispatch(deleteJobApp(id)),
     hideJobDetail: () => dispatch(hideJobDetail())
-  }
-}
+  };
+};
 
-export default connect(null, mapDispatchToProps)(JobAppDeleteModal);
+export default connect(
+  null,
+  mapDispatchToProps
+)(JobAppDeleteModal);

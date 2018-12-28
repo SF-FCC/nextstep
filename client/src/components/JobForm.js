@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { sources } from "../data/jobSources.js";
 import styles from "./JobForm.module.css";
+import g_styles from "../globals.module.css";
 import { connect } from "react-redux";
 import { hideJobForm, postJobApp } from "../actions";
 
@@ -118,8 +119,8 @@ class JobForm extends Component {
       <div className={styles.formOuterContainer}>
         <div className={styles.formInnerContainer}>
           <div className={styles.formHeader}>
-            <h1 className={styles.h1}>Add New Job</h1>
-            <span className={"closeForm"} onClick={this.handleClosePanel}>
+            <h1 className={styles.add_new_job}>Add New Job</h1>
+            <span className={g_styles.close_form} onClick={this.handleClosePanel}>
               X
             </span>
           </div>
@@ -135,36 +136,40 @@ class JobForm extends Component {
             </label>
             <label>
               Company
-              <input 
+              <input
                 className={styles.jobForm__input}
                 id="company_name"
                 onChange={this.handleInputChange}
-                value={this.state.company_name} />
+                value={this.state.company_name}
+              />
             </label>
             <label>
               Job Title
-              <input 
+              <input
                 className={styles.jobForm__input}
                 id="job_title"
                 onChange={this.handleInputChange}
-                value={this.state.job_title} />
+                value={this.state.job_title}
+              />
             </label>
             <label>
               Status
-              <select 
+              <select
+                className={styles.select + " " + styles.jobForm__input}
                 id="current_status"
                 value={this.state.current_status}
-                onChange={this.handleInputChange}>
-                  <option value="interested">Interested</option>
-                  <option value="applied">Applied</option>
-                  <option value="phoneCall">Phone Call</option>
-                  <option value="assignment">Assignment</option>
-                  <option value="interview">Interview</option>
-                  <option value="offer">Offer</option>
-                  <option value="accepted">Accepted</option>
-                  <option value="withdrawn">Withdrawn</option>
-                  <option value="expired">Expired</option>
-                  <option value="notAFit">Not A Fit</option>
+                onChange={this.handleInputChange}
+              >
+                <option value="interested">&#9679; Interested</option>
+                <option value="applied">&#9679; Applied</option>
+                <option value="phoneCall">&#9679; Phone Call</option>
+                <option value="assignment">&#9679; Assignment</option>
+                <option value="interview">&#9679; Interview</option>
+                <option value="offer">&#9679; Offer</option>
+                <option value="accepted">&#9679; Accepted</option>
+                <option value="withdrawn">&#9679; Withdrawn</option>
+                <option value="expired">&#9679; Expired</option>
+                <option value="notAFit">&#9679; Not A Fit</option>
               </select>
             </label>
             <label>
@@ -173,7 +178,8 @@ class JobForm extends Component {
                 className={styles.jobForm__input}
                 id="job_location"
                 onChange={this.handleInputChange}
-                value={this.state.job_location} />
+                value={this.state.job_location}
+              />
             </label>
             <label>
               Source
@@ -199,10 +205,12 @@ class JobForm extends Component {
                 />
               )}
             </label>
-            <button type="button" onClick={this.handleClosePanel}>
-              CANCEL
-            </button>
-            <button className={styles.saveButton}>SAVE</button>
+            <div className={styles.flex_right}>
+              <button className={g_styles.cancel_button} onClick={this.handleClosePanel}>
+                CANCEL
+              </button>
+              <button className={g_styles.primary_button}>SAVE</button>
+            </div>
           </form>
         </div>
       </div>

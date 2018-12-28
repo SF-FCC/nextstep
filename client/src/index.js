@@ -38,13 +38,13 @@ if (token) {
 
 function redirectVerifiedUser() {
   if (pathname === "/login" || pathname === "/register") {
-    window.location.href = "/";
+    history.push("/");
   }
 }
 
 function redirectUnverifiedUser() {
   if (pathname === "/tracker" || pathname === "/dashboard" || pathname === "/account") {
-    window.location.href = "/";
+    history.push("/");
   }
 }
 

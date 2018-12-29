@@ -36,17 +36,3 @@
   cursor: pointer;
   margin: 2rem 0;
 }
-
-/* **************************************** */
-/* move to search form later */
-
-.searchForm__form {
-  display: flex;
-  position: relative;
-}
-
-.searchForm__dropdown {
-  height: 10px;
-  background: green;
-  position: absolute;
-}

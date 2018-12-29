@@ -102,7 +102,6 @@ export const errorLogin = message => {
  * @param {*} password
  */
 export const resolveLogin = user => {
-  console.log(user);
   return {
     type: "LOGIN",
     ...user

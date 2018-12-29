@@ -5,9 +5,8 @@ import JobAppDetail from "./JobAppDetail";
 import { connect } from "react-redux";
 import { setCurrentJobApp, showJobDetail, showJobForm, getAllJobApps } from "../actions";
 import { NavLink } from "react-router-dom";
+import { timeSince } from "../utilities/date-helper";
 import styles from "./Dashboard.module.css";
-
-// TODO: change updated to minutes once 60s threshold reached (basic formatting)
 
 const JobItem = ({ job, handleShowJobAppDetail }) => {
   return (
@@ -19,9 +18,7 @@ const JobItem = ({ job, handleShowJobAppDetail }) => {
         </span>
         <div>{job.current_status}</div>
       </div>
-      <div className={styles.card_bottom}>
-        Updated {Math.round((Date.now() - Date.parse(`${job.updated}`)) / 1000)}s ago
-      </div>
+      <div className={styles.card_bottom}>Updated {timeSince(job.updated)} ago</div>
     </li>
   );
 };

@@ -99,7 +99,6 @@ module.exports = app => {
   });
 
   app.post("/jobs/delete", requireAuthToken, async (req, res, next) => {
-    // TODO - Need to add user_id from client req (action creator)
     const user_id = req.user.id;
     const { id } = req.body;
     const remove = `DELETE FROM jobs WHERE id = $1 AND user_id = $2;`;

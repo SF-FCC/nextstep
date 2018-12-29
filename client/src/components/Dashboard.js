@@ -5,9 +5,8 @@ import JobAppDetail from "./JobAppDetail";
 import { connect } from "react-redux";
 import { setCurrentJobApp, showJobDetail, showJobForm, getAllJobApps } from "../actions";
 import { NavLink } from "react-router-dom";
+import { timeSince } from "../utilities/date-helper";
 import styles from "./Dashboard.module.css";
-
-// TODO: change updated to minutes once 60s threshold reached (basic formatting)
 
 const JobItem = ({ job, handleShowJobAppDetail }) => {
   return (
@@ -19,9 +18,7 @@ const JobItem = ({ job, handleShowJobAppDetail }) => {
         </span>
         <div>{job.current_status}</div>
       </div>
-      <div className={styles.card_bottom}>
-        Updated {Math.round((Date.now() - Date.parse(`${job.updated}`)) / 1000)}s ago
-      </div>
+      <div className={styles.card_bottom}>Updated {timeSince(job.updated)} ago</div>
     </li>
   );
 };
@@ -64,8 +61,8 @@ class Dashboard extends Component {
                 <span className={styles.bold}>+</span> Add Job
               </li>
               {this.props.allJobApps.map(job => (
-                <JobItem 
-                  key={job.id} 
+                <JobItem
+                  key={job.id}
                   job={job}
                   handleShowJobAppDetail={this.handleShowJobAppDetail.bind(this, job)}
                 />
@@ -73,8 +70,9 @@ class Dashboard extends Component {
             </ul>
           </div>
           {this.props.isShowingJobForm && <JobForm />}
-          {this.props.isShowingJobDetail
-            && <JobAppDetail currentJobApp={this.props.currentJobApp} />}
+          {this.props.isShowingJobDetail && (
+            <JobAppDetail currentJobApp={this.props.currentJobApp} />
+          )}
         </div>
       </div>
     );
@@ -97,7 +95,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentJobApp: (job) => dispatch(setCurrentJobApp(job)),
+  setCurrentJobApp: job => dispatch(setCurrentJobApp(job)),
   showJobDetail: () => dispatch(showJobDetail()),
   showJobForm: () => dispatch(showJobForm()),
   getAllJobApps: () => dispatch(getAllJobApps())

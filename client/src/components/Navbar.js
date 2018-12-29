@@ -85,6 +85,9 @@ class Navbar extends Component {
         <AccountDropdown
           isVisible={this.state.isShowingAccountDropdown}
           onHide={this.hideAccountDropdown}
+          close={() => {
+            this.setState({ isShowingAccountDropdown: false });
+          }}
         />
       </nav>
     );

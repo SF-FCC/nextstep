@@ -9,10 +9,11 @@ import { logout } from "../actions";
  * Dropdown display when account is clicked in the header.
  * This will only be visible when a user is logged in.
  */
-const AccountDropdown = ({ isVisible, email, logout, onHide }) => {
+const AccountDropdown = ({ isVisible, email, logout, onHide, close }) => {
   if (!isVisible) return null;
   return (
     <div className={styles.container}>
+      <div className={styles.overlay} onClick={close} />
       <ul>
         <li className={styles.list_item + " " + styles.email}>{email}</li>
         <li className={styles.list_item}>
@@ -34,7 +35,8 @@ const AccountDropdown = ({ isVisible, email, logout, onHide }) => {
 
 AccountDropdown.propTypes = {
   isVisible: PropTypes.bool,
-  email: PropTypes.string
+  email: PropTypes.string,
+  close: PropTypes.func
 };
 
 AccountDropdown.defaultProps = {

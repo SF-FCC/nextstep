@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getItem, setItem, removeItem } from "../utilities/cookie-helper";
+import { setItem, removeItem } from "../utilities/cookie-helper";
 import { reqConfig } from "../utilities/axios-helper";
 /**
  *
@@ -197,6 +197,7 @@ export const sortAllJobApps = allJobApps => async dispatch => {
  * @param {*} details
  */
 export const updateJobApp = details => async dispatch => {
+  // TODO - This needs to be fixed to handle updates properly
   const authHeaders = await reqConfig("token");
   const response = await axios.post("/jobs/update", details, authHeaders);
   if (response.status === 200) {

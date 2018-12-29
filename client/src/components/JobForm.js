@@ -73,29 +73,33 @@ class JobForm extends Component {
   }
   handleSave(e) {
     e.preventDefault();
-    this.props.dispatch(postJobApp({
-      posting_url: this.state.posting_url,
-      company_name: this.state.company_name,
-      job_title: this.state.job_title,
-      current_status: this.state.current_status,
-      job_location: this.state.job_location,
-      active: this.isActive(this.state.current_status),
-      job_source: this.state.job_source,
-      sourceSymbol: this.state.sourceSymbol,
-    }));
+    this.props.dispatch(
+      postJobApp({
+        posting_url: this.state.posting_url,
+        company_name: this.state.company_name,
+        job_title: this.state.job_title,
+        current_status: this.state.current_status,
+        job_location: this.state.job_location,
+        active: this.isActive(this.state.current_status),
+        job_source: this.state.job_source,
+        sourceSymbol: this.state.sourceSymbol
+      })
+    );
 
-    this.setState({
-      posting_url: "",
-      company_name: "",
-      job_title: "",
-      current_status: "interested",
-      job_location: "",
-      job_source: "",
-      sourceSymbol: "",
-      sourceOptions: null,
-      displaySourceForm: true
-    });
-    this.handleClosePanel();
+    this.setState(
+      {
+        posting_url: "",
+        company_name: "",
+        job_title: "",
+        current_status: "interested",
+        job_location: "",
+        job_source: "",
+        sourceSymbol: "",
+        sourceOptions: null,
+        displaySourceForm: true
+      },
+      () => this.handleClosePanel()
+    );
   }
   isActive(status) {
     return ["withdrawn", "expired", "notAFit"].indexOf(status) === -1;

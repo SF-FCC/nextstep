@@ -102,7 +102,6 @@ export const errorLogin = message => {
  * @param {*} password
  */
 export const resolveLogin = user => {
-  console.log(user);
   return {
     type: "LOGIN",
     ...user
@@ -261,7 +260,7 @@ export const hideJobDetail = () => {
   };
 };
 
-export const setCurrentJobApp = job => {
+export const setCurrentJobApp = job => {  
   return {
     type: "SET_CURRENT_JOB_DETAIL",
     payload: job

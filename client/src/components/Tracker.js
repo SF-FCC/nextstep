@@ -5,6 +5,7 @@ import JobForm from "./JobForm";
 import styles from "./Tracker.module.css";
 import g_styles from "../globals.module.css";
 import TrackerTable from "./TrackerTable";
+import SearchForm from "./SearchForm";
 
 // TODO: add search bar
 // TODO: fix button animation so text animates the same speed
@@ -36,6 +37,7 @@ class Tracker extends Component {
       <div>
         <div className={styles.header}>
           <h2>Job Applications</h2>
+          <SearchForm jobApps={this.props.jobApps} />
           <button className={g_styles.primary_button} onClick={this.handleShowJobForm}>
             <span className={styles.plus}>+</span> ADD JOB
           </button>

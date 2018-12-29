@@ -44,6 +44,20 @@ class Dashboard extends Component {
   handleShowJobForm() {
     this.props.showJobForm();
   }
+
+  renderCards = jobs => {
+    if (jobs.length > 0) {
+      const filterActiveJobs = jobs.filter(job => job.active);
+      return filterActiveJobs.map(job => (
+        <JobItem
+          key={job.id}
+          job={job}
+          handleShowJobAppDetail={this.handleShowJobAppDetail.bind(this, job)}
+        />
+      ));
+    }
+  };
+
   render() {
     return (
       <div>
@@ -63,18 +77,13 @@ class Dashboard extends Component {
               >
                 <span className={styles.bold}>+</span> Add Job
               </li>
-              {this.props.allJobApps.map(job => (
-                <JobItem 
-                  key={job.id} 
-                  job={job}
-                  handleShowJobAppDetail={this.handleShowJobAppDetail.bind(this, job)}
-                />
-              ))}
+              {this.renderCards(this.props.allJobApps)}
             </ul>
           </div>
           {this.props.isShowingJobForm && <JobForm />}
-          {this.props.isShowingJobDetail
-            && <JobAppDetail currentJobApp={this.props.currentJobApp} />}
+          {this.props.isShowingJobDetail && (
+            <JobAppDetail currentJobApp={this.props.currentJobApp} />
+          )}
         </div>
       </div>
     );
@@ -97,7 +106,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentJobApp: (job) => dispatch(setCurrentJobApp(job)),
+  setCurrentJobApp: job => dispatch(setCurrentJobApp(job)),
   showJobDetail: () => dispatch(showJobDetail()),
   showJobForm: () => dispatch(showJobForm()),
   getAllJobApps: () => dispatch(getAllJobApps())

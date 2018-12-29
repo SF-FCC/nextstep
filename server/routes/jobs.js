@@ -4,8 +4,7 @@ const { requireAuthToken } = require("../middleware/helper");
 
 module.exports = app => {
   app.post("/jobs", requireAuthToken, async (req, res, next) => {
-    // TODO - Need to add user_id from client req (action creator)
-
+    const user_id = req.user.id;
     const {
       posting_url,
       company_name,
@@ -14,8 +13,7 @@ module.exports = app => {
       current_status,
       job_location,
       job_source,
-      active,
-      user_id
+      active
     } = req.body;
 
     const insert = `

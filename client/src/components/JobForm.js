@@ -82,8 +82,7 @@ class JobForm extends Component {
         job_location: this.state.job_location,
         active: this.isActive(this.state.current_status),
         job_source: this.state.job_source,
-        sourceSymbol: this.state.sourceSymbol,
-        user_id: this.props.user.id
+        sourceSymbol: this.state.sourceSymbol
       })
     );
 
@@ -211,12 +210,8 @@ class JobForm extends Component {
   }
 }
 
-function mapStateToProps({ user }) {
-  return { user };
-}
-
 JobForm.propTypes = {
   dispatch: PropTypes.func
 };
 
-export default connect(mapStateToProps)(JobForm);
+export default connect()(JobForm);

@@ -262,6 +262,7 @@ export const hideJobDetail = () => {
 };
 
 export const setCurrentJobApp = job => {
+  console.log(job); 
   return {
     type: "SET_CURRENT_JOB_DETAIL",
     payload: job

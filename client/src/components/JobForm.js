@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { sources } from "../data";
+import { sources } from "../data/jobSources.js";
 import styles from "./JobForm.module.css";
 import { connect } from "react-redux";
 import { hideJobForm, postJobApp } from "../actions";

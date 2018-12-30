@@ -11,34 +11,6 @@ import Dropdown from "./Dropdown";
  * The header navigation bar that displays location and login/account.
  */
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  toggleAccountDropdown = () => {
-    this.setState({ isShowingAccountDropdown: !this.state.isShowingAccountDropdown });
-  };
-
-  hideAccountDropdown = () => {
-    this.setState({ isShowingAccountDropdown: false });
-  };
-
-  showLoginModal = () => {
-    if (!this.state.isShowingLoginModal) {
-      this.props.clearLoginError();
-      this.props.clearRegisterError();
-    }
-    this.setState({ isShowingLoginModal: !this.state.isShowingLoginModal });
-  };
-
-  hideLoginModal = () => {
-    console.log("hide fired");
-    this.props.clearLoginError();
-    this.props.clearRegisterError();
-    this.setState({ isShowingLoginModal: false });
-  };
-
   render() {
     return (
       <nav style={{ position: "relative" }}>
@@ -70,18 +42,11 @@ class Navbar extends Component {
                 </NavLink>
               </li>
               <li>
-                <button className={styles.nav_list__item} onClick={this.toggleAccountDropdown}>
-                  Account
-                </button>
                 <Dropdown
-                  isVisible={this.state.isShowingAccountDropdown}
-                  onClose={() => {
-                    this.setState({ isShowingAccountDropdown: false });
-                  }}
                   alignRight
-                >
-                  <AccountDropdown onHide={this.hideAccountDropdown} />
-                </Dropdown>
+                  dropComponent={<AccountDropdown onHide={this.hideAccountDropdown} />}
+                  displayComponent={<button className={styles.nav_list__item}>Account</button>}
+                />
               </li>
             </>
           ) : (

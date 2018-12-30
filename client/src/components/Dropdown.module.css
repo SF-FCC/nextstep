@@ -1,11 +1,13 @@
 .visible {
   opacity: 1;
   transition: 0.2s all ease;
+  pointer-events: auto;
 }
 
 .notVisible {
   opacity: 0;
   transition: 0.2s all ease;
+  pointer-events: none;
 }
 
 .slideIn {

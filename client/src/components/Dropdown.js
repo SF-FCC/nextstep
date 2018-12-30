@@ -98,7 +98,9 @@ export default class Dropdown extends Component {
             [styles.slideOut]: !isVisible
           })}
         >
-          {this.props.dropComponent}
+          {React.cloneElement(this.props.dropComponent, {
+            hideDropdown: this.hideDropdown
+          })}
         </div>
       </div>
     );

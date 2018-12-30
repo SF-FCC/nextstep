@@ -8,18 +8,19 @@ import { logout } from "../actions";
 /**
  * Displays account info and navigation
  */
-const AccountDropdown = ({ email, logout }) => {
+const AccountDropdown = ({ email, logout, onHide, hideDropdown }) => {
   return (
     <div className={styles.container}>
       <ul className={styles.dropdown}>
         <li className={styles.list_item + " " + styles.email}>{email}</li>
-        <li className={styles.list_item}>
+        <li className={styles.list_item} onClick={() => hideDropdown()}>
           <NavLink to="/account">Settings</NavLink>
         </li>
         <li
           className={styles.list_item + " " + styles.button}
           onClick={() => {
             logout();
+            onHide();
           }}
         >
           Sign Out
@@ -30,7 +31,9 @@ const AccountDropdown = ({ email, logout }) => {
 };
 
 AccountDropdown.propTypes = {
-  email: PropTypes.string
+  email: PropTypes.string,
+  onHide: PropTypes.func,
+  hideDropdown: PropTypes.func
 };
 
 AccountDropdown.defaultProps = {

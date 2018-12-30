@@ -6,17 +6,28 @@ import { connect } from "react-redux";
 import styles from "./Navbar.module.css";
 import { clearLoginError, clearRegisterError } from "../actions";
 import Dropdown from "./Dropdown";
+import classNames from "classnames";
 
 /**
  * The header navigation bar that displays location and login/account.
  */
 class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isShowingNavDropdown: false
+    };
+  }
+
+  toggleNavDropdown = e => {
+    this.setState({ isShowingNavDropdown: !this.state.isShowingNavDropdown });
+  };
   render() {
     return (
       <nav style={{ position: "relative" }}>
         <ul className={styles.nav_list}>
           <li className={styles.display_left}>
-            <NavLink exact to="/" className={styles.nav_list__item}>
+            <NavLink exact to="/" className={styles.nav_list__header}>
               NextStep
             </NavLink>
           </li>
@@ -26,7 +37,9 @@ class Navbar extends Component {
                 <NavLink
                   exact
                   to="/"
-                  className={styles.nav_list__item}
+                  className={classNames([styles.nav_list__item], {
+                    [styles.hide]: !this.state.isShowingNavDropdown
+                  })}
                   activeClassName={styles.nav_list__item_Active}
                 >
                   Dashboard
@@ -35,7 +48,9 @@ class Navbar extends Component {
               <li>
                 <NavLink
                   to="/tracker"
-                  className={styles.nav_list__item}
+                  className={classNames([styles.nav_list__item], {
+                    [styles.hide]: !this.state.isShowingNavDropdown
+                  })}
                   activeClassName={styles.nav_list__item_Active}
                 >
                   Tracker
@@ -44,19 +59,37 @@ class Navbar extends Component {
               <li>
                 <Dropdown
                   alignRight
-                  dropComponent={<AccountDropdown onHide={this.hideAccountDropdown} />}
-                  displayComponent={<button className={styles.nav_list__item}>Account</button>}
+                  dropComponent={<AccountDropdown onHide={this.toggleNavDropdown} />}
+                  displayComponent={
+                    <button
+                      className={classNames([styles.nav_list__item], {
+                        [styles.hide]: !this.state.isShowingNavDropdown
+                      })}
+                    >
+                      Account
+                    </button>
+                  }
                 />
               </li>
             </>
           ) : (
             <li>
-              <NavLink to="/login" className={styles.nav_list__item}>
+              <NavLink to="/login" className={styles.nav_list__item + " " + styles.stick_top_right}>
                 Login
               </NavLink>
             </li>
           )}
         </ul>
+        {this.props.isLoggedIn && (
+          <button
+            onClick={this.toggleNavDropdown}
+            className={classNames([styles.hamburger], [styles.stick_top_right], {
+              [styles.hamburger_Active]: this.state.isShowingNavDropdown
+            })}
+          >
+            &#9776;
+          </button>
+        )}
       </nav>
     );
   }

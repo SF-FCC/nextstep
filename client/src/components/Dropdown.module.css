@@ -31,3 +31,9 @@
   display: flex;
   justify-content: flex-end;
 }
+
+@media (max-width: 40.625rem) {
+  .inner {
+    width: 100%;
+  }
+}

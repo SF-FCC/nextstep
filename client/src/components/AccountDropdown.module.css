@@ -18,3 +18,9 @@
 .button {
   cursor: pointer;
 }
+
+@media (max-width: 40.625rem) {
+  .container {
+    width: 100%;
+  }
+}

@@ -1,0 +1,31 @@
+.visible {
+  opacity: 1;
+  transition: 0.2s all ease;
+}
+
+.notVisible {
+  opacity: 0;
+  transition: 0.2s all ease;
+}
+
+.slideIn {
+  margin-top: 4px;
+  transition: 0.2s all ease;
+}
+
+.slideOut {
+  margin-top: 0;
+  transition: 0.2s all ease;
+}
+
+.inner {
+  position: absolute;
+}
+.outer {
+  position: relative;
+}
+
+.align_right {
+  display: flex;
+  justify-content: flex-end;
+}

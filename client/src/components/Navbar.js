@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import styles from "./Navbar.module.css";
 import { clearLoginError, clearRegisterError } from "../actions";
+import Dropdown from "./Dropdown";
 
 /**
  * The header navigation bar that displays location and login/account.
@@ -72,6 +73,15 @@ class Navbar extends Component {
                 <button className={styles.nav_list__item} onClick={this.toggleAccountDropdown}>
                   Account
                 </button>
+                <Dropdown
+                  isVisible={this.state.isShowingAccountDropdown}
+                  onClose={() => {
+                    this.setState({ isShowingAccountDropdown: false });
+                  }}
+                  alignRight
+                >
+                  <AccountDropdown onHide={this.hideAccountDropdown} />
+                </Dropdown>
               </li>
             </>
           ) : (
@@ -82,13 +92,6 @@ class Navbar extends Component {
             </li>
           )}
         </ul>
-        <AccountDropdown
-          isVisible={this.state.isShowingAccountDropdown}
-          onHide={this.hideAccountDropdown}
-          close={() => {
-            this.setState({ isShowingAccountDropdown: false });
-          }}
-        />
       </nav>
     );
   }

@@ -194,15 +194,16 @@ export const sortAllJobApps = allJobApps => async dispatch => {
 
 /**
  *
- * @param {*} details
+ * @param {*} details the job object to be updated. Updated field will not be used by the server,
+ * but is provided in order to immediately update client.
  */
 export const updateJobApp = details => async dispatch => {
-  // TODO - This needs to be fixed to handle updates properly
   const authHeaders = await reqConfig("token");
-  const response = await axios.post("/jobs/update", details, authHeaders);
-  if (response.status === 200) {
+  try {
+    await axios.post("/jobs/update", details, authHeaders);
     dispatch({ type: "JOB_APP_UPDATE", payload: details });
-  } else {
+  } catch (err) {
+    // TODO revert to previous state
     dispatch({ type: "JOB_APP_ERR", payload: "Unable to post job application" });
   }
 };
@@ -261,7 +262,7 @@ export const hideJobDetail = () => {
   };
 };
 
-export const setCurrentJobApp = job => {  
+export const setCurrentJobApp = job => {
   return {
     type: "SET_CURRENT_JOB_DETAIL",
     payload: job

@@ -120,6 +120,7 @@ export default class Dropdown extends Component {
 }
 
 Dropdown.propTypes = {
-  isVisible: PropTypes.bool,
-  children: PropTypes.element.isRequired
+  alignRight: PropTypes.bool,
+  dropComponent: PropTypes.element,
+  displayComponent: PropTypes.element
 };

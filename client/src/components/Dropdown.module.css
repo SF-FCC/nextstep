@@ -1,0 +1,39 @@
+.visible {
+  opacity: 1;
+  transition: 0.2s all ease;
+  pointer-events: auto;
+}
+
+.notVisible {
+  opacity: 0;
+  transition: 0.2s all ease;
+  pointer-events: none;
+}
+
+.slideIn {
+  margin-top: 4px;
+  transition: 0.2s all ease;
+}
+
+.slideOut {
+  margin-top: 0;
+  transition: 0.2s all ease;
+}
+
+.inner {
+  position: absolute;
+}
+.outer {
+  position: relative;
+}
+
+.align_right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 40.625rem) {
+  .inner {
+    width: 100%;
+  }
+}

@@ -14,7 +14,8 @@ class RegisterPanel extends Component {
       email: "",
       password: "",
       first_name: "",
-      last_name: ""
+      last_name: "",
+      confirmPW: ""
     };
   }
 
@@ -24,7 +25,8 @@ class RegisterPanel extends Component {
       this.state.email,
       this.state.password,
       this.state.first_name,
-      this.state.last_name
+      this.state.last_name,
+      this.state.confirmPW
     );
   };
 
@@ -78,7 +80,7 @@ class RegisterPanel extends Component {
             <input
               className={styles.field}
               type="password"
-              onChange={this.handleInputChange("password")}
+              onChange={this.handleInputChange("confirmPW")}
               required
             />
           </label>
@@ -99,8 +101,8 @@ class RegisterPanel extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRegisterClick: (email, password, first_name, last_name) => {
-      dispatch(register({ email, password, first_name, last_name }));
+    onRegisterClick: (email, password, first_name, last_name, confirmPW) => {
+      dispatch(register({ email, password, first_name, last_name, confirmPW }));
     }
   };
 };

@@ -2,14 +2,31 @@ const bcrypt = require("bcrypt");
 const { pool } = require("../db/postgres");
 const passport = require("passport");
 const { createToken, requireAuthToken } = require("../middleware/helper");
+const isEmail = require("validator/lib/isEmail");
+const normalizeEmail = require("validator/lib/normalizeEmail");
 
 module.exports = app => {
   /* Register */
-  app.post("/auth/register", async (req, res) => {
-    const { first_name, last_name, email, password } = req.body;
-    if (!email || !first_name || !last_name || !password) {
-      return res.status(400).json("Invalid Form Submission: Missing fields");
+  app.post("/auth/register", async (req, res, next) => {
+    const { first_name, last_name, email, password, confirmPW } = req.body;
+    if (!email || !first_name || !last_name || !password || !confirmPW) {
+      res.status(400);
+      return next("Registration form is missing required fields");
     }
+    if (password !== confirmPW) {
+      res.status(400);
+      return next("Password does not match confirmation");
+    }
+    if (!isEmail(email)) {
+      res.status(400);
+      return next("Email is invalid");
+    }
+    if (password.length < 4) {
+      res.status(400);
+      return next("Password must be at least 4 characters");
+    }
+    // NormalizeEmail needs verification, possibly could create a confusing ux and may need option tweaking
+    const sanitizedEmail = normalizeEmail(email);
     const saltRounds = 10;
     const hashPW = await bcrypt.hashSync(password, saltRounds);
     const insert = `
@@ -22,12 +39,17 @@ module.exports = app => {
     VALUES ($1, $2, $3, $4)
     RETURNING id, email;`;
     try {
-      const registerQuery = await pool.query(insert, [first_name, last_name, email, hashPW]);
+      const registerQuery = await pool.query(insert, [
+        first_name,
+        last_name,
+        sanitizedEmail,
+        hashPW
+      ]);
       const user = registerQuery.rows[0];
       return res.status(200).json({ user, token: createToken(user.id) });
     } catch (err) {
-      console.error(err);
-      return res.status(400).json(`Registration error: ${err.detail}`);
+      res.status(400);
+      return next(`Registration error: ${err.detail}`);
     }
   });
 

@@ -25,9 +25,13 @@
   border-bottom: 0.01em solid #ddd;
 }
 
-.h1 {
+.add_new_job {
   font-weight: 100;
   font-size: 1.5em;
+}
+
+.select {
+  padding: 0.5rem;
 }
 
 .companyAutoPopulate,
@@ -44,12 +48,24 @@
   width: 100%;
   line-height: 2.5;
   margin: auto;
+  margin-top: 0.5rem;
   border: none;
   font-size: 1em;
   font-weight: 100;
   color: #444;
   letter-spacing: 0.04em;
   border-bottom: 0.01em solid #ddd;
+  margin-bottom: 1.5rem;
+}
+
+.flex_right {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.75rem;
+}
+
+.flex_right * {
+  margin: 0 0.25rem;
 }
 
 @media (max-width: 40.625rem) {

@@ -9,7 +9,7 @@ class SearchForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: "",
       dropDownValues: [],
       companyDictionary: {}
     };
@@ -19,19 +19,19 @@ class SearchForm extends Component {
   handleInputChange(e) {
     this.setState({ value: e.target.value }, () => {
       this.setState({ companyDictionary: getCompanyDictionary(this.props.jobApps) }, () => {
-        if (this.state.value === '') {
+        if (this.state.value === "") {
           this.setState({ dropDownValues: [] });
         } else {
           let results = this.state.companyDictionary[this.state.value];
-          this.setState({ dropDownValues: results || ['no results']})
+          this.setState({ dropDownValues: results || ["no results"] });
         }
-      })
+      });
     });
   }
   resetDropdown() {
-    this.setState({ 
-      value: '',
-      dropDownValues: [],
+    this.setState({
+      value: "",
+      dropDownValues: []
     });
   }
   searchIcon() {
@@ -71,22 +71,25 @@ class SearchForm extends Component {
         <label htmlFor="_search" className={styles.search_icon}>
           {this.searchIcon()}
         </label>
-        <input
-          id="_search"
-          onChange={this.handleInputChange}
-          value={this.state.value}
-          className={styles.search_input}
-          placeholder="Search"
-        />
-        {this.state.dropDownValues && (
-          <CompaniesDropdown
-            resetDropdown={this.resetDropdown}
-            companyNames={this.state.dropDownValues}
+        <div className={styles.search_container}>
+          <input
+            id="_search"
+            onChange={this.handleInputChange}
+            value={this.state.value}
+            className={styles.search_input}
+            placeholder="Search Company"
           />
-        )}
+          {this.state.dropDownValues && (
+            <CompaniesDropdown
+              resetDropdown={this.resetDropdown}
+              companyNames={this.state.dropDownValues}
+            />
+          )}
+        </div>
       </form>
     );
   }
+}
 
 SearchForm.propTypes = {
   jobApps: PropTypes.array,

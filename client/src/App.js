@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import SplashPage from "./components/SplashPage";
 import LoginPanel from "./components/LoginPanel";
 import RegisterPanel from "./components/RegisterPanel";
-import styles from "./app.module.css";
+import styles from "./App.module.css";
 
 // TODO do we even need a splash page separated from a login page?
 // function LoginPanel(props) {

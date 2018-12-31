@@ -1,7 +1,7 @@
 .input {
-  color: #444;  
-  padding: .5em;
-  border: .08em solid #ccc;
+  color: #444;
+  padding: 0.5em;
+  border: 0.08em solid #ccc;
   border-radius: 0.2em 0.2em 0 0;
   font-size: 1.1em;
   letter-spacing: 0.05em;
@@ -21,6 +21,10 @@
 
 .search_input::placeholder {
   color: #ccc;
+}
+
+.search_container {
+  display: inline-block;
 }
 
 .search_icon {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setCurrentJobApp, showJobDetail } from '../actions';
+import styles from './CompaniesDropdown.module.css';
 
 class CompaniesDropdown extends Component {
   constructor(props) {
@@ -15,9 +16,10 @@ class CompaniesDropdown extends Component {
   }
   render() {
     return (
-      <ul>
+      <ul className={styles.ul}>
         {this.props.companyNames.map(companyName => (
           <li 
+            className={styles.li}
             onClick={this.handleCompanySelect.bind(this, companyName[1])}
             key={companyName[1]}>{companyName[0]}</li>
         ))}

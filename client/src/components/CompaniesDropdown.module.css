@@ -1,0 +1,17 @@
+.ul {
+  border: 0.05em solid #f1f0f0; 
+  background: #fff;
+  position: relative;
+}
+
+.li {
+  padding: 0.3em;
+  cursor: pointer;
+  border-bottom: 0.05em solid #f1f0f0;
+  width: 100%;
+}
+
+.li:hover {
+  background: #2196f3;
+  color: #fff;
+}

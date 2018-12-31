@@ -3,6 +3,7 @@ import getCompanyDictionary from '../data/getCompanyDictionary';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CompaniesDropdown from './CompaniesDropdown';
+import styles from './SearchForm.module.css';
 
 class SearchForm extends Component {
   constructor(props) {
@@ -31,7 +32,11 @@ class SearchForm extends Component {
   render() {
     return (
       <form>
-        <input onChange={this.handleInputChange} value={this.state.value} />
+        <input
+          className={styles.input}
+          onChange={this.handleInputChange} 
+          placeholder="search"
+          value={this.state.value} />
         {this.state.dropDownValues && 
           <CompaniesDropdown 
             resetDropdown={this.resetDropdown}

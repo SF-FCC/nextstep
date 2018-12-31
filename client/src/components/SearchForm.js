@@ -10,7 +10,7 @@ class SearchForm extends Component {
     super(props);
     this.state = {
       value: '',
-      dropDownValues: null,
+      dropDownValues: [],
       companyDictionary: {}
     }
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -19,14 +19,19 @@ class SearchForm extends Component {
   handleInputChange(e) {
     this.setState({ value: e.target.value }, () => {
       this.setState({ companyDictionary: getCompanyDictionary(this.props.jobApps) }, () => {
-        this.setState({ dropDownValues: this.state.companyDictionary[this.state.value] })
+        if (this.state.value === '') {
+          this.setState({ dropDownValues: [] });
+        } else {
+          let results = this.state.companyDictionary[this.state.value];
+          this.setState({ dropDownValues: results || ['no results']})
+        }
       })
     });
   }
   resetDropdown() {
     this.setState({ 
       value: '',
-      dropDownValues: null,
+      dropDownValues: [],
     });
   }
   render() {
@@ -35,7 +40,7 @@ class SearchForm extends Component {
         <input
           className={styles.input}
           onChange={this.handleInputChange} 
-          placeholder="search"
+          placeholder="company search"
           value={this.state.value} />
         {this.state.dropDownValues && 
           <CompaniesDropdown 

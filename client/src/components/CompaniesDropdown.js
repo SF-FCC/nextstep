@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setCurrentJobApp, showJobDetail } from '../actions';
+import styles from './CompaniesDropdown.module.css';
 
 class CompaniesDropdown extends Component {
   constructor(props) {
@@ -14,15 +15,27 @@ class CompaniesDropdown extends Component {
     this.props.resetDropdown();
   }
   render() {
-    return (
-      <ul>
-        {this.props.companyNames.map(companyName => (
+    const { companyNames } = this.props;
+    if (companyNames[0] === 'no results') {
+      return (
+        <ul className={styles.ul}>
           <li 
-            onClick={this.handleCompanySelect.bind(this, companyName[1])}
-            key={companyName[1]}>{companyName[0]}</li>
-        ))}
-      </ul>
-    )
+            className={styles.li}
+            key={this.props.companyNames[0]}>{this.props.companyNames[0]}</li>
+        </ul>
+      )
+    } else {
+      return (
+        <ul className={styles.ul}>
+          {this.props.companyNames.map(companyName => (
+            <li 
+              className={styles.li_clickable}
+              onClick={this.handleCompanySelect.bind(this, companyName[1])}
+              key={companyName[1]}>{companyName[0]}</li>
+          ))}
+        </ul>
+      )
+    }
   }
 }
 

@@ -1,13 +1,15 @@
 import axios from "axios";
 import { setItem, removeItem } from "../utilities/cookie-helper";
 import { reqConfig } from "../utilities/axios-helper";
+import history from "../utilities/history";
+
 /**
  *
  * @param {*} email
  * @param {*} password
  */
-export const register = ({ email, password, first_name, last_name }) => {
-  const body = { email, password, first_name, last_name };
+export const register = ({ email, password, first_name, last_name, confirmPW }) => {
+  const body = { email, password, first_name, last_name, confirmPW };
   const url = "/auth/register";
   return dispatch => {
     axios
@@ -18,8 +20,8 @@ export const register = ({ email, password, first_name, last_name }) => {
         dispatch(resolveLogin(r.data.user));
       })
       .catch(e => {
-        // TODO map correct response
-        dispatch(errorRegister("Register failed"));
+        console.log(e.response.data.err);
+        dispatch(errorRegister(e.response.data.err));
       });
   };
 };
@@ -102,6 +104,7 @@ export const errorLogin = message => {
  * @param {*} password
  */
 export const resolveLogin = user => {
+  history.push("/");
   return {
     type: "LOGIN",
     ...user

@@ -24,6 +24,12 @@ require("./routes/jobs")(app);
 require("./routes/users")(app);
 require("./routes/auth")(app);
 
+// Error handler
+app.use((err, req, res, next) => {
+  console.log(err);
+  return res.json({ err: err });
+});
+
 function gracefulShutdown() {
   console.log("Closing db");
   pool.end(err => console.log(err));

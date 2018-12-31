@@ -15,8 +15,7 @@ export const register = ({ email, password, first_name, last_name, confirmPW }) 
     axios
       .post(url, body)
       .then(r => {
-        // TODO: request login from these register creds?
-        // Or just save token?
+        setItem("token", r.data.token, 1800);
         dispatch(resolveLogin(r.data.user));
       })
       .catch(e => {

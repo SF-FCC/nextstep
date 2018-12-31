@@ -12,7 +12,7 @@ class SearchForm extends Component {
       value: '',
       dropDownValues: [],
       companyDictionary: {}
-    }
+    };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.resetDropdown = this.resetDropdown.bind(this);
   }
@@ -36,7 +36,7 @@ class SearchForm extends Component {
   }
   render() {
     return (
-      <form>
+      <form className={this.props.className}>
         <input
           className={styles.input}
           onChange={this.handleInputChange} 
@@ -45,19 +45,24 @@ class SearchForm extends Component {
         {this.state.dropDownValues && 
           <CompaniesDropdown 
             resetDropdown={this.resetDropdown}
-            companyNames={this.state.dropDownValues} />}
+            companyNames={this.state.dropDownValues}
+          />
+        )}
       </form>
-    )
+    );
   }
-}
 
 SearchForm.propTypes = {
   jobApps: PropTypes.array,
-}
+  className: PropTypes.string
+};
+SearchForm.defaultProps = {
+  className: ""
+};
 
 const mapStateToProps = state => {
   return {
-    jobApps: state.jobApp.jobApps,
+    jobApps: state.jobApp.jobApps
   };
 };
 

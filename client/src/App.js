@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import SplashPage from "./components/SplashPage";
 import LoginPanel from "./components/LoginPanel";
 import RegisterPanel from "./components/RegisterPanel";
+import styles from "./app.module.css";
 
 // TODO do we even need a splash page separated from a login page?
 // function LoginPanel(props) {
@@ -26,7 +27,7 @@ class App extends Component {
     return (
       <div>
         <Navbar location={this.props.location} />
-        <div style={{ padding: "1.25rem" }}>
+        <div className={styles.page_container}>
           {!this.props.isLoggedIn ? (
             <Switch>
               <Route exact path="/" component={SplashPage} />

@@ -64,3 +64,9 @@
 .add_job_card:hover {
   background-color: rgba(63, 56, 168, 0.08);
 }
+
+@media (max-width: 27.875rem) {
+  .card_list {
+    justify-content: center;
+  }
+}

@@ -12,3 +12,29 @@
   border-bottom: none;
 }
 
+.search_input {
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.search_input::placeholder {
+  color: #ccc;
+}
+
+.search_icon {
+  float: left;
+  margin: 0.25rem;
+}
+
+.search_svg {
+  fill: #999;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 40.625rem) {
+  .search_svg {
+    margin-top: 0;
+  }
+}

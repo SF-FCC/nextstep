@@ -45,8 +45,7 @@ class JobAppDetail extends Component {
       job_location: this.state.job_location,
       job_source: this.state.job_source,
       active: this.isActive(this.state.current_status),
-      posting_url: this.state.posting_url,
-      updated: new Date().toISOString()
+      posting_url: this.state.posting_url
     };
     this.props.updateJobApp(details);
     this.props.hideJobDetail();

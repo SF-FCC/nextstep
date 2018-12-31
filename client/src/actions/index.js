@@ -1,31 +1,31 @@
 import axios from "axios";
 import { setItem, removeItem } from "../utilities/cookie-helper";
 import { reqConfig } from "../utilities/axios-helper";
+import history from "../utilities/history";
+
 /**
- *
- * @param {*} email
- * @param {*} password
+ * Register on server then update store and token
  */
-export const register = ({ email, password, first_name, last_name }) => {
-  const body = { email, password, first_name, last_name };
+export const register = ({ email, password, first_name, last_name, confirmPW }) => {
+  const body = { email, password, first_name, last_name, confirmPW };
   const url = "/auth/register";
   return dispatch => {
     axios
       .post(url, body)
       .then(r => {
-        // TODO: request login from these register creds?
-        // Or just save token?
+        setItem("token", r.data.token, 1800);
         dispatch(resolveLogin(r.data.user));
       })
       .catch(e => {
-        // TODO map correct response
-        dispatch(errorRegister("Register failed"));
+        console.log(e.response.data.err);
+        dispatch(errorRegister(e.response.data.err));
       });
   };
 };
 
 /**
- *
+ * Sets a message on the register page that displays the passed error.
+ * @param {string} message the error to be displayed
  */
 export const errorRegister = message => {
   return {
@@ -35,16 +35,7 @@ export const errorRegister = message => {
 };
 
 /**
- *
- */
-export const clearLoginError = () => {
-  return {
-    type: "CLEAR_LOGIN_ERROR"
-  };
-};
-
-/**
- *
+ * Clear the error message on register page
  */
 export const clearRegisterError = () => {
   return {
@@ -53,9 +44,8 @@ export const clearRegisterError = () => {
 };
 
 /**
- *
- * @param {*} email
- * @param {*} password
+ * @param {string} email the user email
+ * @param {string} password the users password
  */
 export const requestLogin = (email, password) => {
   const body = { email, password };
@@ -85,9 +75,8 @@ export const requestLogin = (email, password) => {
 };
 
 /**
- *
- * @param {*} email
- * @param {*} password
+ * Sets a message on the login page that displays the passed error.
+ * @param {string} message the error to be displayed
  */
 export const errorLogin = message => {
   return {
@@ -97,11 +86,19 @@ export const errorLogin = message => {
 };
 
 /**
- *
- * @param {*} email
- * @param {*} password
+ * Clear the error message on login page
+ */
+export const clearLoginError = () => {
+  return {
+    type: "CLEAR_LOGIN_ERROR"
+  };
+};
+
+/**
+ * @param {object} user the user object to be saved to the store
  */
 export const resolveLogin = user => {
+  history.push("/");
   return {
     type: "LOGIN",
     ...user
@@ -109,8 +106,7 @@ export const resolveLogin = user => {
 };
 
 /**
- *
- *
+ * Logs the user out and clears all state
  */
 export const logout = () => {
   removeItem("token", "/");
@@ -120,8 +116,8 @@ export const logout = () => {
 };
 
 /**
- *
- * @param {*} email
+ * Unused
+ * @param {string} email
  */
 export const updateEmail = email => {
   return {
@@ -131,7 +127,7 @@ export const updateEmail = email => {
 };
 
 /**
- *
+ * Unused
  * @param {*} password
  */
 export const updatePassword = password => {
@@ -142,18 +138,18 @@ export const updatePassword = password => {
 };
 
 /**
- *
- * @param {*} user
+ * Unused
+ * Disable user from server
+ * @param {*} email
+ * @param {*} password
  */
-export const deleteAccount = user => {
-  return {
-    type: "DELETE_ACCOUNT",
-    payload: user
-  };
+export const deleteAccount = (email, password) => {
+  // axios account delete
+  // reset store
 };
 
 /**
- *
+ * Unused
  * @param {array} jobs
  */
 export const setVisibleJobApps = jobs => {
@@ -164,10 +160,8 @@ export const setVisibleJobApps = jobs => {
 };
 
 /**
- *
- * @param {*} details
+ * Populate all jobs tracked by user to the store
  */
-
 export const getAllJobApps = () => async dispatch => {
   const authHeaders = await reqConfig("token");
   const response = await axios.get("/jobs", authHeaders);
@@ -178,6 +172,10 @@ export const getAllJobApps = () => async dispatch => {
   }
 };
 
+/**
+ * Add a job app
+ * @param {object} details contains the required fields of a job app
+ */
 export const postJobApp = details => async dispatch => {
   const authHeaders = await reqConfig("token");
   const response = await axios.post("/jobs", details, authHeaders);
@@ -188,28 +186,33 @@ export const postJobApp = details => async dispatch => {
   }
 };
 
+/**
+ * ?
+ * @param {*} allJobApps ?
+ */
 export const sortAllJobApps = allJobApps => async dispatch => {
   dispatch({ type: "SORT_ALL_JOB_APPS", payload: allJobApps });
 };
 
 /**
- *
- * @param {*} details
+ * Update a job app
+ * @param {*} details the job object to be updated. Updated field will not be used by the server,
+ * but is provided in order to immediately update client.
  */
 export const updateJobApp = details => async dispatch => {
-  // TODO - This needs to be fixed to handle updates properly
   const authHeaders = await reqConfig("token");
-  const response = await axios.post("/jobs/update", details, authHeaders);
-  if (response.status === 200) {
+  try {
+    await axios.post("/jobs/update", details, authHeaders);
     dispatch({ type: "JOB_APP_UPDATE", payload: details });
-  } else {
+  } catch (err) {
+    // TODO revert to previous state
     dispatch({ type: "JOB_APP_ERR", payload: "Unable to post job application" });
   }
 };
 
 /**
- *
- * @param {*} id
+ * Delete job app
+ * @param {string} curId the id of the job app to delete
  */
 export const deleteJobApp = curId => async dispatch => {
   const authHeaders = await reqConfig("token");
@@ -222,7 +225,7 @@ export const deleteJobApp = curId => async dispatch => {
 };
 
 /**
- *
+ * Show form to create job
  */
 export const showJobForm = () => {
   return {
@@ -232,7 +235,7 @@ export const showJobForm = () => {
 };
 
 /**
- *
+ * Hide form to create job
  */
 export const hideJobForm = () => {
   return {
@@ -242,7 +245,7 @@ export const hideJobForm = () => {
 };
 
 /**
- *
+ * Show form to alter job
  */
 export const showJobDetail = () => {
   return {
@@ -252,7 +255,7 @@ export const showJobDetail = () => {
 };
 
 /**
- *
+ * Hide form to alter job
  */
 export const hideJobDetail = () => {
   return {
@@ -261,7 +264,11 @@ export const hideJobDetail = () => {
   };
 };
 
-export const setCurrentJobApp = job => {  
+/**
+ * Sets the initial form state for altering a job
+ * @param {object} job the job details
+ */
+export const setCurrentJobApp = job => {
   return {
     type: "SET_CURRENT_JOB_DETAIL",
     payload: job

@@ -48,6 +48,7 @@ module.exports = app => {
     }
   });
 
+  // TODO change to put method since it sends the whole object
   app.post("/jobs/update", requireAuthToken, async (req, res, next) => {
     // TODO - This needs to be fixed to handle updates properly
     const user_id = req.user.id;

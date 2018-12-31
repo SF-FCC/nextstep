@@ -6,16 +6,14 @@ import { connect } from "react-redux";
 import { logout } from "../actions";
 
 /**
- * Dropdown display when account is clicked in the header.
- * This will only be visible when a user is logged in.
+ * Displays account info and navigation
  */
-const AccountDropdown = ({ isVisible, email, logout, onHide }) => {
-  if (!isVisible) return null;
+const AccountDropdown = ({ email, logout, onHide, hideDropdown }) => {
   return (
     <div className={styles.container}>
-      <ul>
+      <ul className={styles.dropdown}>
         <li className={styles.list_item + " " + styles.email}>{email}</li>
-        <li className={styles.list_item}>
+        <li className={styles.list_item} onClick={() => hideDropdown()}>
           <NavLink to="/account">Settings</NavLink>
         </li>
         <li
@@ -33,12 +31,12 @@ const AccountDropdown = ({ isVisible, email, logout, onHide }) => {
 };
 
 AccountDropdown.propTypes = {
-  isVisible: PropTypes.bool,
-  email: PropTypes.string
+  email: PropTypes.string,
+  onHide: PropTypes.func,
+  hideDropdown: PropTypes.func
 };
 
 AccountDropdown.defaultProps = {
-  isVisible: false,
   email: ""
 };
 

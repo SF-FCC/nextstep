@@ -3,7 +3,6 @@
   border: 1px solid #ddd;
   padding: 0.4em;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-  position: absolute;
   right: 0;
   background-color: white;
 }
@@ -18,4 +17,10 @@
 
 .button {
   cursor: pointer;
+}
+
+@media (max-width: 40.625rem) {
+  .container {
+    width: 100%;
+  }
 }

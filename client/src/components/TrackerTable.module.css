@@ -36,6 +36,9 @@
 .tracker__table_heading > tr > th,
 .tracker__table_body > tr > td {
   padding-left: 1.4rem;
+  max-width: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (max-width: 40.625rem) {

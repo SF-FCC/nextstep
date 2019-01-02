@@ -1,0 +1,51 @@
+.form_container {
+  background: rgba(0, 0, 0, 0.5);
+  margin: auto;
+  padding: 1rem;
+  max-width: 30rem;
+  background-color: white;
+  box-shadow: 0 8px 12px #ccc;
+}
+
+.save_button {
+  width: 100%;
+  padding: 0.5rem;
+  height: auto;
+}
+
+.companyAutoPopulate,
+.companyName {
+  margin: 0.4em;
+  cursor: pointer;
+}
+
+.saveButton {
+  margin-left: 0;
+}
+
+.separated {
+  padding-bottom: 2rem;
+}
+
+.label {
+  color: #777;
+}
+
+.form_input {
+  width: 100%;
+  line-height: 2.5;
+  margin: auto;
+  margin-top: 0.5rem;
+  border: none;
+  font-size: 1em;
+  font-weight: 100;
+  color: #444;
+  letter-spacing: 0.04em;
+  border-bottom: 0.01em solid #ddd;
+  margin-bottom: 1.5rem;
+}
+
+.extra_info {
+  vertical-align: unset;
+  color: #aaa;
+}

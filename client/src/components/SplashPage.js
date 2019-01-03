@@ -13,7 +13,9 @@ export default class SplashPage extends Component {
         <h1 className={styles.value_prop}>
           Manage all your opportunities in one central location.
         </h1>
-        <div className={styles.cool_image} />
+        <div className={styles.cool_image}>
+          <img src="/screencap.jpg" />
+        </div>
         <NavLink className={g_styles.primary_button + " " + styles.login_button} to="/login">
           Try it for free
         </NavLink>

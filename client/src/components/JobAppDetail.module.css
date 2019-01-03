@@ -1,3 +1,6 @@
+@value colors: "../colors.css";
+@value primary-box-shadow from colors;
+
 .jobAppDetail__header {
   display: flex;
   justify-content: space-between;
@@ -13,6 +16,8 @@
   left: 0;
   top: 0;
   cursor: pointer;
+  opacity: 0;
+  transition: all 0.1s ease;
 }
 
 .jobAppDetail__formInnerContainer {
@@ -48,6 +53,15 @@
   cursor: pointer;
   margin-bottom: 1.5rem;
   color: #999;
+}
+
+.disabled:disabled {
+  background-color: #ddd;
+  box-shadow: primary-box-shadow;
+}
+
+.opaque {
+  opacity: 1;
 }
 
 @media (max-width: 40.625rem) {

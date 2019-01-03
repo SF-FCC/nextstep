@@ -11,6 +11,14 @@
   padding: 0.5em 1em;
 }
 
+.list_item,
+.list_item *,
+.list_item:link *,
+.list_item:visited * {
+  color: #777;
+  text-decoration: none;
+}
+
 .email {
   border-bottom: 0.01em solid #ddd;
 }

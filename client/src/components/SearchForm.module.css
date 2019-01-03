@@ -1,7 +1,7 @@
 .input {
-  color: #444;  
-  padding: .5em;
-  border: .08em solid #ccc;
+  color: #444;
+  padding: 0.5em;
+  border: 0.08em solid #ccc;
   border-radius: 0.2em 0.2em 0 0;
   font-size: 1.1em;
   letter-spacing: 0.05em;
@@ -12,3 +12,33 @@
   border-bottom: none;
 }
 
+.search_input {
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.search_input::placeholder {
+  color: #ccc;
+}
+
+.search_container {
+  display: inline-block;
+}
+
+.search_icon {
+  float: left;
+  margin: 0.25rem;
+}
+
+.search_svg {
+  fill: #999;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 40.625rem) {
+  .search_svg {
+    margin-top: 0;
+  }
+}

@@ -1,28 +1,6 @@
 .header {
   display: flex;
   justify-content: space-between;
-  height: 3rem;
-}
-
-.button_Blue {
-  border-color: #2e6da4;
-  background-color: #2196f3;
-  color: white;
-  padding: 1rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-  border-radius: 0.4rem;
-  margin: 1rem;
-  cursor: pointer;
-  border: none;
-  padding: 0.125rem 1.25rem;
-  transition: all 0.3s linear;
-  margin-top: 0;
-  height: 3rem;
-}
-
-.button_Blue:hover {
-  margin-top: 0.0625rem;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
 }
 
 .plus {
@@ -35,4 +13,28 @@
   color: #337ab7;
   cursor: pointer;
   margin: 2rem 0;
+}
+
+.show_mobile {
+  display: none;
+}
+.hide_mobile {
+  display: block;
+}
+
+@media (max-width: 40.625rem) {
+  .add_job_button {
+    padding: 0 0.5rem;
+    font-size: x-small;
+    height: 2rem;
+  }
+  .plus {
+    font-size: large;
+  }
+  .show_mobile {
+    display: block;
+  }
+  .hide_mobile {
+    display: none;
+  }
 }

@@ -29,6 +29,11 @@ class JobAppDetail extends Component {
     this.hideDeleteConfirmation = this.hideDeleteConfirmation.bind(this);
     this.isActive = this.isActive.bind(this);
   }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isOpaque: true });
+    }, 20);
+  }
   handleInputChange(e) {
     this.setState({
       showSubmitButton: true,
@@ -49,7 +54,12 @@ class JobAppDetail extends Component {
       posting_url: this.state.posting_url
     };
     this.props.updateJobApp(details);
-    this.props.hideJobDetail();
+    // Synced to css transition
+    this.setState({ isOpaque: false }, () => {
+      setTimeout(() => {
+        this.props.hideJobDetail();
+      }, 100);
+    });
   }
   isActive(status) {
     return ["withdrawn", "expired", "notAFit"].indexOf(status) === -1;
@@ -61,7 +71,14 @@ class JobAppDetail extends Component {
     this.setState({ deleteConfirmationIsShowing: false });
   }
   handleHideJobAppDetail(e) {
-    if (e.target.id === "formOuterContainer") this.props.hideJobDetail();
+    if (e.target.id === "formOuterContainer") {
+      // Synced to css transition
+      this.setState({ isOpaque: false }, () => {
+        setTimeout(() => {
+          this.props.hideJobDetail();
+        }, 100);
+      });
+    }
   }
   render() {
     const { currentJobApp } = this.props;
@@ -69,7 +86,9 @@ class JobAppDetail extends Component {
       <div
         id="formOuterContainer"
         onClick={this.handleHideJobAppDetail}
-        className={styles.jobAppDetail__formOuterContainer}
+        className={classNames([styles.jobAppDetail__formOuterContainer], {
+          [styles.opaque]: this.state.isOpaque
+        })}
       >
         <div className={styles.jobAppDetail__formInnerContainer}>
           <div className={styles.jobAppDetail__header}>

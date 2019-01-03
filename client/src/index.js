@@ -11,6 +11,9 @@ import { resolveLogin } from "./actions";
 import history from "./utilities/history";
 import store from "./store";
 
+import axiosConfig from "./config/axios";
+axiosConfig(axios, history, store);
+
 const token = getItem("token");
 
 // Redirect is handled inside the App component

@@ -7,12 +7,22 @@
  * @property {string} id user id
  */
 
+const initialState = {
+  isLoggedIn: false,
+  email: "",
+  first_name: "",
+  last_name: "",
+  id: "",
+  loginError: "",
+  registerError: ""
+};
+
 /**
  *
  * @param {object} [state={}] Previous state
  * @param {AuthAction} action The user auth information
  */
-function user(state = {}, action) {
+function user(state = initialState, action) {
   switch (action.type) {
     case "LOGIN":
       return {
@@ -26,14 +36,7 @@ function user(state = {}, action) {
         registerError: ""
       };
     case "LOGOUT":
-      return {
-        ...state,
-        isLoggedIn: false,
-        email: "",
-        first_name: "",
-        last_name: "",
-        id: ""
-      };
+      return initialState;
 
     case "ERROR_LOGIN":
       return {

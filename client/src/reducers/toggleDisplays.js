@@ -15,6 +15,8 @@ function toggleDisplays(state = initialState, action) {
       return { ...state, isShowingJobForm: action.payload };
     case "TOGGLE_JOB_DETAIL":
       return { ...state, isShowingJobDetail: action.payload };
+    case "LOGOUT":
+      return initialState;
     default:
       return state;
   }

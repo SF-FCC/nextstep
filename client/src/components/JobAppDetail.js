@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { hideJobDetail, updateJobApp } from "../actions";
 import JobAppDeleteModal from "./JobAppDeleteModal";
+import classNames from "classnames";
 
 class JobAppDetail extends Component {
   constructor(props) {
@@ -28,6 +29,11 @@ class JobAppDetail extends Component {
     this.hideDeleteConfirmation = this.hideDeleteConfirmation.bind(this);
     this.isActive = this.isActive.bind(this);
   }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isOpaque: true });
+    }, 20);
+  }
   handleInputChange(e) {
     this.setState({
       showSubmitButton: true,
@@ -48,7 +54,12 @@ class JobAppDetail extends Component {
       posting_url: this.state.posting_url
     };
     this.props.updateJobApp(details);
-    this.props.hideJobDetail();
+    // Synced to css transition
+    this.setState({ isOpaque: false }, () => {
+      setTimeout(() => {
+        this.props.hideJobDetail();
+      }, 100);
+    });
   }
   isActive(status) {
     return ["withdrawn", "expired", "notAFit"].indexOf(status) === -1;
@@ -60,7 +71,14 @@ class JobAppDetail extends Component {
     this.setState({ deleteConfirmationIsShowing: false });
   }
   handleHideJobAppDetail(e) {
-    if (e.target.id === "formOuterContainer") this.props.hideJobDetail();
+    if (e.target.id === "formOuterContainer") {
+      // Synced to css transition
+      this.setState({ isOpaque: false }, () => {
+        setTimeout(() => {
+          this.props.hideJobDetail();
+        }, 100);
+      });
+    }
   }
   render() {
     const { currentJobApp } = this.props;
@@ -68,7 +86,9 @@ class JobAppDetail extends Component {
       <div
         id="formOuterContainer"
         onClick={this.handleHideJobAppDetail}
-        className={styles.jobAppDetail__formOuterContainer}
+        className={classNames([styles.jobAppDetail__formOuterContainer], {
+          [styles.opaque]: this.state.isOpaque
+        })}
       >
         <div className={styles.jobAppDetail__formInnerContainer}>
           <div className={styles.jobAppDetail__header}>
@@ -143,16 +163,24 @@ class JobAppDetail extends Component {
                 value={this.state.posting_url}
               />
             </label>
-            <p className={styles.jobAppDetail__delete} onClick={this.showDeleteConfirmation}>
+            <button
+              className={g_styles.primary_button + " " + styles.disabled}
+              disabled={!this.state.showSubmitButton}
+            >
+              submit
+            </button>
+            <button
+              className={styles.jobAppDetail__delete + " " + g_styles.cancel_button}
+              onClick={this.showDeleteConfirmation}
+            >
               delete this job
-            </p>
+            </button>
             {this.state.deleteConfirmationIsShowing && (
               <JobAppDeleteModal
                 jobAppId={this.props.currentJobApp.id}
                 hideDeleteConfirmation={this.hideDeleteConfirmation}
               />
             )}
-            {this.state.showSubmitButton && <button>submit</button>}
           </form>
         </div>
       </div>

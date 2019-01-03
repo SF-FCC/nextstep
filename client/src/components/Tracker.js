@@ -37,11 +37,15 @@ class Tracker extends Component {
       <div>
         <div className={styles.header}>
           <h2>Job Applications</h2>
-          <SearchForm jobApps={this.props.jobApps} />
-          <button className={g_styles.primary_button} onClick={this.handleShowJobForm}>
-            <span className={styles.plus}>+</span> ADD JOB
+          <SearchForm jobApps={this.props.jobApps} className={styles.hide_mobile} />
+          <button
+            className={g_styles.primary_button + " " + styles.add_job_button}
+            onClick={this.handleShowJobForm}
+          >
+            <span className={styles.plus}>+</span>&nbsp;ADD&nbsp;JOB
           </button>
         </div>
+        <SearchForm jobApps={this.props.jobApps} className={styles.show_mobile} />
         {this.props.jobApps && <TrackerTable jobApps={this.props.jobApps} showArchived={false} />}
 
         <p onClick={this.toggleShowArchived} className={styles.archived}>

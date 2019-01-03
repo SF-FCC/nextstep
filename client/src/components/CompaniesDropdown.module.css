@@ -1,7 +1,11 @@
 .ul {
-  border: 0.05em solid #f1f0f0; 
+  border: 0.05em solid #f1f0f0;
   background: #fff;
-  position: relative;
+  position: absolute;
+  min-width: 11.25rem;
+  max-width: 15.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .li {

@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { hideJobDetail, updateJobApp } from "../actions";
 import JobAppDeleteModal from "./JobAppDeleteModal";
+import classNames from "classnames";
 
 class JobAppDetail extends Component {
   constructor(props) {
@@ -143,16 +144,24 @@ class JobAppDetail extends Component {
                 value={this.state.posting_url}
               />
             </label>
-            <p className={styles.jobAppDetail__delete} onClick={this.showDeleteConfirmation}>
+            <button
+              className={g_styles.primary_button + " " + styles.disabled}
+              disabled={!this.state.showSubmitButton}
+            >
+              submit
+            </button>
+            <button
+              className={styles.jobAppDetail__delete + " " + g_styles.cancel_button}
+              onClick={this.showDeleteConfirmation}
+            >
               delete this job
-            </p>
+            </button>
             {this.state.deleteConfirmationIsShowing && (
               <JobAppDeleteModal
                 jobAppId={this.props.currentJobApp.id}
                 hideDeleteConfirmation={this.hideDeleteConfirmation}
               />
             )}
-            {this.state.showSubmitButton && <button>submit</button>}
           </form>
         </div>
       </div>

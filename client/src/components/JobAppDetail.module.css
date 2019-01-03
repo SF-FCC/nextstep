@@ -1,3 +1,6 @@
+@value colors: "../colors.css";
+@value primary-box-shadow from colors;
+
 .jobAppDetail__header {
   display: flex;
   justify-content: space-between;
@@ -48,6 +51,11 @@
   cursor: pointer;
   margin-bottom: 1.5rem;
   color: #999;
+}
+
+.disabled:disabled {
+  background-color: #ddd;
+  box-shadow: primary-box-shadow;
 }
 
 @media (max-width: 40.625rem) {

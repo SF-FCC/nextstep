@@ -1,4 +1,6 @@
-function jobApp(state = {}, action) {
+const initialState = {};
+
+function jobApp(state = initialState, action) {
   switch (action.type) {
     case "ADD_JOB_APP":
       return {
@@ -8,17 +10,22 @@ function jobApp(state = {}, action) {
     case "JOB_APP_UPDATE":
       const curId = action.payload.id;
       return {
-        ...state, 
-        jobApps: [...state.jobApps.filter((jobApp) => {
-          return jobApp.id !== curId;
-        }), action.payload]
+        ...state,
+        jobApps: [
+          ...state.jobApps.filter(jobApp => {
+            return jobApp.id !== curId;
+          }),
+          action.payload
+        ]
       };
     case "DELETE_JOB_APP":
       const deleteId = action.payload;
       return {
-        jobApps: [...state.jobApps.filter(jobApp => {
-          return jobApp.id !== deleteId;
-        })]
+        jobApps: [
+          ...state.jobApps.filter(jobApp => {
+            return jobApp.id !== deleteId;
+          })
+        ]
       };
     case "SET_CURRENT_JOB_DETAIL":
       return {
@@ -34,16 +41,17 @@ function jobApp(state = {}, action) {
       return {
         ...state,
         jobApps: action.payload
-      }
+      };
     case "SORT_ALL_JOB_APPS":
       return {
         ...state,
         jobApps: action.payload
-      }
+      };
+    case "LOGOUT":
+      return initialState;
     default:
       return state;
   }
 }
 
 export default jobApp;
-

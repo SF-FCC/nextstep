@@ -77,9 +77,23 @@ const jwtStratOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_KEY,
   ignoreExpiration: false,
-  jsonWebTokenOptions: { maxAge: 1800 } // in seconds - currently 30 mins
+  jsonWebTokenOptions: { maxAge: 172800 } // in seconds - currently 2 days
 };
 
+/**
+ * @typedef {Object} JWTData
+ * @property {number} data the user id
+ * @property {number} exp the epoch of the expiration date
+ * @property {number} iat the epoch of the issued at date
+ * @property {number} sub the user id... ?
+ */
+
+/**
+ * Determine if jwt token is still valid
+ * @param {JWTData} payload the decoded token information
+ * @param {func} done callback when complete
+ * @returns
+ */
 const validateJwtToken = async (payload, done) => {
   const findUserById = `SELECT id, email, first_name, last_name FROM users WHERE id = $1::INT;`;
   try {

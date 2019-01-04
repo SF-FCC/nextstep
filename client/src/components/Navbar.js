@@ -34,6 +34,16 @@ class Navbar extends Component {
           {this.props.isLoggedIn ? (
             <>
               <li>
+                <button
+                  onClick={this.toggleNavDropdown}
+                  className={classNames([styles.hamburger], [styles.stick_top_right], {
+                    [styles.hamburger_Active]: this.state.isShowingNavDropdown
+                  })}
+                >
+                  &#9776;
+                </button>
+              </li>
+              <li>
                 <NavLink
                   exact
                   to="/"
@@ -80,16 +90,6 @@ class Navbar extends Component {
             </li>
           )}
         </ul>
-        {this.props.isLoggedIn && (
-          <button
-            onClick={this.toggleNavDropdown}
-            className={classNames([styles.hamburger], [styles.stick_top_right], {
-              [styles.hamburger_Active]: this.state.isShowingNavDropdown
-            })}
-          >
-            &#9776;
-          </button>
-        )}
       </nav>
     );
   }

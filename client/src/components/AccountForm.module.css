@@ -1,3 +1,6 @@
+@value colors: "../colors.css";
+@value secondary-blue from colors;
+
 .form_container {
   background: rgba(0, 0, 0, 0.5);
   margin: auto;
@@ -48,4 +51,10 @@
 .extra_info {
   vertical-align: unset;
   color: #aaa;
+}
+
+.cancel_account {
+  color: secondary-blue;
+  padding: 1rem 0 0 0;
+  cursor: pointer;
 }

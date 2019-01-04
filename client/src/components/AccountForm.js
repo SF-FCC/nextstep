@@ -78,8 +78,10 @@ class AccountForm extends Component {
             />
           </label>
           <button className={g_styles.primary_button + " " + styles.save_button}>Save</button>
+          {<p 
+            className={styles.cancel_account}
+            onClick={this.handleAccountCancel}>Cancel my account</p>}
         </form>
-        {false && <p onClick={this.handleAccountCancel}>Cancel my account</p>}
       </div>
     );
   }

@@ -76,7 +76,7 @@ class JobAppDetail extends Component {
       this.setState({ isOpaque: false }, () => {
         setTimeout(() => {
           this.props.hideJobDetail();
-        }, 1000);
+        }, 100);
       });
     }
   }

@@ -22,6 +22,7 @@ class Tracker extends Component {
     };
     this.handleShowJobForm = this.handleShowJobForm.bind(this);
     this.toggleShowArchived = this.toggleShowArchived.bind(this);
+    this.hasArchived = this.hasArchived.bind(this);
   }
   componentDidMount() {
     this.props.getAllJobApps();
@@ -31,6 +32,9 @@ class Tracker extends Component {
   }
   toggleShowArchived() {
     this.setState({ showArchived: !this.state.showArchived });
+  }
+  hasArchived(jobApps) {
+    return jobApps.filter(jobApp => !jobApp.active).length > 0;
   }
   render() {
     return (
@@ -48,9 +52,10 @@ class Tracker extends Component {
         <SearchForm jobApps={this.props.jobApps} className={styles.show_mobile} />
         {this.props.jobApps && <TrackerTable jobApps={this.props.jobApps} showArchived={false} />}
 
-        <p onClick={this.toggleShowArchived} className={styles.archived}>
-          archived
-        </p>
+        {this.hasArchived(this.props.jobApps) &&
+          <p onClick={this.toggleShowArchived} className={styles.archived}>
+            archived
+          </p>}
 
         {this.props.jobApps && this.state.showArchived && (
           <TrackerTable jobApps={this.props.jobApps} showArchived={true} />

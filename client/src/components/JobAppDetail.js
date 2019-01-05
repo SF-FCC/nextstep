@@ -93,7 +93,10 @@ class JobAppDetail extends Component {
         <div className={styles.jobAppDetail__formInnerContainer}>
           <div className={styles.jobAppDetail__header}>
             <h3>{currentJobApp.company_name}</h3>
-            <span onClick={this.props.hideJobDetail} className={g_styles.close_form}>
+            <span 
+              id="formOuterContainer"
+              onClick={this.props.handleHideJobAppDetail}
+              className={g_styles.close_form}>
               X
             </span>
           </div>

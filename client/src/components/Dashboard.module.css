@@ -32,8 +32,10 @@
 }
 
 .card_top__company {
+  font-size: 1.3rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card_top__jobtitle {
@@ -41,6 +43,7 @@
   margin: 0.5rem 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card_bottom {

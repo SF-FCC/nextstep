@@ -1,3 +1,6 @@
+@value colors: "../colors.css";
+@value light-grey-text from colors;
+
 .tracker__table {
   width: 100%;
   border-spacing: 0 1rem;
@@ -33,12 +36,18 @@
   box-shadow: 0 8px 16px #d4d4d4;
 }
 
+.tracker__table_body > tr > td:first-child {
+  font-size: 1.1rem;
+  color: light-grey-text;
+}
+
 .tracker__table_heading > tr > th,
 .tracker__table_body > tr > td {
   padding-left: 1.4rem;
   max-width: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @media (max-width: 40.625rem) {

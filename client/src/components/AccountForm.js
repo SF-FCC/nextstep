@@ -14,14 +14,14 @@ class AccountForm extends Component {
       passwordComfirmation: "",
       currentPassword: ""
     };
-    this.handleChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSave.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAccountCancel = this.handleAccountCancel.bind(this);
   }
-  handleInputChange(e) {
+  handleChange(e) {
     this.setState({ [e.target.id]: e.target.value });
   }
-  handleSave(e) {
+  handleSubmit(e) {
     e.preventDefault();
     console.log("submitting...", this.state);
   }
@@ -31,13 +31,13 @@ class AccountForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSave} className={styles.form_container}>
+        <form onSubmit={this.handleSubmit} className={styles.form_container}>
           <h3>Account Settings</h3>
           <label className={styles.separated + " " + styles.label}>
             Email
             <input
               id="email"
-              onChange={this.handleInputChange}
+              onChange={this.handleChange}
               value={this.state.email}
               className={styles.form_input}
             />
@@ -48,7 +48,7 @@ class AccountForm extends Component {
             <input
               id="password"
               type="password"
-              onChange={this.handleInputChange}
+              onChange={this.handleChange}
               value={this.state.password}
               className={styles.form_input}
             />
@@ -58,7 +58,7 @@ class AccountForm extends Component {
             <input
               id="passwordComfirmation"
               type="password"
-              onChange={this.handleInputChange}
+              onChange={this.handleChange}
               value={this.state.passwordComfirmation}
               className={styles.form_input}
             />
@@ -72,14 +72,16 @@ class AccountForm extends Component {
             <input
               id="currentPassword"
               type="password"
-              onChange={this.handleInputChange}
+              onChange={this.handleChange}
               value={this.state.currentPassword}
               className={styles.form_input}
             />
           </label>
           <button className={g_styles.primary_button + " " + styles.save_button}>Save</button>
+          {<p 
+            className={styles.cancel_account}
+            onClick={this.handleAccountCancel}>Cancel my account</p>}
         </form>
-        {false && <p onClick={this.handleAccountCancel}>Cancel my account</p>}
       </div>
     );
   }

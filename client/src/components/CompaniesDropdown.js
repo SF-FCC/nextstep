@@ -31,7 +31,10 @@ class CompaniesDropdown extends Component {
             <li 
               className={styles.li_clickable}
               onClick={this.handleCompanySelect.bind(this, companyName[1])}
-              key={companyName[1]}>{companyName[0]}</li>
+              key={companyName[1]}
+            >
+              {companyName[0]}
+            </li>
           ))}
         </ul>
       )

@@ -171,6 +171,7 @@ class JobAppDetail extends Component {
             </button>
             <button
               className={styles.jobAppDetail__delete + " " + g_styles.cancel_button}
+              type="button"
               onClick={this.showDeleteConfirmation}
             >
               delete this job

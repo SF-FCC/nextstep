@@ -16,7 +16,7 @@
   border: 1px solid #bbb;
   border-radius: 2px;
   padding: 0.25rem;
-  margin-top: 0.5rem;
+  width: 11.25rem;
 }
 
 .search_input::placeholder {
@@ -29,12 +29,13 @@
 
 .search_icon {
   float: left;
-  margin: 0.25rem;
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 0;
 }
 
 .search_svg {
   fill: #999;
-  margin-top: 0.5rem;
 }
 
 @media (max-width: 40.625rem) {

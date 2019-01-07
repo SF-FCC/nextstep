@@ -1,6 +1,7 @@
 .header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .plus {
@@ -18,8 +19,10 @@
 .show_mobile {
   display: none;
 }
+
 .hide_mobile {
-  display: block;
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 40.625rem) {
@@ -28,12 +31,16 @@
     font-size: x-small;
     height: 2rem;
   }
+
   .plus {
     font-size: large;
   }
+
   .show_mobile {
-    display: block;
+    display: flex;
+    align-items: center;
   }
+
   .hide_mobile {
     display: none;
   }

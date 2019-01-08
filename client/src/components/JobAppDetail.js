@@ -172,6 +172,7 @@ class JobAppDetail extends Component {
             <button
               className={g_styles.primary_button + " " + styles.disabled}
               disabled={!this.state.showSubmitButton}
+              onClick={this.handleFormSubmit}
             >
               submit
             </button>

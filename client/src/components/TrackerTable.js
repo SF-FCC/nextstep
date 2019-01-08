@@ -70,7 +70,7 @@ class TrackerTable extends Component {
                   LOCATION
                 </th>
                 <th id="created" className={"mobile_hide"}>
-                  DATE APPLIED
+                  LAST UPDATED
                 </th>
               </tr>
             </thead>
@@ -83,7 +83,7 @@ class TrackerTable extends Component {
                 <td>{this.capitalize(jobApp.current_status)}</td>
                 <td className={"mobile_hide"}>{jobApp.job_location}</td>
                 <td className={"mobile_hide"}>
-                  {jobApp.created ? formatDate(jobApp.created) : ""}
+                  {jobApp.created ? formatDate(jobApp.updated) : ""}
                 </td>
               </tr>
             ))}

@@ -1,0 +1,40 @@
+.UpdateAccountModal__outerContainer {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.UpdateAccountModal__innerContainer {
+  background: #fff;
+  position: fixed;
+  width: 40%;
+  height: 30%;
+  left: 30%;
+  top: 30%;
+  display: flex;
+}
+
+.UpdateAccountModal {
+  text-align: center;
+  width: 100%;
+  margin: auto;
+}
+
+.UpdateAccountModal > span {
+  position: absolute;
+  top: 0.02em;
+  right: 0.02em;
+  padding: 0.6em.8em;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+@media (max-width: 40.625rem) {
+  .UpdateAccountModal__innerContainer {
+    width: 70%;
+    left: 15%;
+  }
+}

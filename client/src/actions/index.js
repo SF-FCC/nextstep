@@ -143,9 +143,28 @@ export const updatePassword = password => {
  * @param {*} email
  * @param {*} password
  */
-export const deleteAccount = (email, password) => {
-  // axios account delete
-  // reset store
+
+export const deleteAccount = (email, password) => async dispatch => {
+  const body = { email, password };
+  const authHeaders = await reqConfig("token");
+  const validPassword = await axios.post("/auth/login", body);
+
+  if (validPassword.status === 200) {
+    const response = await axios.post("/users/delete", {}, authHeaders);
+    if (response.status === 200) {
+      dispatch({ type: "DELETE_USER_MSG", payload: "Account was removed" });
+      dispatch(logout());
+      history.push("/");
+    } else {
+      dispatch({ type: "DELETE_USER_MSG", payload: "Unable to delete user" });
+    }
+  }
+};
+
+export const clearDeleteUserMsg = () => {
+  return {
+    type: "CLEAR_DELETE_USER_MSG"
+  };
 };
 
 /**
@@ -202,6 +221,7 @@ export const sortAllJobApps = allJobApps => async dispatch => {
 export const updateJobApp = details => async dispatch => {
   const authHeaders = await reqConfig("token");
   try {
+console.log('jobs auth headers.......', authHeaders);
     await axios.post("/jobs/update", details, authHeaders);
     dispatch({ type: "JOB_APP_UPDATE", payload: details });
   } catch (err) {

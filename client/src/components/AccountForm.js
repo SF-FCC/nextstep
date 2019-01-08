@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./AccountForm.module.css";
 import g_styles from "../globals.module.css";
+import UpdateAccountModal from "./UpdateAccountModal";
 
 /**
  * A panel that allows users to update their account information.
@@ -11,12 +12,14 @@ class AccountForm extends Component {
     this.state = {
       email: "",
       password: "",
-      passwordComfirmation: "",
-      currentPassword: ""
+      passwordConfirmation: "",
+      currentPassword: "",
+      showUpdateAccountModal: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAccountCancel = this.handleAccountCancel.bind(this);
+    this.hideUpdateAccountModal = this.hideUpdateAccountModal.bind(this);
   }
   handleChange(e) {
     this.setState({ [e.target.id]: e.target.value });
@@ -26,7 +29,10 @@ class AccountForm extends Component {
     console.log("submitting...", this.state);
   }
   handleAccountCancel() {
-    console.log("canceling account...");
+    this.setState({ showUpdateAccountModal: true });
+  }
+  hideUpdateAccountModal() {
+    this.setState({ showUpdateAccountModal: false});
   }
   render() {
     return (
@@ -55,12 +61,12 @@ class AccountForm extends Component {
               />
             </label>
             <label className={styles.label}>
-              New Password Comfirmation{" "}
+              New Password Confirmation{" "}
               <input
-                id="passwordComfirmation"
+                id="passwordConfirmation"
                 type="password"
                 onChange={this.handleChange}
-                value={this.state.passwordComfirmation}
+                value={this.state.passwordConfirmation}
                 className={styles.form_input}
               />
             </label>
@@ -83,6 +89,8 @@ class AccountForm extends Component {
             </p>
           }
         </form>
+        {this.state.showUpdateAccountModal &&
+          <UpdateAccountModal hideUpdateAccountModal={this.hideUpdateAccountModal} /> }
       </div>
     );
   }

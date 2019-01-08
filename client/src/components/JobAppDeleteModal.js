@@ -37,6 +37,10 @@ class JobAppDeleteModal extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  console.log(state)  
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     deleteJobApp: id => dispatch(deleteJobApp(id)),
@@ -45,6 +49,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(JobAppDeleteModal);

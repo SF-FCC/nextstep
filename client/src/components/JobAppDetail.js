@@ -93,10 +93,11 @@ class JobAppDetail extends Component {
         <div className={styles.jobAppDetail__formInnerContainer}>
           <div className={styles.jobAppDetail__header}>
             <h3>{currentJobApp.company_name}</h3>
-            <span 
+            <span
               id="formOuterContainer"
               onClick={this.props.handleHideJobAppDetail}
-              className={g_styles.close_form}>
+              className={g_styles.close_form}
+            >
               X
             </span>
           </div>
@@ -166,6 +167,8 @@ class JobAppDetail extends Component {
                 value={this.state.posting_url}
               />
             </label>
+          </form>
+          <div className={styles.button_container}>
             <button
               className={g_styles.primary_button + " " + styles.disabled}
               disabled={!this.state.showSubmitButton}
@@ -179,13 +182,13 @@ class JobAppDetail extends Component {
             >
               delete this job
             </button>
-            {this.state.deleteConfirmationIsShowing && (
-              <JobAppDeleteModal
-                jobAppId={this.props.currentJobApp.id}
-                hideDeleteConfirmation={this.hideDeleteConfirmation}
-              />
-            )}
-          </form>
+          </div>
+          {this.state.deleteConfirmationIsShowing && (
+            <JobAppDeleteModal
+              jobAppId={this.props.currentJobApp.id}
+              hideDeleteConfirmation={this.hideDeleteConfirmation}
+            />
+          )}
         </div>
       </div>
     );

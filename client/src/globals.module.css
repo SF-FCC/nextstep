@@ -32,7 +32,6 @@
 }
 
 .cancel_button:hover {
-  background-color: #f5f5f5;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
 }
 

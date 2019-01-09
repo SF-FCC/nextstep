@@ -41,6 +41,22 @@
   border: none;
   box-shadow: 0 2px 6px darkgray;
   cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.login_button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px #888;
+  border: none;
+}
+
+.login_button:focus {
+  transition: none;
+  box-shadow: none;
+  outline: 2px solid #91ceff;
+  transform: translateY(2px);
+  border: none;
 }
 
 .footer {

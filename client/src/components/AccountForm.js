@@ -42,45 +42,46 @@ class AccountForm extends Component {
               className={styles.form_input}
             />
           </label>
-          <label className={styles.label}>
-            New Password
-            <sub className={styles.extra_info}> *Leave blank if you dont want to change it</sub>
-            <input
-              id="password"
-              type="password"
-              onChange={this.handleChange}
-              value={this.state.password}
-              className={styles.form_input}
-            />
-          </label>
-          <label className={styles.label}>
-            New Password Comfirmation
-            <input
-              id="passwordComfirmation"
-              type="password"
-              onChange={this.handleChange}
-              value={this.state.passwordComfirmation}
-              className={styles.form_input}
-            />
-          </label>
-          <label className={styles.label}>
-            Current Password
-            <sub className={styles.extra_info}>
-              {" "}
-              *Your current password is needed to alter your password
-            </sub>
-            <input
-              id="currentPassword"
-              type="password"
-              onChange={this.handleChange}
-              value={this.state.currentPassword}
-              className={styles.form_input}
-            />
-          </label>
+          <div className={styles.left_margin}>
+            <label className={styles.label}>
+              New Password
+              <sub className={styles.extra_info}> *Leave blank if you dont want to change it</sub>
+              <input
+                id="password"
+                type="password"
+                onChange={this.handleChange}
+                value={this.state.password}
+                className={styles.form_input}
+              />
+            </label>
+            <label className={styles.label}>
+              New Password Comfirmation{" "}
+              <input
+                id="passwordComfirmation"
+                type="password"
+                onChange={this.handleChange}
+                value={this.state.passwordComfirmation}
+                className={styles.form_input}
+              />
+            </label>
+            <label className={styles.label}>
+              Current Password{" "}
+              <sub className={styles.extra_info}> *needed to alter your password</sub>
+              <input
+                id="currentPassword"
+                type="password"
+                onChange={this.handleChange}
+                value={this.state.currentPassword}
+                className={styles.form_input}
+              />
+            </label>
+          </div>
           <button className={g_styles.primary_button + " " + styles.save_button}>Save</button>
-          {<p 
-            className={styles.cancel_account}
-            onClick={this.handleAccountCancel}>Cancel my account</p>}
+          {
+            <p className={styles.cancel_account} onClick={this.handleAccountCancel}>
+              Cancel my account
+            </p>
+          }
         </form>
       </div>
     );

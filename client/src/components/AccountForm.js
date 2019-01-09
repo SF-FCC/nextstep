@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./AccountForm.module.css";
 import g_styles from "../globals.module.css";
 import UpdateAccountModal from "./UpdateAccountModal";
+import { connect } from "react-redux";
 
 /**
  * A panel that allows users to update their account information.
@@ -20,6 +21,9 @@ class AccountForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAccountCancel = this.handleAccountCancel.bind(this);
     this.hideUpdateAccountModal = this.hideUpdateAccountModal.bind(this);
+  }
+  componentDidMount() {
+    this.setState({email: this.props.userEmail });
   }
   handleChange(e) {
     this.setState({ [e.target.id]: e.target.value });
@@ -96,4 +100,10 @@ class AccountForm extends Component {
   }
 }
 
-export default AccountForm;
+const mapStateToProps = state => {
+  return {
+    userEmail: state.user.email,
+  }
+}
+
+export default connect(mapStateToProps)(AccountForm);

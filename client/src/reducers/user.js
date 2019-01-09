@@ -14,7 +14,8 @@ const initialState = {
   last_name: "",
   id: "",
   loginError: "",
-  registerError: ""
+  registerError: "",
+  deleteUserMsg: ""
 };
 
 /**
@@ -54,6 +55,16 @@ function user(state = initialState, action) {
         ...state,
         registerError: action.message
       };
+    case "DELETE_USER_MSG":
+      return {
+        ...state,
+        deleteUserMsg: action.message
+      }
+    case "CLEAR_DELETE_USER_MSG":
+      return {
+        ...state,
+        deleteUserMsg: ""
+      }
     case "CLEAR_REGISTER_ERROR":
       return {
         ...state,

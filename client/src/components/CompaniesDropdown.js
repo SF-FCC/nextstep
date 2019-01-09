@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setCurrentJobApp, showJobDetail } from '../actions';
+import { setCurrentJobApp, showJobDetail } from '../actions/jobsActions';
 import styles from './CompaniesDropdown.module.css';
 
 class CompaniesDropdown extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { showJobForm, getAllJobApps } from "../actions";
+import { showJobForm, getAllJobApps } from "../actions/jobsActions";
 import JobForm from "./JobForm";
 import styles from "./Tracker.module.css";
 import g_styles from "../globals.module.css";

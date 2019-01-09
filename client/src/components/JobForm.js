@@ -4,7 +4,7 @@ import { sources } from "../data/jobSources.js";
 import styles from "./JobForm.module.css";
 import g_styles from "../globals.module.css";
 import { connect } from "react-redux";
-import { hideJobForm, postJobApp } from "../actions";
+import { hideJobForm, postJobApp } from "../actions/jobsActions";
 
 const SourceOptionsList = ({ companyNames, handleClick }) => {
   if (companyNames) {

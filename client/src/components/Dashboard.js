@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import JobForm from "./JobForm";
 import JobAppDetail from "./JobAppDetail";
 import { connect } from "react-redux";
-import { setCurrentJobApp, showJobDetail, showJobForm, getAllJobApps } from "../actions";
+import { setCurrentJobApp, showJobDetail, showJobForm, getAllJobApps } from "../actions/jobsActions";
 import { NavLink } from "react-router-dom";
 import { timeSince } from "../utilities/date-helper";
 import styles from "./Dashboard.module.css";

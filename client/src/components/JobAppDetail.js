@@ -5,7 +5,7 @@ import styles from "./JobAppDetail.module.css";
 import g_styles from "../globals.module.css";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
-import { hideJobDetail, updateJobApp } from "../actions";
+import { hideJobDetail, updateJobApp } from "../actions/jobsActions";
 import JobAppDeleteModal from "./JobAppDeleteModal";
 import classNames from "classnames";
 

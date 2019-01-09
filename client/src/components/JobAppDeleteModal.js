@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./JobAppDeleteModal.module.css";
 import g_styles from "../globals.module.css";
 import { connect } from "react-redux";
-import { deleteJobApp, hideJobDetail } from "../actions";
+import { deleteJobApp, hideJobDetail } from "../actions/jobsActions";
 
 class JobAppDeleteModal extends Component {
   constructor(props) {

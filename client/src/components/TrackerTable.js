@@ -3,7 +3,7 @@ import styles from "./TrackerTable.module.css";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import JobAppDetail from "./JobAppDetail";
-import { setCurrentJobApp, showJobDetail, sortAllJobApps } from "../actions";
+import { setCurrentJobApp, showJobDetail, sortAllJobApps } from "../actions/jobsActions";
 
 /**
  * TODO - when a job status is changed to applied there should be a form for collecting the date

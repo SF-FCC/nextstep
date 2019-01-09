@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropType from "prop-types";
 import { connect } from "react-redux";
-import { requestLogin } from "../actions";
+import { requestLogin } from "../actions/userActions";
 import { NavLink } from "react-router-dom";
 import styles from "./LoginPanel.module.css";
 

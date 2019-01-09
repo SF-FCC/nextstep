@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import styles from "./Navbar.module.css";
-import { clearLoginError, clearRegisterError } from "../actions";
+import { clearLoginError, clearRegisterError } from "../actions/userActions";
 import Dropdown from "./Dropdown";
 import classNames from "classnames";
 

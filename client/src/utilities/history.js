@@ -1,7 +1,7 @@
 import { createBrowserHistory } from "history";
 import { hasItem } from "./cookie-helper";
 import store from "../store";
-import { logout } from "../actions";
+import { logout } from "../actions/userActions";
 
 const history = createBrowserHistory();
 

@@ -1,4 +1,4 @@
-import { logout } from "../actions";
+import { logout } from "../actions/userActions";
 
 export default function config(axios, history, store) {
   axios.interceptors.response.use(

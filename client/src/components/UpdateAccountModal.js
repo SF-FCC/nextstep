@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./UpdateAccountModal.module.css";
 import g_styles from "../globals.module.css";
 import { connect } from "react-redux";
-import { deleteAccount } from "../actions";
+import { deleteAccount } from "../actions/userActions";
 
 class UpdateAccountModal extends Component {
   constructor(props) {

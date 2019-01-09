@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { register } from "../actions";
+import { register } from "../actions/userActions";
 import { connect } from "react-redux";
 import styles from "./RegisterPanel.module.css";
 import { NavLink } from "react-router-dom";

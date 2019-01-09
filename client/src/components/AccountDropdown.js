@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import styles from "./AccountDropdown.module.css";
 import { connect } from "react-redux";
-import { logout } from "../actions";
+import { logout } from "../actions/userActions";
 
 /**
  * Displays account info and navigation

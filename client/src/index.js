@@ -7,7 +7,7 @@ import { Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { getItem } from "./utilities/cookie-helper";
 import axios from "axios";
-import { resolveLogin } from "./actions";
+import { resolveLogin } from "./actions/userActions";
 import history from "./utilities/history";
 import store from "./store";
 

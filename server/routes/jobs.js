@@ -1,4 +1,3 @@
-// Temp index routing
 const pool = require("../db/postgres").pool;
 const { requireAuthToken } = require("../middleware/helper");
 

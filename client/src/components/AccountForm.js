@@ -30,6 +30,9 @@ class AccountForm extends Component {
   componentDidMount() {
     this.setState({email: this.props.userEmail });
   }
+  componentDidMount() {
+    this.setState({email: this.props.userEmail });
+  }
   handleChange(e) {
     this.setState({ [e.target.id]: e.target.value }, () => {
       if (!this.state.currentPassword || this.state.currentPassword.length > 3) {

@@ -69,7 +69,7 @@ export default class Dropdown extends Component {
 
   handleClickOutside = event => {
     if (this.state.waitForTransition || !this.wrapperRef || !this.componentRef) return;
-    if (!this.wrapperRef.contains(event.target) && !this.componentRef.contains(event.target)) {
+    if (!this.wrapperRef.contains(event.target)) {
       this.setState({ isVisible: false });
     }
   };

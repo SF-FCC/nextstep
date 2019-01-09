@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import JobAppDetail from "./JobAppDetail";
 import { setCurrentJobApp, showJobDetail, sortAllJobApps } from "../actions/jobsActions";
+import { formatDate } from "../utilities/date-helper";
 
 /**
  * TODO - when a job status is changed to applied there should be a form for collecting the date
@@ -69,7 +70,7 @@ class TrackerTable extends Component {
                   LOCATION
                 </th>
                 <th id="created" className={"mobile_hide"}>
-                  DATE APPLIED
+                  LAST UPDATED
                 </th>
               </tr>
             </thead>
@@ -81,7 +82,9 @@ class TrackerTable extends Component {
                 <td>{jobApp.job_title}</td>
                 <td>{this.capitalize(jobApp.current_status)}</td>
                 <td className={"mobile_hide"}>{jobApp.job_location}</td>
-                <td className={"mobile_hide"}>{jobApp.created}</td>
+                <td className={"mobile_hide"}>
+                  {jobApp.created ? formatDate(jobApp.updated) : ""}
+                </td>
               </tr>
             ))}
           </tbody>

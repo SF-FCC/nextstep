@@ -24,3 +24,9 @@ export function timeSince(date) {
   }
   return Math.floor(seconds) + " seconds";
 }
+
+// Last Updated column in tracker
+export function formatDate(date) {
+  const fDate = new Date(date);
+  return fDate.toDateString();
+}

@@ -150,7 +150,7 @@ export const deleteAccount = (email, password) => async dispatch => {
   const validPassword = await axios.post("/auth/login", body);
 
   if (validPassword.status === 200) {
-    const response = await axios.post("/users/delete", {}, authHeaders);
+    const response = await axios.delete("/users/delete", authHeaders);
     if (response.status === 200) {
       dispatch({ type: "DELETE_USER_MSG", payload: "Account was removed" });
       dispatch(logout());

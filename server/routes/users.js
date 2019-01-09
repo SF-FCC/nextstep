@@ -5,7 +5,7 @@ module.exports = app => {
   // TODO Use for user profile update form - probably prefer patch
   app.put("/users", (req, res) => {});
 
-  app.post("/users/delete", requireAuthToken, async (req, res, next) => {
+  app.delete("/users/delete", requireAuthToken, async (req, res, next) => {
     const user_id = req.user.id;
     const remove = `DELETE FROM users WHERE id = $1;`;
     try {

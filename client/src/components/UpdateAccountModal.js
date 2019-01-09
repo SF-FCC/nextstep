@@ -35,6 +35,7 @@ class UpdateAccountModal extends Component {
               <label>password
               <input
                 onChange={this.handlePasswordChange}
+                type="password"
                 value={this.state.passwordValue} />
               </label>
             </form>

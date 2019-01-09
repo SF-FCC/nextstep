@@ -14,7 +14,7 @@ export default class SplashPage extends Component {
           Manage all your opportunities in one central location.
         </h1>
         <div className={styles.cool_image}>
-          <img src="/screencap.jpg" />
+          <img src="/screencap.jpg" alt="App Dashboard Screenshot"/>
         </div>
         <NavLink className={g_styles.primary_button + " " + styles.login_button} to="/login">
           Try it for free

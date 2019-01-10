@@ -5,6 +5,7 @@
   position: fixed;
   left: 0;
   top: 0;
+  overflow-y: auto;
 }
 
 .formInnerContainer {
@@ -55,7 +56,7 @@
   color: #444;
   letter-spacing: 0.04em;
   border-bottom: 0.01em solid #ddd;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .flex_right {

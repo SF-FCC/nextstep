@@ -16,6 +16,13 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  min-height: 100vh;
+  overflow: auto;
+}
+
 body,
 button {
   color: #444;
@@ -124,7 +131,6 @@ label {
 
 select {
   width: 100%;
-  font-size: 1em;
   margin-top: 1em;
   background: transparent;
 }

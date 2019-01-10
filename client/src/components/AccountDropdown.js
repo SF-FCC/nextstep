@@ -12,18 +12,27 @@ const AccountDropdown = ({ email, logout, onHide, hideDropdown }) => {
   return (
     <div className={styles.container}>
       <ul className={styles.dropdown}>
-        <li className={styles.list_item + " " + styles.email}>{email}</li>
-        <li className={styles.list_item} onClick={() => hideDropdown()}>
-          <NavLink to="/account">Settings</NavLink>
+        <li>
+          <p className={styles.list_item + " " + styles.email}>{email}</p>
+        </li>
+        <li>
+          <NavLink
+            className={styles.list_item + " " + styles.hover_background}
+            onClick={() => hideDropdown()}
+            to="/account"
+          >
+            Settings
+          </NavLink>
         </li>
         <li
-          className={styles.list_item + " " + styles.button}
           onClick={() => {
             logout();
             onHide();
           }}
         >
-          Sign Out
+          <p className={styles.list_item + " " + styles.button + " " + styles.hover_background}>
+            Sign Out
+          </p>
         </li>
       </ul>
     </div>

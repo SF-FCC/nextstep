@@ -25,7 +25,7 @@ import styles from "./App.module.css";
 class App extends Component {
   render() {
     return (
-      <div>
+      <>
         <Navbar location={this.props.location} />
         <div className={styles.page_container}>
           {!this.props.isLoggedIn ? (
@@ -42,7 +42,7 @@ class App extends Component {
             </Switch>
           )}
         </div>
-      </div>
+      </>
     );
   }
 }

@@ -174,14 +174,14 @@ class JobAppDetail extends Component {
               disabled={!this.state.showSubmitButton}
               onClick={this.handleFormSubmit}
             >
-              submit
+              Save
             </button>
             <button
               className={styles.jobAppDetail__delete + " " + g_styles.cancel_button}
               type="button"
               onClick={this.showDeleteConfirmation}
             >
-              delete this job
+              Delete This Job
             </button>
           </div>
           {this.state.deleteConfirmationIsShowing && (

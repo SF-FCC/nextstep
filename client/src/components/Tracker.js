@@ -54,7 +54,7 @@ class Tracker extends Component {
 
         {this.hasArchived(this.props.jobApps) &&
           <p onClick={this.toggleShowArchived} className={styles.archived}>
-            archived
+            Archived
           </p>}
 
         {this.props.jobApps && this.state.showArchived && (

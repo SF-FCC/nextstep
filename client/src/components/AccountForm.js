@@ -72,8 +72,10 @@ class AccountForm extends Component {
 
     if (this.state.email !== this.props.userEmail 
         && this.state.currentPassword.length > 3) {
-      console.log('updating email...')
-      this.props.updateEmail(this.state.password, this.state.email)
+      this.props.updateEmail(
+        this.props.userEmail,
+        this.state.email,
+        this.state.currentPassword)
     }
   }
   handleAccountCancel() {
@@ -164,7 +166,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateEmail: (newEmail, pw) => dispatch(updateEmail(newEmail, pw)),
+    updateEmail: (email, newEmail, pw) => dispatch(updateEmail(email, newEmail, pw)),
   }
 }
 

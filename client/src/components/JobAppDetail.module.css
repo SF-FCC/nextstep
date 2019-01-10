@@ -17,6 +17,7 @@
   top: 0;
   cursor: pointer;
   opacity: 0;
+  overflow-y: auto;
   /* This is synced to unmount */
   transition: all 0.1s ease;
 }

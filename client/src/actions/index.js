@@ -119,7 +119,8 @@ export const logout = () => {
  * Unused
  * @param {string} email
  */
-export const updateEmail = email => {
+export const updateEmail = (email, pw) => {
+  console.log('updating....', email, pw)
   return {
     type: "UPDATE_EMAIL",
     payload: email

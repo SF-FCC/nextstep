@@ -17,7 +17,7 @@ class UpdateAccountModal extends Component {
     this.setState({ passwordValue : e.target.value });
   }
   handleFormSubmit() {
-    this.props.hideUpdateAccountModal();
+    this.props.hideModal();
     this.props.deleteAccount(this.props.userEmail, this.state.passwordValue);
   }
   render() {
@@ -27,7 +27,7 @@ class UpdateAccountModal extends Component {
           <div className={styles.UpdateAccountModal}>
             <span 
               className={g_styles.close_form} 
-              onClick={this.props.hideUpdateAccountModal} >
+              onClick={this.props.hideModal} >
               X
             </span>
             <h1>{this.props.message}</h1>
@@ -40,7 +40,7 @@ class UpdateAccountModal extends Component {
               </label>
             </form>
             <button 
-              onClick={this.props.hideUpdateAccountModal}
+              onClick={this.props.hideModal}
               className={g_styles.cancel_button}>
               Cancel
             </button>

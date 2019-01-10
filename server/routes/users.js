@@ -3,7 +3,20 @@ const { requireAuthToken } = require("../middleware/helper");
 
 module.exports = app => {
   // TODO Use for user profile update form - probably prefer patch
-  app.put("/users", (req, res) => {});
+  app.put("/users", requireAuthToken, async (req, res, next) => {
+    const { email, newEmail } = req.body 
+     
+    const insert = `
+      UPDATE users SET email = $2
+      WHERE email = $1
+      ;`;
+    try {
+      const dbResponse = await pool.query(insert, [email, newEmail]);
+      return res.send({ status: 200 });
+    } catch (err) {
+      next(err)
+    }
+  });
 
   app.delete("/users/delete", requireAuthToken, async (req, res, next) => {
     const user_id = req.user.id;

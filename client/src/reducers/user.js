@@ -34,7 +34,8 @@ function user(state = initialState, action) {
         last_name: action.last_name,
         id: action.id,
         loginError: "",
-        registerError: ""
+        registerError: "",
+        updateEmailErr: ""
       };
     case "LOGOUT":
       return initialState;
@@ -64,6 +65,21 @@ function user(state = initialState, action) {
       return {
         ...state,
         deleteUserMsg: ""
+      }
+    case "UPDATE_EMAIL":
+      return {
+        ...state,
+        email: action.payload
+      }
+    case "UPDATE_EMAIL_ERR":
+      return {
+        ...state,
+        updateEmailErr: action.message
+      }
+    case "CLEAR_EMAIL_ERR":
+      return {
+        ...state,
+        updateEmailErr: ""
       }
     case "CLEAR_REGISTER_ERROR":
       return {

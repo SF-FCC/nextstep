@@ -3,7 +3,7 @@ import styles from "./AccountForm.module.css";
 import g_styles from "../globals.module.css";
 import UpdateAccountModal from "./UpdateAccountModal";
 import { connect } from "react-redux";
-import { updateEmail } from "../actions";
+import { updateEmail, updatePassword } from "../actions";
 
 /**
  * A panel that allows users to update their account information.
@@ -62,14 +62,15 @@ class AccountForm extends Component {
     
     if (this.state.currentPassword.length && this.state.password) {
       if (this.state.password !== this.state.passwordConfirmation) {
-        console.log('new passwords must match')
         this.setState({ passwordMissmatchAlert: true})
       } else if (this.state.password.length < 4 || 
                  this.state.passwordConfirmation.length < 4) {
-        console.log('new password is too short');
         this.setState({ passwordTooShortAlert: true });
       } else {
-        console.log('updating password...')
+        this.props.updatePassword(
+          this.props.userEmail,
+          this.state.passwordConfirmation,
+          this.state.currentPassword)
       }
     }
 
@@ -170,6 +171,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updateEmail: (email, newEmail, pw) => dispatch(updateEmail(email, newEmail, pw)),
+    updatePassword: (email, newPw, oldPw) => dispatch(updatePassword(email, newPw, oldPw))
   }
 }
 

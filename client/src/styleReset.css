@@ -16,6 +16,13 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  min-height: 100vh;
+  overflow: auto;
+}
+
 body,
 button {
   color: #444;

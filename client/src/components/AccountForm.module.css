@@ -58,6 +58,12 @@
   color: #aaa;
 }
 
+.extra_info_alert {
+  display: block;
+  vertical-align: unset;
+  color: red;
+}
+
 .cancel_account {
   color: secondary-blue;
   padding: 1rem 0 0 0;

@@ -119,11 +119,20 @@ export const logout = () => {
  * Unused
  * @param {string} email
  */
-export const updateEmail = email => {
-  return {
-    type: "UPDATE_EMAIL",
-    payload: email
-  };
+export const updateEmail = (email, newEmail, password) => async dispatch => {
+  const body = { email, newEmail };
+  const authHeaders = await reqConfig("token");
+  const validPassword = await axios.post("/auth/login", { email, password });
+
+  if (validPassword.status === 200) {
+    const response = await axios.put("/users", body, authHeaders);
+    if (response.status === 200) {
+      dispatch({ type: "UPDATE_EMAIL", payload: newEmail });
+      history.push("/tracker");
+    } else {
+      dispatch({ type: "UPDATE_EMAIL_ERR", message: "unable to update email" });
+    }
+  }
 };
 
 /**
@@ -221,7 +230,6 @@ export const sortAllJobApps = allJobApps => async dispatch => {
 export const updateJobApp = details => async dispatch => {
   const authHeaders = await reqConfig("token");
   try {
-console.log('jobs auth headers.......', authHeaders);
     await axios.post("/jobs/update", details, authHeaders);
     dispatch({ type: "JOB_APP_UPDATE", payload: details });
   } catch (err) {

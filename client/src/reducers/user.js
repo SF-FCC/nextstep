@@ -15,7 +15,8 @@ const initialState = {
   id: "",
   loginError: "",
   registerError: "",
-  deleteUserMsg: ""
+  deleteUserMsg: "",
+  passwordError: ""
 };
 
 /**
@@ -35,7 +36,8 @@ function user(state = initialState, action) {
         id: action.id,
         loginError: "",
         registerError: "",
-        updateEmailErr: ""
+        updateEmailErr: "",
+        updatePwErr: ""
       };
     case "LOGOUT":
       return initialState;
@@ -80,6 +82,16 @@ function user(state = initialState, action) {
       return {
         ...state,
         updateEmailErr: ""
+      }
+    case "UPDATE_PW_ERR":
+      return {
+        ...state,
+        passwordError: action.message
+      }
+    case "CLEAR_PW_ERR":
+      return {
+        ...state,
+        passwordError: ""
       }
     case "CLEAR_REGISTER_ERROR":
       return {

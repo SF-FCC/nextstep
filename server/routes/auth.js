@@ -55,7 +55,6 @@ module.exports = app => {
 
   /* Login */
   app.post("/auth/login", passport.authenticate("local"), (req, res) => {
-    console.log("req.user", req.user);
     return res.status(200).send({ user: req.user, token: createToken(req.user.id) });
   });
 

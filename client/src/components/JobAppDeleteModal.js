@@ -19,26 +19,32 @@ class JobAppDeleteModal extends Component {
       <div className={styles.JobAppDeleteModal__outerContainer}>
         <div className={styles.JobAppDeleteModal__innerContainer}>
           <div className={styles.JobAppDeleteModal}>
-            <span className={g_styles.close_form} onClick={this.props.hideDeleteConfirmation}>
-              X
-            </span>
-            <h1>Are you sure?</h1>
-            <h4>This cannot be undone</h4>
-            <button className={g_styles.cancel_button} onClick={this.props.hideDeleteConfirmation}>
-              Cancel
-            </button>
-            <button className={g_styles.primary_button} onClick={this.handleDeleteJobApp}>
-              Delete
-            </button>
+            <div className={styles.JobAppDeleteModal__header}>
+              <span
+                className={styles.JobAppDeleteModal__closeForm}
+                onClick={this.props.hideDeleteConfirmation}
+              >
+                x
+              </span>
+              <h1>Are you sure?</h1>
+              <h4>This cannot be undone!</h4>
+            </div>
+            <div className={styles.JobAppDeleteModal__buttonContainer}>
+              <button
+                className={g_styles.cancel_button}
+                onClick={this.props.hideDeleteConfirmation}
+              >
+                Cancel
+              </button>
+              <button className={g_styles.primary_button} onClick={this.handleDeleteJobApp}>
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>
     );
   }
-}
-
-const mapStateToProps = state => {
-  console.log(state)  
 }
 
 const mapDispatchToProps = dispatch => {
@@ -49,6 +55,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(JobAppDeleteModal);

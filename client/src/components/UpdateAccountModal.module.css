@@ -5,16 +5,17 @@
   position: fixed;
   left: 0;
   top: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .UpdateAccountModal__innerContainer {
-  background: #fff;
-  position: fixed;
-  width: 40%;
-  height: 30%;
-  left: 30%;
-  top: 30%;
   display: flex;
+  background: #fff;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
 .UpdateAccountModal {
@@ -22,14 +23,52 @@
   width: 100%;
   margin: auto;
 }
-
-.UpdateAccountModal > span {
-  position: absolute;
-  top: 0.02em;
-  right: 0.02em;
+.UpdateAccountModal__header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+.UpdateAccountModal__closeModal {
+  align-self: flex-end;
   padding: 0.6em.8em;
   font-size: 1.2em;
   cursor: pointer;
+}
+
+.UpdateAccountModal__messageHeader {
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+
+.UpdateAccountModal__label {
+  margin: 2.5rem 0 1rem;
+  padding: 0 1rem;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.UpdateAccountModal__input {
+  border: none;
+  margin: auto;
+  margin-top: 0.5rem;
+  width: 70%;
+  line-height: 2.5;
+  font-size: 1em;
+  font-weight: 100;
+  color: #444;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 1.5rem;
+}
+
+.UpdateAccountModal__buttonContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 0 1em;
 }
 
 @media (max-width: 40.625rem) {

@@ -11,6 +11,7 @@ history.listen((loc, action) => {
     // Token has expired so logout
     if (!hasItem("token")) {
       store.dispatch(logout());
+      history.push("/");
     }
   }
 });

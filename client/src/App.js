@@ -11,13 +11,6 @@ import LoginPanel from "./components/LoginPanel";
 import RegisterPanel from "./components/RegisterPanel";
 import styles from "./App.module.css";
 
-// TODO do we even need a splash page separated from a login page?
-// function LoginPanel(props) {
-// return (
-// // <div>This is a placeholder - login panel exists but needs a refactor and style rework.</div>
-// );
-// }
-
 /**
  * The main app entry point. If you plan to add a component that will utilize
  * NavLink, be sure to pass the location prop so renders are correctly updated.

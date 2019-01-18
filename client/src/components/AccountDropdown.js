@@ -18,7 +18,7 @@ const AccountDropdown = ({ email, logout, onHide, hideDropdown }) => {
         <li>
           <NavLink
             className={styles.list_item + " " + styles.hover_background}
-            onClick={() => hideDropdown()}
+            onClick={hideDropdown}
             to="/account"
           >
             Settings

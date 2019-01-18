@@ -3,7 +3,7 @@ import styles from "./AccountForm.module.css";
 import g_styles from "../globals.module.css";
 import UpdateAccountModal from "./UpdateAccountModal";
 import { connect } from "react-redux";
-import { updateEmail, updatePassword } from "../actions";
+import { updateEmail, updatePassword } from "../actions/userActions";
 
 /**
  * A panel that allows users to update their account information.

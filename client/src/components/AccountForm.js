@@ -13,81 +13,70 @@ class AccountForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      email: props.userEmail,
       password: "",
       passwordConfirmation: "",
       currentPassword: "",
       showUpdateAccountModal: false,
       invalidPassword: false,
-      passwordMissmatchAlert: false,
-      passwordTooShortAlert: false,
+      passwordMismatchAlert: false,
+      passwordTooShortAlert: false
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleAccountCancel = this.handleAccountCancel.bind(this);
-    this.hideModal = this.hideModal.bind(this);
   }
-  componentDidMount() {
-    this.setState({email: this.props.userEmail });
-  }
-  componentDidMount() {
-    this.setState({email: this.props.userEmail });
-  }
-  handleChange(e) {
+
+  handleChange = e => {
     this.setState({ [e.target.id]: e.target.value }, () => {
       if (!this.state.currentPassword || this.state.currentPassword.length > 3) {
         this.setState({ invalidPassword: false });
       }
 
-      if (this.state.password.length === 0 && 
-          this.state.passwordConfirmation.length === 0) {
+      if (this.state.password.length === 0 && this.state.passwordConfirmation.length === 0) {
         this.setState({ passwordTooShortAlert: false });
       }
-      
-      if (this.state.password.length > 3 && 
-          this.state.passwordConfirmation.length > 3) {
+
+      if (this.state.password.length > 3 && this.state.passwordConfirmation.length > 3) {
         this.setState({ passwordTooShortAlert: false });
       }
 
       if (this.state.password === this.state.passwordConfirmation) {
-        this.setState({ passwordMissmatchAlert: false });
+        this.setState({ passwordMismatchAlert: false });
       }
     });
-  }
-  handleSubmit(e) {
+  };
+
+  handleSubmit = e => {
     e.preventDefault();
     if (this.state.currentPassword.length < 4) {
       this.setState({ invalidPassword: true });
-    } 
-    
+    }
+
     if (this.state.currentPassword.length && this.state.password) {
       if (this.state.password !== this.state.passwordConfirmation) {
-        this.setState({ passwordMissmatchAlert: true})
-      } else if (this.state.password.length < 4 || 
-                 this.state.passwordConfirmation.length < 4) {
+        this.setState({ passwordMismatchAlert: true });
+      } else if (this.state.password.length < 4 || this.state.passwordConfirmation.length < 4) {
         this.setState({ passwordTooShortAlert: true });
       } else {
         this.props.updatePassword(
           this.props.userEmail,
           this.state.passwordConfirmation,
-          this.state.currentPassword)
+          this.state.currentPassword
+        );
       }
     }
 
-    if (this.state.email !== this.props.userEmail 
-        && this.state.currentPassword.length > 3) {
-      this.props.updateEmail(
-        this.props.userEmail,
-        this.state.email,
-        this.state.currentPassword)
+    if (this.state.email !== this.props.userEmail && this.state.currentPassword.length > 3) {
+      this.props.updateEmail(this.props.userEmail, this.state.email, this.state.currentPassword);
     }
-  }
-  handleAccountCancel() {
+  };
+
+  handleAccountCancel = () => {
     this.setState({ showUpdateAccountModal: true });
-  }
-  hideModal() {
-    this.setState({ showUpdateAccountModal: false});
-  }
+  };
+
+  hideModal = () => {
+    this.setState({ showUpdateAccountModal: false });
+  };
+
   render() {
     return (
       <div>
@@ -115,14 +104,12 @@ class AccountForm extends Component {
             </label>
             <label className={styles.label}>
               New Password Confirmation{" "}
-              {this.state.passwordMissmatchAlert &&
-                <sub className={styles.extra_info_alert}> 
-                  *Password must match
-                </sub>}
-              {this.state.passwordTooShortAlert && 
-                <sub className={styles.extra_info_alert}>
-                  *New password is too short
-                </sub>}
+              {this.state.passwordMismatchAlert && (
+                <sub className={styles.extra_info_alert}>*Password must match</sub>
+              )}
+              {this.state.passwordTooShortAlert && (
+                <sub className={styles.extra_info_alert}>*New password is too short</sub>
+              )}
               <input
                 id="passwordConfirmation"
                 type="password"
@@ -133,10 +120,9 @@ class AccountForm extends Component {
             </label>
             <label className={styles.label}>
               Current Password{" "}
-              {this.state.invalidPassword &&
-                <sub className={styles.extra_info_alert}>
-                  *must enter current password
-                </sub>}
+              {this.state.invalidPassword && (
+                <sub className={styles.extra_info_alert}>*Must enter current password</sub>
+              )}
               <input
                 id="currentPassword"
                 type="password"
@@ -146,17 +132,14 @@ class AccountForm extends Component {
               />
             </label>
           </div>
-          <button className={g_styles.primary_button + " " + styles.save_button}>
-            Save
-          </button>
-          {<p 
-            className={styles.cancel_account}
-            onClick={this.handleAccountCancel}>
+          <button className={g_styles.primary_button + " " + styles.save_button}>Save</button>
+          {
+            <p className={styles.cancel_account} onClick={this.handleAccountCancel}>
               Cancel my account
-            </p>}
+            </p>
+          }
         </form>
-        {this.state.showUpdateAccountModal &&
-          <UpdateAccountModal hideModal={this.hideModal} />}
+        {this.state.showUpdateAccountModal && <UpdateAccountModal hideModal={this.hideModal} />}
       </div>
     );
   }
@@ -164,15 +147,18 @@ class AccountForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    userEmail: state.user.email,
-  }
-}
+    userEmail: state.user.email
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     updateEmail: (email, newEmail, pw) => dispatch(updateEmail(email, newEmail, pw)),
     updatePassword: (email, newPw, oldPw) => dispatch(updatePassword(email, newPw, oldPw))
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AccountForm);

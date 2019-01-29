@@ -11,13 +11,13 @@ clone the repo from the forked copy
     origin	https://github.com/<UserName>/nextstep.git (fetch)
     origin	https://github.com/<UserName>/nextstep.git (push)
 
-    $ git remote add upstream git@github.com:xChristianZx/nextstep.git
+    $ git remote add upstream https://github.com/SF-FCC/nextstep.git
     $ git remote -v
 
     origin	https://github.com/<UserName>/nextstep.git (fetch)
     origin	https://github.com/<UserName>/nextstep.git (push)
-    upstream	git@github.com:xChristianZx/nextstep.git (fetch)
-    upstream	git@github.com:xChristianZx/nextstep.git (push)
+    upstream	https://github.com/SF-FCC/nextstep.git (fetch)
+    upstream	https://github.com/SF-FCC/nextstep.git (push)
 
 do the following from master
 
